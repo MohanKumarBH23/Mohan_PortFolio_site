@@ -94,9 +94,8 @@ document.addEventListener('DOMContentLoaded', () => {
   if (typewriterElement) {
     const typewriterPhrases = [
       'Mohan',
-      'AI&ML graduate',
+      'AI&ML Graduate',
       'Aspirant',
-      'an AI Engineer Aspirant'
     ];
     let phraseIdx = 0;
     let charIdx = 0;
@@ -129,33 +128,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     setTimeout(runTypewriter, 350);
-  }
-
-  /* ==========================================================================
-     2.5 ABOUT ME INTERACTIVE TABS (Education & Certifications)
-     ========================================================================== */
-  const aboutTabBtns = document.querySelectorAll('.about-tab-btn');
-  const aboutTabPanes = document.querySelectorAll('.about-tab-pane');
-
-  if (aboutTabBtns.length > 0) {
-    aboutTabBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        const targetTab = btn.getAttribute('data-tab');
-
-        aboutTabBtns.forEach(b => {
-          b.classList.remove('active');
-          b.setAttribute('aria-selected', 'false');
-        });
-        aboutTabPanes.forEach(pane => pane.classList.remove('active'));
-
-        btn.classList.add('active');
-        btn.setAttribute('aria-selected', 'true');
-        const targetPane = document.getElementById(`pane-${targetTab}`);
-        if (targetPane) {
-          targetPane.classList.add('active');
-        }
-      });
-    });
   }
 
   /* ==========================================================================
