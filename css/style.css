@@ -653,10 +653,9 @@ code, pre, .font-mono {
    ========================================================================== */
 
 .about-section {
-  padding: 100px 0;
+  padding: calc(var(--nav-height) + 40px) 0 90px;
   position: relative;
   background-color: var(--bg-primary);
-  border-top: 1px solid var(--border-subtle);
   transition: background-color var(--transition-normal);
 }
 
