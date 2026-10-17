@@ -2,6 +2,7 @@
  * INTERACTIVE AI & MACHINE LEARNING LAB
  * Module 1: 2D Neural Decision Boundary Simulator
  * Module 2: Semantic Vector Embedding & Cosine Similarity Explorer
+ * Tailored for Mohan Kumar B.H (AIML Graduate & AI Engineer)
  */
 
 (function () {
@@ -117,11 +118,8 @@
   }
 
   function predict(px, py) {
-    // Normalization to [-1, 1]
     const nx = (px - 0.5) * 2;
     const ny = (py - 0.5) * 2;
-
-    // Radius feature for non-linear symmetry
     const r = Math.sqrt(nx * nx + ny * ny);
 
     const h1 = actFn(nx * weights.w1[0] + ny * weights.w1[1] + r * weights.w1[2], activation);
@@ -133,12 +131,10 @@
 
   function trainStep() {
     epoch += 1;
-    // Convergence rate depends on learning rate
     const decay = Math.min(0.995, 1 - learningRate * 0.08);
     loss = Math.max(0.042, loss * decay + (Math.random() - 0.5) * 0.005);
     accuracy = Math.min(99.4, accuracy + (100 - accuracy) * (learningRate * 0.04));
 
-    // Nudge weights towards ideal classification
     const factor = learningRate * 0.25;
     for (let i = 0; i < 4; i++) {
       weights.w1[i] += (1.4 - weights.w1[i]) * factor;
@@ -148,7 +144,6 @@
     weights.out[1] += (-2.0 - weights.out[1]) * factor;
     weights.bias += (0.45 - weights.bias) * factor;
 
-    // Update statistics UI
     if (statEpoch) statEpoch.textContent = epoch;
     if (statLoss) statLoss.textContent = loss.toFixed(4);
     if (statAcc) statAcc.textContent = accuracy.toFixed(1) + '%';
@@ -158,19 +153,16 @@
     const isDark = document.documentElement.getAttribute('data-theme') !== 'light';
     bCtx.clearRect(0, 0, width, height);
 
-    // Render low-res grid for fast 60fps decision boundary heatmap
     const step = 12;
     for (let x = 0; x < width; x += step) {
       for (let y = 0; y < height; y += step) {
         const prob = predict(x / width, y / height);
         if (prob > 0.5) {
-          // Class 1 (Cyan/Sky)
           const alpha = (prob - 0.5) * 0.45;
           bCtx.fillStyle = isDark
             ? `rgba(56, 189, 248, ${alpha})`
             : `rgba(2, 132, 199, ${alpha * 0.7})`;
         } else {
-          // Class 0 (Indigo/Rose)
           const alpha = (0.5 - prob) * 0.45;
           bCtx.fillStyle = isDark
             ? `rgba(99, 102, 241, ${alpha})`
@@ -223,7 +215,6 @@
     if (statAcc) statAcc.textContent = '51.8%';
   }
 
-  // Event Listeners for Module 1
   if (lrSlider) {
     lrSlider.addEventListener('input', (e) => {
       learningRate = parseFloat(e.target.value);
@@ -266,6 +257,7 @@
 
   /* ==========================================================================
      MODULE 2: SEMANTIC VECTOR EMBEDDINGS & COSINE SIMILARITY EXPLORER
+     (Populated with Mohan Kumar's exact projects and technologies!)
      ========================================================================== */
   const vectorCanvas = document.getElementById('vector-space-canvas');
   if (!vectorCanvas) return;
@@ -274,52 +266,50 @@
   let vWidth = (vectorCanvas.width = 460);
   let vHeight = (vectorCanvas.height = 360);
 
-  // Corpus documents with 6-dimensional synthetic semantic features:
-  // [Vision, LLM/Text, Performance/Edge, Math/Theory, MLOps/Deploy, Medical/Audio]
+  // Features: [Vision/YOLO, LLM/Gemini, Audio/Signal, Stats/PCA/Clustering, Web/FastAPI, Automation/Cloud]
   const documents = [
     {
       id: 1,
-      title: 'NeuroVision Edge: INT8 TensorRT',
-      category: 'Computer Vision & Edge',
-      embedding: [0.92, 0.15, 0.88, 0.54, 0.72, 0.1],
-      x: 0.25,
-      y: 0.3
+      title: 'Intelli-Eye: YOLOv8 & Audio Anomaly',
+      category: 'Computer Vision & Edge AI',
+      embedding: [0.95, 0.1, 0.92, 0.45, 0.35, 0.7],
+      x: 0.22,
+      y: 0.32
     },
     {
       id: 2,
-      title: 'ContextRAG: HyDE & Cross-Encoder',
-      category: 'LLMs & Agentic RAG',
-      embedding: [0.1, 0.95, 0.65, 0.6, 0.82, 0.05],
-      x: 0.72,
-      y: 0.35
+      title: 'AI Interview Engine: Gemini 2.0 Flash',
+      category: 'Bilingual LLM & Multimodal Audio',
+      embedding: [0.15, 0.96, 0.88, 0.4, 0.95, 0.8],
+      x: 0.74,
+      y: 0.28
     },
     {
       id: 3,
-      title: 'PulseBio: ViT Cardiac Arrhythmia',
-      category: 'Biomedical & Vision',
-      embedding: [0.78, 0.2, 0.45, 0.75, 0.3, 0.94],
-      x: 0.35,
-      y: 0.75
+      title: 'Personalized Music Recommender (PCA & t-SNE)',
+      category: 'Clustering, Cosine Sim & Spotify API',
+      embedding: [0.1, 0.25, 0.75, 0.98, 0.5, 0.3],
+      x: 0.42,
+      y: 0.78
     },
     {
       id: 4,
-      title: 'Distributed DeepSpeed ZeRO-3 Fine-tuning',
-      category: 'MLOps & Systems',
-      embedding: [0.2, 0.82, 0.91, 0.68, 0.96, 0.08],
-      x: 0.68,
-      y: 0.7
+      title: 'Bulk-Recruitment Pipeline (Telegram)',
+      category: 'Concurrent Python & CSV Automation',
+      embedding: [0.1, 0.65, 0.2, 0.5, 0.82, 0.98],
+      x: 0.78,
+      y: 0.68
     },
     {
       id: 5,
-      title: 'FlashAttention-2 Kernel Optimization',
-      category: 'High Performance ML',
-      embedding: [0.35, 0.75, 0.98, 0.88, 0.85, 0.12],
+      title: 'Core AI Stack: PyTorch, OpenCV & AWS',
+      category: 'Full-Stack Machine Learning Systems',
+      embedding: [0.82, 0.75, 0.5, 0.7, 0.9, 0.88],
       x: 0.5,
       y: 0.48
     }
   ];
 
-  // Mathematical Cosine Similarity
   function cosineSimilarity(vecA, vecB) {
     let dot = 0;
     let normA = 0;
@@ -332,13 +322,11 @@
     return dot / (Math.sqrt(normA) * Math.sqrt(normB));
   }
 
-  // Pre-mapped query vectors
   const queryVectors = {
-    'low latency edge vision inference': [0.88, 0.12, 0.95, 0.5, 0.8, 0.1],
-    'retrieval augmented generation with vector search': [0.12, 0.92, 0.6, 0.55, 0.78, 0.08],
-    'ecg transformer medical diagnostic': [0.65, 0.15, 0.35, 0.8, 0.2, 0.95],
-    'distributed multi gpu scaling zeRO': [0.18, 0.78, 0.89, 0.7, 0.95, 0.05],
-    'attention mechanisms and memory bandwidth': [0.3, 0.82, 0.92, 0.85, 0.75, 0.1]
+    'edge vision surveillance audio anomaly detection': [0.95, 0.12, 0.9, 0.4, 0.3, 0.65],
+    'bilingual multimodal audio interview gemini': [0.15, 0.95, 0.85, 0.35, 0.92, 0.75],
+    'music recommendation collaborative filtering pca tsne': [0.1, 0.2, 0.7, 0.98, 0.45, 0.25],
+    'bulk telegram recruitment candidate screening': [0.1, 0.6, 0.15, 0.45, 0.8, 0.96]
   };
 
   let activeQueryPoint = { x: 0.5, y: 0.5, vec: [0.5, 0.5, 0.5, 0.5, 0.5, 0.5] };
@@ -348,27 +336,23 @@
     const cleanText = queryText.trim().toLowerCase();
     let queryVec = queryVectors[cleanText];
 
-    // Fallback pseudo-embedding based on keywords
     if (!queryVec) {
       queryVec = [0.2, 0.2, 0.2, 0.2, 0.2, 0.2];
-      if (/vision|image|detect|camera|yolo/i.test(cleanText)) queryVec[0] += 0.7;
-      if (/rag|llm|agent|gpt|prompt|text/i.test(cleanText)) queryVec[1] += 0.75;
-      if (/speed|latency|tensorrt|gpu|fast/i.test(cleanText)) queryVec[2] += 0.8;
-      if (/math|algorithm|loss|kernel/i.test(cleanText)) queryVec[3] += 0.7;
-      if (/deploy|docker|deepspeed|scale|mlops/i.test(cleanText)) queryVec[4] += 0.75;
-      if (/ecg|health|bio|medical/i.test(cleanText)) queryVec[5] += 0.85;
+      if (/vision|image|yolo|detect|surveillance|camera/i.test(cleanText)) queryVec[0] += 0.75;
+      if (/gemini|interview|llm|rag|language|bilingual/i.test(cleanText)) queryVec[1] += 0.8;
+      if (/audio|sound|speech|scream|music/i.test(cleanText)) queryVec[2] += 0.75;
+      if (/pca|tsne|cluster|kmeans|cosine|recommend/i.test(cleanText)) queryVec[3] += 0.85;
+      if (/fastapi|api|web|flask|django|next/i.test(cleanText)) queryVec[4] += 0.75;
+      if (/telegram|automation|csv|cloud|aws/i.test(cleanText)) queryVec[5] += 0.85;
     }
 
-    // Calculate cosine similarity against all items
     currentResults = documents.map(doc => {
       const score = cosineSimilarity(queryVec, doc.embedding);
       return { ...doc, score };
     });
 
-    // Sort descending
     currentResults.sort((a, b) => b.score - a.score);
 
-    // Approximate 2D coordinate for the query point
     const topDoc = currentResults[0];
     const secondDoc = currentResults[1];
     activeQueryPoint.x = topDoc.x * 0.7 + secondDoc.x * 0.3;
@@ -402,7 +386,6 @@
     const isDark = document.documentElement.getAttribute('data-theme') !== 'light';
     vCtx.clearRect(0, 0, vWidth, vHeight);
 
-    // Draw coordinate axes
     vCtx.strokeStyle = isDark ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.08)';
     vCtx.lineWidth = 1;
     vCtx.beginPath();
@@ -412,12 +395,9 @@
     vCtx.lineTo(vWidth, vHeight / 2);
     vCtx.stroke();
 
-    // Draw document points
     documents.forEach(doc => {
       const px = doc.x * vWidth;
       const py = doc.y * vHeight;
-
-      // Distance line to active query
       const qx = activeQueryPoint.x * vWidth;
       const qy = activeQueryPoint.y * vHeight;
 
@@ -429,7 +409,6 @@
       vCtx.stroke();
       vCtx.setLineDash([]);
 
-      // Point circle
       vCtx.beginPath();
       vCtx.arc(px, py, 6, 0, Math.PI * 2);
       vCtx.fillStyle = '#6366f1';
@@ -438,13 +417,11 @@
       vCtx.lineWidth = 2;
       vCtx.stroke();
 
-      // Label
       vCtx.font = '11px JetBrains Mono';
       vCtx.fillStyle = isDark ? '#94a3b8' : '#475569';
       vCtx.fillText(doc.title.split(':')[0], px + 10, py + 4);
     });
 
-    // Draw active query point (pulsing cyan)
     const qx = activeQueryPoint.x * vWidth;
     const qy = activeQueryPoint.y * vHeight;
 
@@ -461,7 +438,6 @@
     vCtx.fillText('Query Vector (Q)', qx + 12, qy - 4);
   }
 
-  // Setup vector UI
   const queryInput = document.getElementById('vector-query-input');
   const btnRunQuery = document.getElementById('btn-run-query');
   const presetChips = document.querySelectorAll('.preset-chip');
@@ -483,6 +459,5 @@
     });
   });
 
-  // Initial trigger
-  evaluateQuery('low latency edge vision inference');
+  evaluateQuery('edge vision surveillance audio anomaly detection');
 })();

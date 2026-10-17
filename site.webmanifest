@@ -1,11 +1,11 @@
 {
-  "name": "Mohan | AI & Machine Learning Engineer Portfolio",
-  "short_name": "Mohan AI",
+  "name": "Mohan Kumar B.H | AI & Machine Learning Engineer Portfolio",
+  "short_name": "Mohan Kumar AI",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#080a0f",
   "theme_color": "#080a0f",
-  "description": "Portfolio of Mohan, an Engineering Graduate specializing in AI, Deep Learning, Foundation Models, Computer Vision, and High-Performance MLOps.",
+  "description": "Portfolio of Mohan Kumar B.H, B.Tech CSE (AIML) graduate from Sai Vidya Institute of Technology, CGPA 8.82. AI Intern at Digitaltransols AI.",
   "icons": [
     {
       "src": "assets/profile.jpg",

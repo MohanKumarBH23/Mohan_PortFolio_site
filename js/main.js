@@ -1,6 +1,6 @@
 /**
  * MAIN INTERACTIVITY CONTROLLER
- * Mohan | AI & Machine Learning Engineering Portfolio
+ * Mohan Kumar B.H | AI & Machine Learning Engineering Portfolio
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -112,143 +112,169 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   /* ==========================================================================
-     4. PROJECT DETAIL MODAL SYSTEM
+     4. PROJECT DETAIL MODAL SYSTEM (MOHAN'S REAL PROJECTS)
      ========================================================================== */
   const projectData = {
-    'neurovision': {
-      title: 'NeuroVision-Edge: Real-Time Edge Vision with INT8 TensorRT',
-      badge: 'Edge AI & Computer Vision',
-      category: 'Computer Vision & Embedded ML',
-      overview: 'Engineered an ultra-low latency real-time object detection and instance segmentation pipeline for constrained robotic edge devices (NVIDIA Jetson Orin Nano). Converted YOLOv11 and custom Vision Transformer backbones to TensorRT INT8 engines.',
+    'intelli-eye': {
+      title: 'Intelli-Eye: ML-Based Surveillance System',
+      badge: 'Computer Vision & Audio AI',
+      category: 'GPU-Accelerated Surveillance & Edge Deployment',
+      overview: 'Engineered a real-time smart surveillance architecture combining YOLOv8 computer vision detection with spectrogram audio anomaly classification to autonomously detect physical threats, glass breakage, and distress screams.',
       architecture: [
-        'Model: Quantized YOLOv11 & MobileNet-V4 backbone',
-        'Inference Engine: NVIDIA TensorRT 10.x with custom CUDA plugins',
-        'Hardware Target: NVIDIA Jetson Orin (8GB / 15W TDP)',
-        'Quantization: INT8 Calibration with Symmetric Kullback-Leibler (KL) Divergence'
+        'Vision Backbone: Ultralytics YOLOv8 real-time object detection & tracking pipeline',
+        'Audio Anomaly: CNN spectrogram classifier analyzing microphone streams for scream and glass breaking signatures',
+        'Frame Processing: GPU-accelerated OpenCV frame grabber with circular ring buffer',
+        'Alert Infrastructure: Real-time incident dispatching with automated smart city notification triggers'
       ],
       metrics: [
-        { label: 'Inference Speed', value: '120 FPS (8.3ms)' },
-        { label: 'Detection Accuracy', value: '94.2% mAP@50' },
-        { label: 'VRAM Footprint', value: '420 MB (4x Reduction)' },
-        { label: 'Energy Efficiency', value: '7.8W Average Power' }
+        { label: 'Vision Model', value: 'YOLOv8 Edge' },
+        { label: 'Multimodal', value: 'Vision + Audio' },
+        { label: 'Anomaly Latency', value: '< 25 ms' },
+        { label: 'Pipeline Speed', value: '60+ FPS Realtime' }
       ],
-      codeSnippet: `# TensorRT INT8 Calibration Pipeline (PyTorch to Engine)
-import tensorrt as trt
+      codeSnippet: `# Intelli-Eye Multi-Modal Threat Detection Pipeline Excerpt
+import cv2
+from ultralytics import YOLO
+import numpy as np
 
-def build_int8_engine(onnx_path, calib_dataset):
-    logger = trt.Logger(trt.Logger.WARNING)
-    builder = trt.Builder(logger)
-    config = builder.create_builder_config()
+class IntelliEyePipeline:
+    def __init__(self, yolo_weights="yolov8n.pt", audio_anomaly_model=None):
+        self.vision_model = YOLO(yolo_weights)
+        self.audio_classifier = audio_anomaly_model
+
+    def process_multimodal_frame(self, video_frame, audio_spectrogram):
+        # 1. Vision Detection (YOLOv8)
+        vision_results = self.vision_model(video_frame, stream=True)
+        detected_objects = [box.cls for r in vision_results for box in r.boxes]
+
+        # 2. Audio Anomaly Inference
+        audio_score = self.audio_classifier.predict(audio_spectrogram)
+        is_audio_threat = audio_score > 0.85 # screams or glass breaks
+
+        if is_audio_threat and len(detected_objects) > 0:
+            self.dispatch_smart_alert("HIGH_PRIORITY_THREAT", detected_objects)
+        return vision_results`,
+      githubUrl: 'https://github.com/mohankumarbh',
+      demoUrl: 'https://github.com/mohankumarbh'
+    },
+    'ai-interview': {
+      title: 'AI Interview Engine (Gemini 2.0 Flash)',
+      badge: 'Multimodal AI & LLMs',
+      category: 'Digitaltransols AI Private Limited',
+      overview: 'Engineered an end-to-end bilingual (Kannada & English) conversational interview platform at Digitaltransols AI. Leverages Gemini 2.0 Flash for low-latency multimodal audio transcription, rubric evaluation, and contextual dynamic follow-ups.',
+      architecture: [
+        'LLM Core: Gemini 2.0 Flash multimodal real-time speech and context engine',
+        'Backend: FastAPI asynchronous microservice with streaming WebSockets',
+        'Frontend: Next.js responsive full-stack candidate interview console',
+        'Adaptive Rubric: Evaluates answers against criteria rubrics and dynamically synthesizes follow-up probes'
+      ],
+      metrics: [
+        { label: 'Languages', value: 'Kannada + English' },
+        { label: 'Inference', value: 'Gemini 2.0 Flash' },
+        { label: 'Evaluation', value: 'Rubric Scoring' },
+        { label: 'Report Delivery', value: 'Automated PDF' }
+      ],
+      codeSnippet: `# FastAPI Bilingual Interview Evaluator with Gemini 2.0
+from fastapi import FastAPI, UploadFile
+from google import genai
+
+app = FastAPI(title="AI Interview Engine")
+client = genai.Client()
+
+@app.post("/api/evaluate-response")
+async def evaluate_candidate(audio: UploadFile, language: str = "kannada", rubric_criteria: dict = None):
+    audio_bytes = await audio.read()
     
-    # Enable INT8 Quantization
-    config.set_flag(trt.BuilderFlag.INT8)
-    config.int8_calibrator = CustomEntropyCalibrator(calib_dataset)
-    config.set_memory_pool_limit(trt.MemoryPoolType.WORKSPACE, 1 << 30)
+    prompt = f"""
+    You are an expert bilingual technical interviewer conducting an interview in {language}.
+    Transcribe the candidate's audio, grade their technical depth according to the rubric: {rubric_criteria},
+    and return an adaptive contextual follow-up question.
+    """
     
-    return builder.build_serialized_network(network, config)`,
-      githubUrl: 'https://github.com/mohan-ai/neurovision-edge',
-      demoUrl: 'https://demo.mohan-ai.dev/neurovision'
+    response = client.models.generate_content(
+        model='gemini-2.0-flash',
+        contents=[prompt, genai.types.Part.from_bytes(data=audio_bytes, mime_type="audio/mp3")]
+    )
+    return {"evaluation": response.text}`,
+      githubUrl: 'https://github.com/mohankumarbh',
+      demoUrl: 'https://github.com/mohankumarbh'
     },
-    'contextrag': {
-      title: 'ContextRAG Engine: Enterprise Multi-Modal Agentic Retrieval',
-      badge: 'LLMs & Agentic Systems',
-      category: 'GenAI & Information Retrieval',
-      overview: 'Designed a high-reliability Agentic RAG architecture incorporating Hypothetical Document Embeddings (HyDE), BGE-Reranker-Large cross-encoders, and self-correcting hallucination guards for multi-tenant technical documentation.',
+    'music-recommender': {
+      title: 'Personalized Music Recommendation System',
+      badge: 'Machine Learning & Clustering',
+      category: 'Data Science & Statistical Modeling',
+      overview: 'Comprehensive music recommendation system applying Collaborative Filtering, Content-Based Filtering, and K-Means clustering. Analyzes acoustic features from Spotify API with PCA and t-SNE for dimensional projection and Cosine Similarity.',
       architecture: [
-        'Query Expansion: HyDE (Hypothetical Document Embeddings via Llama-3.1-8B)',
-        'Dense Retrieval: Qdrant Vector Store with HNSW Graph Indexing',
-        'Re-ranking: BGE-Reranker-Large cross-encoder (P95 < 80ms)',
-        'Hallucination Guard: RAGAS automated ground truth & context faithfulness validator'
+        'Feature Pipeline: Extracted danceability, acousticness, tempo, and valence via Spotify Web API',
+        'Dimensionality Reduction: PCA retains 95% variance; t-SNE projects 2D latent clusters',
+        'Clustering: Optimal K-Means clustering with Silhouette score and Elbow validation',
+        'Recommendation Engine: Cosine Similarity matrix for sub-second ranking and candidate generation'
       ],
       metrics: [
-        { label: 'P95 Latency', value: '420 ms' },
-        { label: 'BERTScore F1', value: '0.892' },
-        { label: 'Retrieval Recall@5', value: '96.4%' },
-        { label: 'Hallucination Drop', value: '-82% vs Naive RAG' }
+        { label: 'Clustering', value: 'K-Means + PCA' },
+        { label: 'Distance Metric', value: 'Cosine Similarity' },
+        { label: 'Data Source', value: 'Spotify API' },
+        { label: 'Libraries', value: 'Scikit-learn, Pandas' }
       ],
-      codeSnippet: `# HyDE + Cross-Encoder Agentic Pipeline
-from langchain_community.vectorstores import Qdrant
-from sentence_transformers import CrossEncoder
+      codeSnippet: `# Cosine Similarity & K-Means Pipeline
+import numpy as np
+import pandas as pd
+from sklearn.decomposition import PCA
+from sklearn.metrics.pairwise import cosine_similarity
+from sklearn.cluster import KMeans
 
-class AgenticRAGRetriever:
-    def __init__(self, vector_store, reranker_model):
-        self.vs = vector_store
-        self.reranker = CrossEncoder(reranker_model)
-
-    async def retrieve(self, query: str, top_k: int = 5):
-        hypothetical_doc = await self.generate_hyde(query)
-        dense_candidates = self.vs.similarity_search(hypothetical_doc, k=25)
-        pairs = [[query, doc.page_content] for doc in dense_candidates]
-        scores = self.reranker.predict(pairs)
-        ranked = sorted(zip(dense_candidates, scores), key=lambda x: x[1], reverse=True)
-        return [doc for doc, _ in ranked[:top_k]]`,
-      githubUrl: 'https://github.com/mohan-ai/context-rag-engine',
-      demoUrl: 'https://demo.mohan-ai.dev/contextrag'
+def compute_music_recommendations(user_song_vector, music_db_df, top_k=5):
+    # Standardized audio features
+    features = ['danceability', 'energy', 'valence', 'tempo', 'acousticness']
+    X = music_db_df[features].values
+    
+    # Cosine Similarity between user target and corpus
+    sim_scores = cosine_similarity(user_song_vector.reshape(1, -1), X).flatten()
+    top_indices = np.argsort(sim_scores)[::-1][:top_k]
+    
+    return music_db_df.iloc[top_indices][['song_name', 'artist', 'genre']]`,
+      githubUrl: 'https://github.com/mohankumarbh',
+      demoUrl: 'https://github.com/mohankumarbh'
     },
-    'pulsebio': {
-      title: 'PulseBio-ECG AI: Self-Supervised Vision Transformer for Cardiology',
-      badge: 'Biomedical AI & Transformers',
-      category: 'Deep Learning & Medical Diagnosis',
-      overview: 'Self-supervised masked autoencoder (MAE) pre-trained on 150,000+ 12-lead ECG signal recordings from PhysioNet. Diagnoses 16 distinct cardiac arrhythmia conditions with cardiologist-level sensitivity.',
+    'bulk-recruitment': {
+      title: 'Bulk-Recruitment Pipeline (Telegram)',
+      badge: 'Automation & Concurrency',
+      category: 'Digitaltransols AI Private Limited',
+      overview: 'High-throughput concurrent automated recruitment system designed to parse bulk CSV applicant records, screen candidate profiles against job eligibility criteria, and orchestrate automated Telegram interview invitations.',
       architecture: [
-        'Model Backbone: Swin-Transformer adapted for 1D/2D multi-lead biosignals',
-        'Pretraining: Masked Biosignal Modeling (MBM) with 75% patch masking',
-        'Dataset: PhysioNet Challenge 2021 & PTB-XL Cardiology Benchmark',
-        'Interpretability: Integrated Gradients & Attention Rollout for clinical audit'
+        'Concurrency: Multithreaded Python processing to parse thousands of candidate rows without blocking',
+        'Screening Engine: Automated rule-based candidate filtering against specific job qualifications',
+        'Telegram Bot: Telegram Bot API integration for direct messaging and confirmation logging',
+        'Data Cleaning: Pandas preprocessing, deduplication, and automated candidate status tracking'
       ],
       metrics: [
-        { label: 'AUROC', value: '98.7%' },
-        { label: 'Sensitivity', value: '97.2%' },
-        { label: 'Inference Time', value: '18ms per 12-lead' },
-        { label: 'Validation Cohort', value: '45,000 Patients' }
+        { label: 'Execution', value: 'Concurrent Workers' },
+        { label: 'Integration', value: 'Telegram Bot API' },
+        { label: 'Input Format', value: 'Bulk CSV Streams' },
+        { label: 'Efficiency', value: '100% Automated' }
       ],
-      codeSnippet: `# Swin-Transformer Biosignal Forward Block
-import torch.nn as nn
+      codeSnippet: `# Concurrent Candidate Processing & Telegram Notification
+import asyncio
+import pandas as pd
+import httpx
 
-class ECGPatchEmbed(nn.Module):
-    def __init__(self, patch_size=16, in_chans=12, embed_dim=768):
-        super().__init__()
-        self.proj = nn.Conv1d(in_chans, embed_dim, kernel_size=patch_size, stride=patch_size)
-        self.norm = nn.LayerNorm(embed_dim)
+async def screen_and_invite_candidate(client, bot_token, candidate, job_criteria):
+    # Rule-based screening
+    if candidate['experience_years'] >= job_criteria['min_exp']:
+        telegram_url = f"https://api.telegram.org/bot{bot_token}/sendMessage"
+        payload = {
+            "chat_id": candidate['telegram_chat_id'],
+            "text": f"Congratulations {candidate['name']}! You have been shortlisted for an interview."
+        }
+        await client.post(telegram_url, json=payload)
 
-    def forward(self, x):
-        # x shape: [Batch, 12, Samples]
-        x = self.proj(x).transpose(1, 2)
-        return self.norm(x)`,
-      githubUrl: 'https://github.com/mohan-ai/pulsebio-ecg',
-      demoUrl: 'https://demo.mohan-ai.dev/pulsebio'
-    },
-    'distributed-tune': {
-      title: 'DistributedLLM-Tune: Multi-GPU QLoRA with DeepSpeed ZeRO-3',
-      badge: 'MLOps & Distributed Systems',
-      category: 'Distributed Training & Scaled ML',
-      overview: 'Engineered an open-source distributed fine-tuning framework for 8B–70B parameter models. Employs ZeRO-3 parameter offloading, FlashAttention-2, and 4-bit NormalFloat NF4 quantization to train 70B models on commodity hardware.',
-      architecture: [
-        'Parallelism: DeepSpeed ZeRO-Stage 3 with CPU/NVMe Memory Offloading',
-        'Quantization: BitsAndBytes 4-bit NF4 with Double Quantization',
-        'Attention Kernel: FlashAttention-2 fused kernels (2.5x speedup)',
-        'Orchestration: Ray Cluster with automated spot instance fault tolerance'
-      ],
-      metrics: [
-        { label: 'VRAM Savings', value: '68% Lower VRAM' },
-        { label: 'Scaling Efficiency', value: '91.4% Across 8x A100' },
-        { label: 'Throughput', value: '3,850 Tokens/sec' },
-        { label: 'Training Cost', value: '55% Cloud Cost Drop' }
-      ],
-      codeSnippet: `# DeepSpeed ZeRO-3 Config
-ds_config = {
-    "zero_optimization": {
-        "stage": 3,
-        "offload_optimizer": {"device": "cpu", "pin_memory": True},
-        "offload_param": {"device": "cpu", "pin_memory": True},
-        "overlap_comm": True,
-        "contiguous_gradients": True
-    },
-    "bf16": {"enabled": True},
-    "train_micro_batch_size_per_gpu": 2
-}`,
-      githubUrl: 'https://github.com/mohan-ai/distributed-llm-tune',
-      demoUrl: 'https://github.com/mohan-ai/distributed-llm-tune'
+async def run_pipeline(csv_file, job_criteria, bot_token):
+    df = pd.read_csv(csv_file)
+    async with httpx.AsyncClient() as client:
+        tasks = [screen_and_invite_candidate(client, bot_token, row, job_criteria) for _, row in df.iterrows()]
+        await asyncio.gather(*tasks)`,
+      githubUrl: 'https://github.com/mohankumarbh',
+      demoUrl: 'https://github.com/mohankumarbh'
     }
   };
 
@@ -285,7 +311,7 @@ ds_config = {
       </div>
 
       <div style="margin-bottom: 24px;">
-        <h4 style="font-size: 0.9375rem; margin-bottom: 12px;">Production Benchmark Metrics</h4>
+        <h4 style="font-size: 0.9375rem; margin-bottom: 12px;">Key Engineering Highlights</h4>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px;">
           ${data.metrics.map(m => `
             <div style="background: var(--bg-primary); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 12px;">
@@ -304,10 +330,7 @@ ds_config = {
       <div style="display: flex; gap: 12px; margin-top: 28px;">
         <a href="${data.githubUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-          Repository on GitHub
-        </a>
-        <a href="${data.demoUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">
-          Live Interactive Demo ↗
+          Mohan's GitHub Profile
         </a>
       </div>
     `;
@@ -364,7 +387,7 @@ ds_config = {
               current = target;
               clearInterval(timer);
             }
-            el.textContent = (isDecimal ? current.toFixed(1) : Math.floor(current)) + suffix;
+            el.textContent = (isDecimal ? current.toFixed(2) : Math.floor(current)) + suffix;
           }, 25);
         });
       }
@@ -375,7 +398,7 @@ ds_config = {
   if (metricsStrip) countObserver.observe(metricsStrip);
 
   /* ==========================================================================
-     6. SECURE CONTACT FORM HANDLER
+     6. SECURE CONTACT FORM HANDLER (MOHAN'S REAL EMAIL)
      ========================================================================== */
   const contactForm = document.getElementById('contact-form');
   const formStatus = document.getElementById('form-status');
@@ -387,8 +410,7 @@ ds_config = {
       // Check honeypot anti-spam trap
       if (window.SecurityGuard && window.SecurityGuard.isHoneypotTriggered(contactForm)) {
         console.warn('Bot detected by honeypot.');
-        // Pretend success to confuse spam bot
-        showToast('Message sent securely.');
+        showToast('Message processed.');
         contactForm.reset();
         return;
       }
@@ -427,16 +449,16 @@ ds_config = {
         return;
       }
 
-      // Format payload (Direct mailto trigger or API dispatch)
-      const mailtoLink = `mailto:mohan.engineering.ai@gmail.com?subject=${encodeURIComponent('[Portfolio Inquiry] ' + subject)}&body=${encodeURIComponent('From: ' + name + ' (' + email + ')\n\n' + message)}`;
+      // Target Mohan Kumar's exact email address
+      const mailtoLink = `mailto:mohankumarbh007@gmail.com?subject=${encodeURIComponent('[Portfolio Inquiry] ' + subject)}&body=${encodeURIComponent('From: ' + name + ' (' + email + ')\n\n' + message)}`;
 
       formStatus.className = 'form-status success';
       formStatus.innerHTML = `
         <strong>Message prepared securely!</strong><br>
-        Opening your default mail client... (If it doesn't open automatically, <a href="${mailtoLink}" style="text-decoration: underline; color: inherit;">click here to send</a>).
+        Opening your default mail client to reach Mohan Kumar B.H (<a href="${mailtoLink}" style="text-decoration: underline; color: inherit;">click here if not launched</a>).
       `;
 
-      showToast('Dispatching secure message...');
+      showToast('Dispatching secure inquiry to Mohan Kumar B.H...');
 
       setTimeout(() => {
         window.location.href = mailtoLink;
@@ -446,26 +468,7 @@ ds_config = {
   }
 
   /* ==========================================================================
-     7. CITATION & COPY BUTTONS (Safe Clipboard)
-     ========================================================================== */
-  document.querySelectorAll('.copy-bibtex-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const bibtex = `@article{mohan2025pulsebio,
-  title={Self-Supervised Vision Transformers for Robust Electrocardiographic Arrhythmia Screening},
-  author={Mohan and Research Collaborators},
-  journal={arXiv preprint arXiv:2502.04918},
-  year={2025}
-}`;
-      if (window.SecurityGuard) {
-        window.SecurityGuard.copyTextSecurely(bibtex, () => {
-          showToast('BibTeX citation copied to clipboard!');
-        });
-      }
-    });
-  });
-
-  /* ==========================================================================
-     8. INTERACTIVE CLI TERMINAL (Easter Egg for Engineers & Recruiters)
+     7. INTERACTIVE CLI TERMINAL (MOHAN'S REAL RESUME DETAILS)
      ========================================================================== */
   const cliModal = document.getElementById('cli-modal');
   const cliToggle = document.getElementById('cli-toggle-btn');
@@ -475,32 +478,46 @@ ds_config = {
 
   const cliCommands = {
     help: `Available commands:
-  - about       : Brief engineering background
-  - skills      : Technical competencies & frameworks
-  - projects    : Core research & deployment highlights
-  - stats       : Benchmarks and model inference statistics
-  - contact     : Reach out directly for opportunities
+  - about       : Engineering background & AI focus
+  - education   : College, degree, coursework, and CGPA
+  - experience  : Digitaltransols AI internship details
+  - skills      : Programming languages, ML libraries & tools
+  - projects    : Engineered systems (Intelli-Eye, Gemini Engine, Music Rec)
+  - contact     : Phone, email, LinkedIn, and GitHub
   - theme       : Toggle dark/light theme
   - clear       : Clear terminal screen`,
-    about: `Mohan | AI & Machine Learning Engineer
-Graduate Computer Science & AI Engineer passionate about edge computer vision, large language model inference architectures, and distributed systems.`,
-    skills: `Frameworks: PyTorch, TensorFlow, Hugging Face, TensorRT, JAX
-Languages : Python (Expert), C++, SQL, Bash, CUDA C
-MLOps     : Docker, Kubernetes, MLflow, Weights & Biases, DeepSpeed
-Data/GenAI: LangChain, Qdrant, ChromaDB, Polars, Scikit-Learn`,
-    projects: `1. NeuroVision-Edge   - 120 FPS INT8 Edge Detection
-2. ContextRAG Engine   - Agentic RAG with HyDE & Cross-Encoders
-3. PulseBio-ECG AI     - 98.7% AUROC Self-Supervised Vision Transformer
-4. DistributedLLM-Tune - Multi-GPU DeepSpeed ZeRO-3 QLoRA Framework`,
-    stats: `[Model Benchmarks]
-- TensorRT Latency   : 8.3 ms @ Jetson Orin Nano
-- Cross-Encoder P95  : 420 ms
-- VRAM Savings       : 68% with ZeRO-3 + FlashAttention-2
-- Model Precision    : 94.2% mAP / 98.7% AUROC`,
-    contact: `Email    : mohan.engineering.ai@gmail.com
-LinkedIn : linkedin.com/in/mohan-ai
-GitHub   : github.com/mohan-ai
-Kaggle   : kaggle.com/mohan-ml`,
+    about: `Mohan Kumar B.H | AI & Machine Learning Engineer
+Graduate in Computer Science & Engineering (AIML) from Sai Vidya Institute of Technology (CGPA: 8.82).
+Currently AI Intern at Digitaltransols AI Private Limited, Bangalore.
+Passionate about LLMs, RAG, Multimodal Gemini 2.0, YOLOv8 vision, and scalable ML systems.`,
+    education: `[EDUCATION]
+Bachelor of Technology in Computer Science and Engineering (AIML)
+Institution : Sai Vidya Institute of Technology, Rajanukunte (2022 - 2026)
+CGPA        : 8.82 / 10.0 (First Class with Distinction)
+Coursework  : Machine Learning, Deep Learning, Big Data, Cryptography & Network Security, NLP, DSA, DBMS, OS`,
+    experience: `[EXPERIENCE]
+Role    : AI Intern (Feb 2026 – May 2026)
+Company : DIGITALTRANSOLS AI PRIVATE LIMITED, Bangalore
+- Developed a real-time, bilingual (Kannada/English) AI Interview Engine with FastAPI, Next.js, and Gemini 2.0 Flash.
+- Engineered a concurrent automated bulk-recruitment pipeline using Telegram to parse CSVs and orchestrate interviews.`,
+    skills: `[TECHNICAL SKILLS]
+Languages  : Python (Proficient), SQL, C/C++, React
+Core CS    : Data Structures & Algorithms, OOPs, OS, DBMS, Computer Networks
+Frameworks : Django, Flask, FastAPI, REST APIs, OpenCV, Next.js
+ML/AI      : LLMs, NLP, RAG systems, PyTorch, Pandas, NumPy, Scikit-learn, Matplotlib
+Cloud/Tools: Git, AWS (Lambda, S3)`,
+    projects: `[FEATURED PROJECTS]
+1. Intelli-Eye             : GPU-accelerated YOLOv8 Surveillance + Audio Anomaly Detection (Screams, Glass Breaking)
+2. AI Interview Engine     : Real-time Bilingual (Kannada/English) Gemini 2.0 Flash Multimodal Interview Platform
+3. Music Recommender System: Spotify API Recommender with K-Means, PCA, t-SNE, and Cosine Similarity
+4. Bulk-Recruitment Pipeline: Concurrent Automated CSV Screening & Telegram Orchestration`,
+    contact: `[DIRECT CONTACT]
+Name     : Mohan Kumar B.H
+Phone    : +91 9980507072
+Email    : mohankumarbh007@gmail.com
+LinkedIn : linkedin.com/in/mohankumarbh
+GitHub   : github.com/mohankumarbh
+Location : Bangalore, Karnataka, India`,
     theme: () => {
       const current = root.getAttribute('data-theme') || 'dark';
       const next = current === 'dark' ? 'light' : 'dark';
@@ -534,10 +551,10 @@ Kaggle   : kaggle.com/mohan-ml`,
           const val = cliInput.value.trim().toLowerCase();
           cliInput.value = '';
 
-          // Add user input line to body
+          // Add user input line
           const userLine = document.createElement('div');
           userLine.style.color = '#38bdf8';
-          userLine.textContent = `visitor@mohan-ai:~$ ${val}`;
+          userLine.textContent = `mohan@portfolio:~$ ${val}`;
           cliBody.appendChild(userLine);
 
           let outputText = '';
@@ -567,7 +584,7 @@ Kaggle   : kaggle.com/mohan-ml`,
   }
 
   /* ==========================================================================
-     9. TOAST NOTIFICATION UTILITY
+     8. TOAST NOTIFICATION UTILITY
      ========================================================================== */
   function showToast(message) {
     let container = document.querySelector('.toast-container');
