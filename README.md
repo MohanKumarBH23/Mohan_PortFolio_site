@@ -89,5 +89,5 @@ Open [http://localhost:8080](http://localhost:8080) in your web browser.
 ## ⚙️ Customization Checklist
 
 - **Your Name & Social Links**: Open [`index.html`](file:///c:/Users/Dell/Desktop/Mohan%20PF/index.html) and search for `mohan` to update your email, GitHub, LinkedIn, and Kaggle URLs.
-- **Profile Picture**: Replace [`assets/profile.jpg`](file:///c:/Users/Dell/Desktop/Mohan%20PF/assets/profile.jpg) with your own headshot.
+- **Profile Picture**: Replace [`assets/mohan-avatar.jpg`](file:///c:/Users/Dell/Desktop/Mohan%20PF/assets/mohan-avatar.jpg) with your own headshot.
 - **Projects & Research**: Edit the project cards in `index.html` or their modal technical specs in [`js/main.js`](file:///c:/Users/Dell/Desktop/Mohan%20PF/js/main.js).
