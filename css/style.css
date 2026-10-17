@@ -61,32 +61,49 @@
   --shadow-glow: 0 0 25px -4px var(--glow-cyan);
 }
 
-/* Light Theme Overrides */
+/* Light Theme Overrides (Warm Off-White with Soft Coral-Pink Top-Right Gradient) */
 [data-theme="light"] {
-  --bg-primary: #f8fafc;
-  --bg-secondary: #f1f5f9;
+  --bg-primary: #faf8f5;
+  --bg-secondary: #f4efe8;
   --bg-surface: #ffffff;
-  --bg-surface-elevated: #f8fafc;
-  --bg-glass: rgba(255, 255, 255, 0.85);
+  --bg-surface-elevated: #f9f5ee;
+  --bg-glass: rgba(250, 248, 245, 0.85);
   --bg-glass-hover: rgba(255, 255, 255, 0.95);
 
-  --border-subtle: rgba(0, 0, 0, 0.08);
-  --border-strong: rgba(0, 0, 0, 0.16);
-  --border-focus: #0284c7;
+  --border-subtle: rgba(180, 140, 130, 0.12);
+  --border-strong: rgba(180, 130, 120, 0.22);
+  --border-focus: #f43f5e;
 
-  --text-primary: #0f172a;
-  --text-secondary: #475569;
-  --text-muted: #64748b;
-  --text-accent: #0284c7;
+  --text-primary: #1c1917;
+  --text-secondary: #57534e;
+  --text-muted: #78716c;
+  --text-accent: #e11d48;
 
-  --glow-cyan: rgba(2, 132, 199, 0.12);
-  --glow-indigo: rgba(79, 70, 229, 0.12);
-  --glow-blue: rgba(14, 165, 233, 0.12);
+  --glow-cyan: rgba(244, 63, 94, 0.12);
+  --glow-indigo: rgba(251, 146, 60, 0.12);
+  --glow-blue: rgba(244, 63, 94, 0.12);
 
-  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 12px -2px rgba(0, 0, 0, 0.08);
-  --shadow-lg: 0 12px 32px -4px rgba(0, 0, 0, 0.12);
-  --shadow-glow: 0 0 25px -4px rgba(2, 132, 199, 0.2);
+  --shadow-sm: 0 1px 3px 0 rgba(60, 40, 30, 0.05);
+  --shadow-md: 0 4px 14px -2px rgba(60, 40, 30, 0.08);
+  --shadow-lg: 0 12px 32px -4px rgba(60, 40, 30, 0.12);
+  --shadow-glow: 0 0 25px -4px rgba(244, 63, 94, 0.2);
+}
+
+[data-theme="light"] body {
+  background-color: #faf8f5;
+  background-image: 
+    radial-gradient(ellipse 65% 55% at 100% 0%, rgba(255, 135, 120, 0.28) 0%, rgba(255, 170, 155, 0.18) 28%, rgba(254, 210, 200, 0.08) 52%, transparent 75%),
+    radial-gradient(circle at 88% 12%, rgba(254, 185, 170, 0.16) 0%, transparent 45%);
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+[data-theme="light"] body::before {
+  display: none;
+}
+
+[data-theme="light"] body::after {
+  opacity: 0.22;
 }
 
 /* Base Reset */
@@ -655,7 +672,7 @@ code, pre, .font-mono {
 .about-section {
   padding: calc(var(--nav-height) + 40px) 0 90px;
   position: relative;
-  background-color: var(--bg-primary);
+  background-color: transparent;
   transition: background-color var(--transition-normal);
 }
 
