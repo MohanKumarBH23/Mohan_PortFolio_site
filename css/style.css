@@ -43,11 +43,25 @@
 
   /* Layout & Spacing */
   --container-max-w: 1200px;
-  --nav-height: 72px;
+  --nav-height: 64px;
   --radius-sm: 6px;
   --radius-md: 10px;
   --radius-lg: 16px;
   --radius-full: 9999px;
+
+  /* Liquid Glass Navigation Tokens */
+  --nav-glass-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.01) 100%), rgba(12, 17, 29, 0.72);
+  --nav-glass-bg-scrolled: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.02) 100%), rgba(10, 14, 25, 0.88);
+  --nav-glass-border: rgba(255, 255, 255, 0.14);
+  --nav-glass-border-scrolled: rgba(255, 255, 255, 0.22);
+  --nav-glass-shadow: 
+    0 20px 40px -15px rgba(0, 0, 0, 0.6),
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.22),
+    inset 0 -1px 1px 0 rgba(0, 0, 0, 0.4);
+  --nav-glass-shadow-scrolled: 
+    0 24px 48px -12px rgba(0, 0, 0, 0.75),
+    inset 0 1px 1px 0 rgba(255, 255, 255, 0.28),
+    inset 0 -1px 1px 0 rgba(0, 0, 0, 0.5);
 
   /* Transitions */
   --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
@@ -87,6 +101,22 @@
   --shadow-md: 0 4px 14px -2px rgba(60, 40, 30, 0.08);
   --shadow-lg: 0 12px 32px -4px rgba(60, 40, 30, 0.12);
   --shadow-glow: 0 0 25px -4px rgba(244, 63, 94, 0.2);
+
+  /* Liquid Glass Navigation Tokens (Light Mode) */
+  --nav-glass-bg: linear-gradient(135deg, rgba(255, 255, 255, 0.82) 0%, rgba(255, 255, 255, 0.52) 100%), rgba(250, 248, 245, 0.65);
+  --nav-glass-bg-scrolled: linear-gradient(135deg, rgba(255, 255, 255, 0.94) 0%, rgba(255, 255, 255, 0.72) 100%), rgba(250, 248, 245, 0.85);
+  --nav-glass-border: rgba(255, 255, 255, 0.85);
+  --nav-glass-border-scrolled: rgba(220, 195, 190, 0.5);
+  --nav-glass-shadow: 
+    0 16px 36px -10px rgba(235, 120, 105, 0.16),
+    0 4px 18px -2px rgba(45, 25, 20, 0.06),
+    inset 0 1.5px 1px 0 rgba(255, 255, 255, 0.95),
+    inset 0 -1px 1px 0 rgba(235, 160, 150, 0.2);
+  --nav-glass-shadow-scrolled: 
+    0 22px 45px -10px rgba(225, 110, 95, 0.22),
+    0 6px 20px -3px rgba(45, 25, 20, 0.08),
+    inset 0 1.5px 1px 0 #ffffff,
+    inset 0 -1px 1px 0 rgba(235, 160, 150, 0.25);
 }
 
 [data-theme="light"] body {
@@ -311,23 +341,50 @@ code, pre, .font-mono {
    NAVIGATION
    ========================================================================== */
 
+/* ==========================================================================
+   LIQUID GLASS NAVIGATION BAR
+   ========================================================================== */
+
 .navbar {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 36px);
+  max-width: 1200px;
   height: var(--nav-height);
-  background: var(--bg-glass);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--border-subtle);
+  border-radius: var(--radius-full);
+  background: var(--nav-glass-bg);
+  backdrop-filter: blur(28px) saturate(190%);
+  -webkit-backdrop-filter: blur(28px) saturate(190%);
+  border: 1px solid var(--nav-glass-border);
+  box-shadow: var(--nav-glass-shadow);
   z-index: 1000;
-  transition: all var(--transition-normal);
+  transition: all var(--transition-smooth);
+}
+
+/* Liquid Specular Top Rim Reflection */
+.navbar::before {
+  content: "";
+  position: absolute;
+  top: 1px;
+  left: 24px;
+  right: 24px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.45) 25%, rgba(255, 255, 255, 0.9) 50%, rgba(255, 255, 255, 0.45) 75%, transparent 100%);
+  border-radius: var(--radius-full);
+  pointer-events: none;
+}
+
+[data-theme="light"] .navbar::before {
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 255, 255, 0.7) 20%, #ffffff 50%, rgba(255, 255, 255, 0.7) 80%, transparent 100%);
 }
 
 .navbar.scrolled {
-  box-shadow: var(--shadow-md);
-  border-bottom-color: var(--border-strong);
+  top: 12px;
+  background: var(--nav-glass-bg-scrolled);
+  box-shadow: var(--nav-glass-shadow-scrolled);
+  border-color: var(--nav-glass-border-scrolled);
 }
 
 .nav-container {
@@ -335,6 +392,9 @@ code, pre, .font-mono {
   align-items: center;
   justify-content: space-between;
   height: 100%;
+  padding-left: 20px;
+  padding-right: 12px;
+  width: 100%;
 }
 
 .nav-brand {
@@ -345,17 +405,26 @@ code, pre, .font-mono {
 
 .nav-logo {
   font-family: var(--font-mono);
-  font-size: 1.125rem;
+  font-size: 1.0625rem;
   font-weight: 700;
   letter-spacing: -0.02em;
   color: var(--text-primary);
   display: flex;
   align-items: center;
   gap: 6px;
+  transition: opacity var(--transition-fast);
+}
+
+.nav-logo:hover {
+  opacity: 0.85;
 }
 
 .nav-logo span {
   color: var(--accent-sky);
+}
+
+[data-theme="light"] .nav-logo span {
+  color: #0284c7;
 }
 
 .status-badge {
@@ -366,9 +435,10 @@ code, pre, .font-mono {
   border-radius: var(--radius-full);
   font-size: 0.6875rem;
   font-weight: 600;
-  background: rgba(16, 185, 129, 0.1);
+  background: rgba(16, 185, 129, 0.12);
   color: var(--accent-emerald);
-  border: 1px solid rgba(16, 185, 129, 0.25);
+  border: 1px solid rgba(16, 185, 129, 0.28);
+  backdrop-filter: blur(8px);
 }
 
 .status-dot {
@@ -389,7 +459,7 @@ code, pre, .font-mono {
 .nav-menu {
   display: flex;
   align-items: center;
-  gap: 28px;
+  gap: 6px;
   list-style: none;
 }
 
@@ -398,49 +468,70 @@ code, pre, .font-mono {
   font-weight: 500;
   color: var(--text-secondary);
   position: relative;
-  padding: 6px 0;
-  transition: color var(--transition-fast);
+  padding: 7px 15px;
+  border-radius: var(--radius-full);
+  transition: all var(--transition-fast);
 }
 
-.nav-link:hover,
+.nav-link:hover {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme="light"] .nav-link:hover {
+  background: rgba(0, 0, 0, 0.05);
+}
+
 .nav-link.active {
   color: var(--text-primary);
+  background: rgba(56, 189, 248, 0.14);
+  font-weight: 600;
+  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.16), 0 2px 8px -2px rgba(56, 189, 248, 0.25);
+}
+
+[data-theme="light"] .nav-link.active {
+  background: rgba(225, 29, 72, 0.09);
+  color: var(--text-accent);
+  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.75), 0 2px 8px -2px rgba(225, 29, 72, 0.12);
 }
 
 .nav-link.active::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 2px;
-  background: linear-gradient(90deg, var(--accent-sky), var(--accent-indigo));
-  border-radius: 2px;
+  display: none;
 }
 
 .nav-actions {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
 }
 
 .theme-toggle {
   width: 38px;
   height: 38px;
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-full);
   border: 1px solid var(--border-subtle);
-  background: var(--bg-surface);
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   color: var(--text-secondary);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   transition: all var(--transition-fast);
+  box-shadow: inset 0 1px 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+[data-theme="light"] .theme-toggle {
+  background: rgba(255, 255, 255, 0.85);
+  border-color: rgba(215, 185, 175, 0.4);
+  box-shadow: inset 0 1px 1px 0 #ffffff, 0 2px 6px -1px rgba(60, 30, 20, 0.06);
 }
 
 .theme-toggle:hover {
   color: var(--text-primary);
   border-color: var(--border-strong);
+  transform: scale(1.06);
 }
 
 .theme-toggle svg {
@@ -458,6 +549,14 @@ code, pre, .font-mono {
 
 [data-theme="light"] .theme-toggle .icon-moon {
   display: block;
+}
+
+.nav-actions .btn-primary {
+  border-radius: var(--radius-full);
+  padding: 8px 18px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  box-shadow: 0 4px 14px -2px rgba(2, 132, 199, 0.35);
 }
 
 .mobile-nav-toggle {
@@ -2104,19 +2203,38 @@ select.control-select {
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 868px) {
+  .navbar {
+    top: 10px;
+    width: calc(100% - 24px);
+    height: 58px;
+    border-radius: 20px;
+  }
+
+  .nav-container {
+    padding-left: 14px;
+    padding-right: 8px;
+  }
+
+  .status-badge {
+    display: none;
+  }
+
   .nav-menu {
-    position: fixed;
-    top: var(--nav-height);
+    position: absolute;
+    top: calc(100% + 10px);
     left: 0;
     right: 0;
-    background: var(--bg-surface);
-    border-bottom: 1px solid var(--border-strong);
+    background: var(--nav-glass-bg-scrolled);
+    backdrop-filter: blur(28px) saturate(190%);
+    -webkit-backdrop-filter: blur(28px) saturate(190%);
+    border: 1px solid var(--nav-glass-border);
+    border-radius: 20px;
+    padding: 16px;
     flex-direction: column;
-    padding: 24px;
-    gap: 16px;
+    gap: 8px;
     display: none;
-    box-shadow: var(--shadow-lg);
+    box-shadow: var(--nav-glass-shadow-scrolled);
   }
 
   .nav-menu.open {
