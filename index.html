@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <!-- Security Headers (Client-side Fallbacks) -->
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+  <meta http-equiv="X-XSS-Protection" content="1; mode=block" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  
+  <!-- SEO & Primary Meta Tags -->
+  <title>Mohan | AI & Machine Learning Engineer | Portfolio</title>
+  <meta name="title" content="Mohan | AI & Machine Learning Engineer | Portfolio" />
+  <meta name="description" content="Portfolio of Mohan, an Engineering Graduate specializing in AI, Deep Learning, Foundation Models, Computer Vision, and High-Performance MLOps." />
+  <meta name="keywords" content="Mohan, AI Engineer, Machine Learning Engineer, Deep Learning, PyTorch, Computer Vision, TensorRT, LLM, RAG, MLOps, Portfolio" />
+  <meta name="author" content="Mohan" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://mohan-ai.dev/" />
+  <meta name="theme-color" content="#080a0f" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://mohan-ai.dev/" />
+  <meta property="og:title" content="Mohan | AI & Machine Learning Engineer" />
+  <meta property="og:description" content="Engineering Intelligent Systems from Mathematical Foundations to Scaled Deployment." />
+  <meta property="og:image" content="assets/profile.jpg" />
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://mohan-ai.dev/" />
+  <meta property="twitter:title" content="Mohan | AI & Machine Learning Engineer" />
+  <meta property="twitter:description" content="Engineering Intelligent Systems from Mathematical Foundations to Scaled Deployment." />
+  <meta property="twitter:image" content="assets/profile.jpg" />
+
+  <!-- Favicon / Web App Manifest -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>" />
+  <link rel="manifest" href="site.webmanifest" />
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css" />
+
+  <!-- JSON-LD Structured Data (Person Schema) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Mohan",
+    "jobTitle": "AI & Machine Learning Engineer",
+    "description": "Engineering graduate specializing in Deep Learning, Computer Vision, LLMs, and High-Performance ML Systems.",
+    "url": "https://mohan-ai.dev",
+    "sameAs": [
+      "https://github.com/mohan-ai",
+      "https://linkedin.com/in/mohan-ai",
+      "https://kaggle.com/mohan-ml"
+    ],
+    "knowsAbout": [
+      "Artificial Intelligence",
+      "Machine Learning",
+      "Deep Learning",
+      "Computer Vision",
+      "Large Language Models",
+      "PyTorch",
+      "TensorRT",
+      "MLOps"
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ==========================================================================
+       NAVIGATION BAR
+       ========================================================================== -->
+  <nav class="navbar" id="navbar" aria-label="Main Navigation">
+    <div class="container nav-container">
+      <div class="nav-brand">
+        <a href="#hero" class="nav-logo" aria-label="Mohan Portfolio Home">
+          <span>MOHAN</span>//AI
+        </a>
+        <div class="status-badge" title="Actively interviewing for ML & AI roles">
+          <span class="status-dot"></span>
+          <span>Open to Roles</span>
+        </div>
+      </div>
+
+      <ul class="nav-menu" id="nav-menu">
+        <li><a href="#hero" class="nav-link active">Overview</a></li>
+        <li><a href="#lab" class="nav-link">Interactive Lab</a></li>
+        <li><a href="#projects" class="nav-link">Projects</a></li>
+        <li><a href="#skills" class="nav-link">Competencies</a></li>
+        <li><a href="#experience" class="nav-link">Timeline</a></li>
+        <li><a href="#publications" class="nav-link">Research</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <!-- Dark / Light Theme Toggle -->
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle visual theme" title="Toggle Dark/Light Mode">
+          <svg class="icon-sun" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+          </svg>
+          <svg class="icon-moon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+          </svg>
+        </button>
+
+        <a href="#contact" class="btn btn-primary btn-sm">Hire Me</a>
+
+        <button class="mobile-nav-toggle" id="mobile-toggle" aria-label="Toggle navigation menu">
+          <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ==========================================================================
+       HERO SECTION
+       ========================================================================== -->
+  <header class="hero" id="hero">
+    <canvas id="neural-canvas" aria-hidden="true"></canvas>
+
+    <div class="container hero-content">
+      <div class="hero-text">
+        <div class="hero-eyebrow">
+          <span class="hero-eyebrow-chip">ENGINEERING GRADUATE</span>
+          <span>ARTIFICIAL INTELLIGENCE & MACHINE LEARNING</span>
+        </div>
+
+        <h1 class="hero-title">
+          Engineering Intelligent Systems from <span class="text-gradient">Mathematical Foundations</span> to Scaled Deployment.
+        </h1>
+
+        <p class="hero-description">
+          Hi, I'm <strong>Mohan</strong>. I build high-performance deep learning models, edge computer vision pipelines, and resilient agentic retrieval systems. Dedicated to bridging theoretical research with hardware-accelerated production inference.
+        </p>
+
+        <div class="hero-actions">
+          <a href="#projects" class="btn btn-primary">
+            Explore Engineered Systems
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <a href="#lab" class="btn btn-secondary">
+            Launch Interactive ML Lab ✦
+          </a>
+          <button class="btn btn-outline copy-bibtex-btn" title="View & Copy CV summary">
+            Quick Bio Citation
+          </button>
+        </div>
+
+        <!-- Metrics Strip -->
+        <div class="metrics-strip">
+          <div class="metric-item">
+            <span class="metric-number" data-target="94.2" data-suffix="%">0%</span>
+            <span class="metric-label">Edge Vision mAP</span>
+          </div>
+          <div class="metric-item">
+            <span class="metric-number" data-target="420" data-suffix="ms">0ms</span>
+            <span class="metric-label">P95 RAG Latency</span>
+          </div>
+          <div class="metric-item">
+            <span class="metric-number" data-target="68" data-suffix="%">0%</span>
+            <span class="metric-label">VRAM Saved (ZeRO-3)</span>
+          </div>
+          <div class="metric-item">
+            <span class="metric-number" data-target="10" data-suffix="+">0+</span>
+            <span class="metric-label">Production Repos</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="profile-card">
+          <div class="profile-image-wrapper">
+            <img src="assets/profile.jpg" alt="Mohan - AI & Machine Learning Engineer" class="profile-image" loading="eager" />
+            <div class="profile-overlay-badge">
+              <div class="profile-overlay-info">
+                <h4>Mohan, B.E. / B.Tech</h4>
+                <p>Specialist: Deep Learning & MLOps</p>
+              </div>
+              <span class="status-badge">
+                <span class="status-dot"></span> Active
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       INTERACTIVE AI & ML LAB (The Wow Factor)
+       ========================================================================== -->
+  <section class="section" id="lab">
+    <div class="container">
+      <div class="section-tag">Interactive In-Browser Demonstrator</div>
+      <h2 class="section-title">Client-Side AI & Machine Learning Lab</h2>
+      <p class="section-subtitle">
+        Explore live interactive simulations demonstrating fundamental deep learning optimization, non-linear classification decision boundaries, and semantic vector cosine retrieval.
+      </p>
+
+      <div class="ai-lab-container">
+        <div class="lab-header">
+          <div class="lab-title-group">
+            <div class="lab-terminal-dots">
+              <span></span><span></span><span></span>
+            </div>
+            <div class="lab-header-text">
+              <h3>live_neural_runtime.py // v2.4</h3>
+            </div>
+          </div>
+
+          <div class="lab-tabs">
+            <button class="lab-tab-btn active" data-tab="tab-boundary">1. Decision Boundary Simulator</button>
+            <button class="lab-tab-btn" data-tab="tab-vectors">2. Semantic Vector Space Explorer</button>
+          </div>
+        </div>
+
+        <div class="lab-content">
+          <!-- Module 1: Decision Boundary Simulator -->
+          <div class="lab-panel active" id="tab-boundary">
+            <div class="boundary-layout">
+              <div class="canvas-wrapper">
+                <canvas id="boundary-canvas"></canvas>
+                <div class="canvas-overlay-stats">
+                  <div>Epoch: <span id="stat-epoch" style="color: #ffffff;">0</span></div>
+                  <div>Loss: <span id="stat-loss" style="color: #ffffff;">0.8500</span></div>
+                  <div>Acc: <span id="stat-acc" style="color: var(--accent-emerald);">51.8%</span></div>
+                </div>
+              </div>
+
+              <div class="controls-card">
+                <div class="control-group">
+                  <div class="control-header">
+                    <span>Learning Rate (&alpha;)</span>
+                    <span class="control-value" id="lr-val">0.050</span>
+                  </div>
+                  <input type="range" id="lr-slider" min="0.005" max="0.2" step="0.005" value="0.05" />
+                </div>
+
+                <div class="control-group">
+                  <div class="control-header">
+                    <span>Activation Function &sigma;(z)</span>
+                  </div>
+                  <select class="control-select" id="activation-select">
+                    <option value="relu">ReLU (Rectified Linear Unit)</option>
+                    <option value="sigmoid">Sigmoid (&sigma;)</option>
+                    <option value="tanh">Hyperbolic Tangent (Tanh)</option>
+                    <option value="leaky">Leaky ReLU (&alpha;=0.01)</option>
+                  </select>
+                </div>
+
+                <div class="control-group">
+                  <div class="control-header">
+                    <span>Target Dataset Topology</span>
+                  </div>
+                  <select class="control-select" id="dataset-select">
+                    <option value="circles">Concentric Rings (Non-linear)</option>
+                    <option value="moons">Two Interleaved Moons</option>
+                    <option value="xor">XOR Multi-Quadrant</option>
+                  </select>
+                </div>
+
+                <div class="btn-group-row">
+                  <button class="btn btn-primary btn-sm" id="btn-train" style="flex: 1;">Start Training</button>
+                  <button class="btn btn-secondary btn-sm" id="btn-reset">Reset</button>
+                </div>
+
+                <p style="font-size: 0.75rem; color: var(--text-muted); line-height: 1.4;">
+                  ✦ Uses backpropagation approximation on a shallow multi-layer neural network with 2D spatial feature mapping.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Module 2: Semantic Vector Explorer -->
+          <div class="lab-panel" id="tab-vectors">
+            <div class="vector-layout">
+              <div>
+                <p style="font-size: 0.875rem; margin-bottom: 12px; color: var(--text-secondary);">
+                  Test real-time <strong>Cosine Similarity</strong> ranking against portfolio research domains:
+                </p>
+                <div class="search-input-box">
+                  <input type="text" class="vector-query-input" id="vector-query-input" placeholder="Type AI query, e.g. edge vision latency..." value="low latency edge vision inference" />
+                  <button class="btn btn-primary btn-sm" id="btn-run-query">Embed & Rank</button>
+                </div>
+
+                <div class="vector-presets">
+                  <span style="font-size: 0.75rem; color: var(--text-muted); align-self: center;">Try presets:</span>
+                  <button class="preset-chip" data-query="low latency edge vision inference">Edge Vision INT8</button>
+                  <button class="preset-chip" data-query="retrieval augmented generation with vector search">Agentic RAG</button>
+                  <button class="preset-chip" data-query="ecg transformer medical diagnostic">Biosignal ViT</button>
+                  <button class="preset-chip" data-query="distributed multi gpu scaling zeRO">DeepSpeed ZeRO</button>
+                </div>
+
+                <div class="vector-results-list" id="vector-results-list">
+                  <!-- Populated by JS -->
+                </div>
+              </div>
+
+              <div class="canvas-wrapper">
+                <canvas id="vector-space-canvas"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       FEATURED PROJECTS
+       ========================================================================== */
+  -->
+  <section class="section" id="projects">
+    <div class="container">
+      <div class="section-tag">Engineered Solutions & Research</div>
+      <h2 class="section-title">Production & Applied AI Systems</h2>
+      <p class="section-subtitle">
+        Selected engineering architectures spanning edge vision quantization, distributed LLM fine-tuning, and self-supervised biomedical transformers.
+      </p>
+
+      <div class="filter-bar">
+        <button class="filter-btn active" data-filter="all">All Systems</button>
+        <button class="filter-btn" data-filter="vision">Computer Vision & Edge</button>
+        <button class="filter-btn" data-filter="llm">LLMs & Agentic RAG</button>
+        <button class="filter-btn" data-filter="systems">MLOps & Distributed</button>
+      </div>
+
+      <div class="projects-grid">
+        <!-- Project 1 -->
+        <article class="project-card" data-category="vision">
+          <div class="project-card-header">
+            <span class="project-badge">Edge AI & Computer Vision</span>
+            <div class="project-links">
+              <a href="https://github.com/mohan-ai/neurovision-edge" target="_blank" rel="noopener noreferrer" class="icon-btn" title="View Source on GitHub" aria-label="GitHub Repository">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+              </a>
+            </div>
+          </div>
+          <div class="project-card-body">
+            <h3 class="project-title">NeuroVision-Edge: INT8 TensorRT Pipeline</h3>
+            <p class="project-desc">
+              Quantized real-time YOLOv11 & custom segmentation engine for NVIDIA Jetson robotics with symmetric KL-divergence calibration and sub-10ms latency.
+            </p>
+            <div class="project-metrics">
+              <div class="proj-metric-item">
+                <span class="proj-metric-val">120 FPS</span>
+                <span class="proj-metric-name">Inference Speed</span>
+              </div>
+              <div class="proj-metric-item">
+                <span class="proj-metric-val">94.2%</span>
+                <span class="proj-metric-name">mAP@50 Accuracy</span>
+              </div>
+            </div>
+            <div class="project-tags">
+              <span class="tag">PyTorch</span>
+              <span class="tag">TensorRT 10</span>
+              <span class="tag">INT8</span>
+              <span class="tag">CUDA</span>
+              <span class="tag">C++</span>
+            </div>
+          </div>
+          <div class="project-card-footer">
+            <button class="view-details-btn" data-project="neurovision">
+              Architecture & Details <span>→</span>
+            </button>
+            <span style="font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-mono);">v1.4.0</span>
+          </div>
+        </article>
+
+        <!-- Project 2 -->
+        <article class="project-card" data-category="llm">
+          <div class="project-card-header">
+            <span class="project-badge">LLMs & Agentic Systems</span>
+            <div class="project-links">
+              <a href="https://github.com/mohan-ai/context-rag-engine" target="_blank" rel="noopener noreferrer" class="icon-btn" title="View Source on GitHub" aria-label="GitHub Repository">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+              </a>
+            </div>
+          </div>
+          <div class="project-card-body">
+            <h3 class="project-title">ContextRAG: Agentic Multi-Modal Engine</h3>
+            <p class="project-desc">
+              Production retrieval architecture with HyDE query generation, cross-encoder reranking, and self-evaluating RAGAS hallucination guardrails.
+            </p>
+            <div class="project-metrics">
+              <div class="proj-metric-item">
+                <span class="proj-metric-val">420 ms</span>
+                <span class="proj-metric-name">P95 Latency</span>
+              </div>
+              <div class="proj-metric-item">
+                <span class="proj-metric-val">0.892</span>
+                <span class="proj-metric-name">BERTScore F1</span>
+              </div>
+            </div>
+            <div class="project-tags">
+              <span class="tag">LangChain</span>
+              <span class="tag">Qdrant</span>
+              <span class="tag">FastAPI</span>
+              <span class="tag">HyDE</span>
+              <span class="tag">Docker</span>
+            </div>
+          </div>
+          <div class="project-card-footer">
+            <button class="view-details-btn" data-project="contextrag">
+              Architecture & Details <span>→</span>
+            </button>
+            <span style="font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-mono);">v2.1.0</span>
+          </div>
+        </article>
+
+        <!-- Project 3 -->
+        <article class="project-card" data-category="vision">
+          <div class="project-card-header">
+            <span class="project-badge">Biomedical AI & Transformers</span>
+            <div class="project-links">
+              <a href="https://github.com/mohan-ai/pulsebio-ecg" target="_blank" rel="noopener noreferrer" class="icon-btn" title="View Source on GitHub" aria-label="GitHub Repository">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+              </a>
+            </div>
+          </div>
+          <div class="project-card-body">
+            <h3 class="project-title">PulseBio: Self-Supervised Vision Transformer</h3>
+            <p class="project-desc">
+              Masked autoencoder pre-trained on 150k+ multi-lead biosignals for real-time cardiac arrhythmia screening with high clinician-validated fidelity.
+            </p>
+            <div class="project-metrics">
+              <div class="proj-metric-item">
+                <span class="proj-metric-val">98.7%</span>
+                <span class="proj-metric-name">AUROC Score</span>
+              </div>
+              <div class="proj-metric-item">
+                <span class="proj-metric-val">18 ms</span>
+                <span class="proj-metric-name">Clinical Latency</span>
+              </div>
+            </div>
+            <div class="project-tags">
+              <span class="tag">Vision Transformers</span>
+              <span class="tag">PyTorch</span>
+              <span class="tag">PhysioNet</span>
+              <span class="tag">Self-Supervised</span>
+            </div>
+          </div>
+          <div class="project-card-footer">
+            <button class="view-details-btn" data-project="pulsebio">
+              Architecture & Details <span>→</span>
+            </button>
+            <span style="font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-mono);">Research</span>
+          </div>
+        </article>
+
+        <!-- Project 4 -->
+        <article class="project-card" data-category="systems">
+          <div class="project-card-header">
+            <span class="project-badge">MLOps & Distributed ML</span>
+            <div class="project-links">
+              <a href="https://github.com/mohan-ai/distributed-llm-tune" target="_blank" rel="noopener noreferrer" class="icon-btn" title="View Source on GitHub" aria-label="GitHub Repository">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+              </a>
+            </div>
+          </div>
+          <div class="project-card-body">
+            <h3 class="project-title">DistributedLLM-Tune: DeepSpeed ZeRO-3</h3>
+            <p class="project-desc">
+              Multi-GPU QLoRA fine-tuning infrastructure for Llama-3-70B incorporating FlashAttention-2 kernels and automated parameter partitioning.
+            </p>
+            <div class="project-metrics">
+              <div class="proj-metric-item">
+                <span class="proj-metric-val">68%</span>
+                <span class="proj-metric-name">VRAM Savings</span>
+              </div>
+              <div class="proj-metric-item">
+                <span class="proj-metric-val">91.4%</span>
+                <span class="proj-metric-name">Scaling Efficiency</span>
+              </div>
+            </div>
+            <div class="project-tags">
+              <span class="tag">DeepSpeed</span>
+              <span class="tag">FlashAttention-2</span>
+              <span class="tag">Ray</span>
+              <span class="tag">HuggingFace</span>
+            </div>
+          </div>
+          <div class="project-card-footer">
+            <button class="view-details-btn" data-project="distributed-tune">
+              Architecture & Details <span>→</span>
+            </button>
+            <span style="font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-mono);">Open Source</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       TECHNICAL COMPETENCIES & ARSENAL
+       ========================================================================== -->
+  <section class="section" id="skills" style="background: var(--bg-secondary);">
+    <div class="container">
+      <div class="section-tag">Core Competencies</div>
+      <h2 class="section-title">Technical Mastery & Stack</h2>
+      <p class="section-subtitle">
+        Engineered with a strong foundation in calculus, linear algebra, distributed computing, and contemporary deep learning frameworks.
+      </p>
+
+      <div class="skills-matrix">
+        <!-- Card 1 -->
+        <div class="skill-category-card">
+          <div class="category-header">
+            <div class="category-icon-box">⚡</div>
+            <div>
+              <h3>Deep Learning & Frameworks</h3>
+              <p style="font-size: 0.75rem; color: var(--text-muted);">Neural Architectures & Inference</p>
+            </div>
+          </div>
+          <div class="skills-list">
+            <div class="skill-item">
+              <div class="skill-info"><span class="skill-name">PyTorch & TorchVision</span><span class="skill-level">Advanced</span></div>
+              <div class="skill-bar-track"><div class="skill-bar-fill" style="width: 95%;"></div></div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-info"><span class="skill-name">TensorRT & ONNX Runtime</span><span class="skill-level">Proficient</span></div>
+              <div class="skill-bar-track"><div class="skill-bar-fill" style="width: 88%;"></div></div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-info"><span class="skill-name">Hugging Face Transformers / PEFT</span><span class="skill-level">Advanced</span></div>
+              <div class="skill-bar-track"><div class="skill-bar-fill" style="width: 92%;"></div></div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-info"><span class="skill-name">TensorFlow / Keras</span><span class="skill-level">Competent</span></div>
+              <div class="skill-bar-track"><div class="skill-bar-fill" style="width: 80%;"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="skill-category-card">
+          <div class="category-header">
+            <div class="category-icon-box">🧬</div>
+            <div>
+              <h3>GenAI & Agentic Systems</h3>
+              <p style="font-size: 0.75rem; color: var(--text-muted);">Retrieval & Foundation Models</p>
+            </div>
+          </div>
+          <div class="skills-list">
+            <div class="skill-item">
+              <div class="skill-info"><span class="skill-name">LangChain & LlamaIndex</span><span class="skill-level">Advanced</span></div>
+              <div class="skill-bar-track"><div class="skill-bar-fill" style="width: 90%;"></div></div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-info"><span class="skill-name">Vector DBs (Qdrant, Chroma, Pinecone)</span><span class="skill-level">Advanced</span></div>
+              <div class="skill-bar-track"><div class="skill-bar-fill" style="width: 92%;"></div></div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-info"><span class="skill-name">HyDE, Rerankers & RAGAS Evaluation</span><span class="skill-level">Proficient</span></div>
+              <div class="skill-bar-track"><div class="skill-bar-fill" style="width: 85%;"></div></div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-info"><span class="skill-name">vLLM & Ollama Self-Hosting</span><span class="skill-level">Proficient</span></div>
+              <div class="skill-bar-track"><div class="skill-bar-fill" style="width: 88%;"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="skill-category-card">
+          <div class="category-header">
+            <div class="category-icon-box">⚙️</div>
+            <div>
+              <h3>Systems, Cloud & MLOps</h3>
+              <p style="font-size: 0.75rem; color: var(--text-muted);">Reliability & Scalability</p>
+            </div>
+          </div>
+          <div class="skills-list">
+            <div class="skill-item">
+              <div class="skill-info"><span class="skill-name">Docker & Kubernetes</span><span class="skill-level">Proficient</span></div>
+              <div class="skill-bar-track"><div class="skill-bar-fill" style="width: 85%;"></div></div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-info"><span class="skill-name">DeepSpeed ZeRO & Distributed Training</span><span class="skill-level">Proficient</span></div>
+              <div class="skill-bar-track"><div class="skill-bar-fill" style="width: 84%;"></div></div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-info"><span class="skill-name">MLflow, Weights & Biases</span><span class="skill-level">Advanced</span></div>
+              <div class="skill-bar-track"><div class="skill-bar-fill" style="width: 90%;"></div></div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-info"><span class="skill-name">FastAPI & Async Microservices</span><span class="skill-level">Advanced</span></div>
+              <div class="skill-bar-track"><div class="skill-bar-fill" style="width: 94%;"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="skill-category-card">
+          <div class="category-header">
+            <div class="category-icon-box">📐</div>
+            <div>
+              <h3>Languages & Foundations</h3>
+              <p style="font-size: 0.75rem; color: var(--text-muted);">Core Computational Engineering</p>
+            </div>
+          </div>
+          <div class="skills-list">
+            <div class="skill-item">
+              <div class="skill-info"><span class="skill-name">Python (OOP, Profiling, Async)</span><span class="skill-level">Expert</span></div>
+              <div class="skill-bar-track"><div class="skill-bar-fill" style="width: 96%;"></div></div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-info"><span class="skill-name">C++ & CUDA Foundations</span><span class="skill-level">Proficient</span></div>
+              <div class="skill-bar-track"><div class="skill-bar-fill" style="width: 78%;"></div></div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-info"><span class="skill-name">NumPy, SciPy, Polars, Pandas</span><span class="skill-level">Expert</span></div>
+              <div class="skill-bar-track"><div class="skill-bar-fill" style="width: 94%;"></div></div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-info"><span class="skill-name">Linux / Bash & Git Automation</span><span class="skill-level">Advanced</span></div>
+              <div class="skill-bar-track"><div class="skill-bar-fill" style="width: 92%;"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       ACADEMIC TIMELINE & EXPERIENCE
+       ========================================================================== -->
+  <section class="section" id="experience">
+    <div class="container">
+      <div class="section-tag">Trajectory & Qualifications</div>
+      <h2 class="section-title">Academic & Engineering Journey</h2>
+      <p class="section-subtitle">
+        Rigorous engineering foundation coupled with practical hands-on research and applied machine learning internships.
+      </p>
+
+      <div class="timeline">
+        <!-- Item 1 -->
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card">
+            <div class="timeline-meta">
+              <span class="timeline-period">2022 - 2026</span>
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent-emerald);">GPA: 8.9 / 10.0 (First Class with Distinction)</span>
+            </div>
+            <h3 class="timeline-title">Bachelor of Engineering (B.E. / B.Tech) in Computer Science & Engineering</h3>
+            <p class="timeline-org">Affiliated Technical University // AI & Data Science Specialization</p>
+            <p class="timeline-desc">
+              Core coursework: Linear Algebra, Probability & Statistics for Engineers, Design & Analysis of Algorithms, Deep Learning, Computer Vision, Distributed Cloud Architectures, and Database Internals. Published undergraduate capstone research on transformer architectures for biomedical signal analysis.
+            </p>
+          </div>
+        </div>
+
+        <!-- Item 2 -->
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card">
+            <div class="timeline-meta">
+              <span class="timeline-period">2025 (6 Months)</span>
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent-sky);">Applied AI Research Intern</span>
+            </div>
+            <h3 class="timeline-title">Machine Learning Engineering Intern</h3>
+            <p class="timeline-org">Intelligent Systems Lab</p>
+            <p class="timeline-desc">
+              Optimized deep neural network inference on edge hardware using TensorRT and ONNX Runtime. Implemented automated data ingestion and validation pipelines with MLflow, reducing training iteration cycles by 35%. Mentored junior cohorts in PyTorch model fine-tuning and GPU profiling.
+            </p>
+          </div>
+        </div>
+
+        <!-- Item 3 -->
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-card">
+            <div class="timeline-meta">
+              <span class="timeline-period">2024</span>
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--accent-amber);">National Hackathon Finalist</span>
+            </div>
+            <h3 class="timeline-title">Lead Developer & ML Architect</h3>
+            <p class="timeline-org">Smart India AI Innovation Challenge</p>
+            <p class="timeline-desc">
+              Built an offline edge-assisted surveillance pipeline with YOLOv8 and automated alert dispatch for industrial worker PPE compliance. Awarded 2nd Runner Up out of 250+ engineering teams.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       PUBLICATIONS & RESEARCH NOTES
+       ========================================================================== -->
+  <section class="section" id="publications" style="background: var(--bg-secondary);">
+    <div class="container">
+      <div class="section-tag">Peer-Reviewed & Preprints</div>
+      <h2 class="section-title">Research Publications</h2>
+      <p class="section-subtitle">
+        Contributions to deep learning literature and conference proceedings.
+      </p>
+
+      <div class="publications-grid">
+        <div class="paper-card">
+          <div class="paper-top">
+            <span class="venue-badge">arXiv Preprint &bull; CS.LG / EECS</span>
+            <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted);">Feb 2025</span>
+          </div>
+          <h3 class="paper-title">Self-Supervised Vision Transformers for Robust Electrocardiographic Arrhythmia Screening</h3>
+          <p class="paper-authors"><strong>Mohan</strong>, Research Advisor, Faculty Collaborators</p>
+          <p class="paper-abstract">
+            Proposes a novel 1D/2D multi-lead biosignal masked autoencoding objective that pre-trains Swin-Transformer backbones on unlabelled PhysioNet records. Outperforms standard supervised ResNet-50 baselines by +4.2% AUROC under heavy sensor noise and missing lead conditions.
+          </p>
+          <div class="paper-actions">
+            <button class="btn btn-outline btn-sm copy-bibtex-btn">
+              Copy BibTeX Citation 📋
+            </button>
+            <a href="https://arxiv.org" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-sm">
+              Read Manuscript (PDF) ↗
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       CONTACT & INQUIRY (SECURED)
+       ========================================================================== -->
+  <section class="section" id="contact">
+    <div class="container">
+      <div class="section-tag">Direct Communication</div>
+      <h2 class="section-title">Initiate Collaboration</h2>
+      <p class="section-subtitle">
+        Whether discussing prospective Machine Learning Engineering roles, research collaborations, or technical architecture advisory, I'd welcome the opportunity to connect.
+      </p>
+
+      <div class="contact-layout">
+        <!-- Contact Information -->
+        <div class="contact-info-card">
+          <h3>Professional Coordinates</h3>
+          <p style="font-size: 0.875rem; margin-top: 6px;">
+            Available for full-time, contract, or high-impact AI research opportunities.
+          </p>
+
+          <div class="contact-channels">
+            <div class="channel-item">
+              <div class="channel-icon">✉</div>
+              <div class="channel-text">
+                <p>Email Address</p>
+                <p><a href="mailto:mohan.engineering.ai@gmail.com">mohan.engineering.ai@gmail.com</a></p>
+              </div>
+            </div>
+
+            <div class="channel-item">
+              <div class="channel-icon">💼</div>
+              <div class="channel-text">
+                <p>LinkedIn Profile</p>
+                <p><a href="https://linkedin.com/in/mohan-ai" target="_blank" rel="noopener noreferrer">linkedin.com/in/mohan-ai</a></p>
+              </div>
+            </div>
+
+            <div class="channel-item">
+              <div class="channel-icon">🐙</div>
+              <div class="channel-text">
+                <p>GitHub Repositories</p>
+                <p><a href="https://github.com/mohan-ai" target="_blank" rel="noopener noreferrer">github.com/mohan-ai</a></p>
+              </div>
+            </div>
+
+            <div class="channel-item">
+              <div class="channel-icon">📊</div>
+              <div class="channel-text">
+                <p>Kaggle Competitions</p>
+                <p><a href="https://kaggle.com/mohan-ml" target="_blank" rel="noopener noreferrer">kaggle.com/mohan-ml</a></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="security-badge-box">
+            <div class="sec-icon">🛡️</div>
+            <div class="sec-text">
+              <h5>Security & Confidentiality</h5>
+              <p>
+                Equipped with client-side rate limiting, honeypot spam protection, and strict Content Security Policies. Inquiries are handled with complete confidentiality.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Secure Contact Form -->
+        <form class="contact-form" id="contact-form" novalidate>
+          <!-- Honeypot anti-spam bot trap (hidden) -->
+          <input type="text" name="_gotcha_hp" class="hp-field" tabindex="-1" autocomplete="off" />
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="form-name">Your Full Name *</label>
+              <input type="text" id="form-name" class="form-input" placeholder="e.g. Dr. Alan Turing" required />
+            </div>
+            <div class="form-group">
+              <label for="form-email">Work / Contact Email *</label>
+              <input type="email" id="form-email" class="form-input" placeholder="e.g. alan@laboratory.org" required />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="form-subject">Subject / Purpose of Inquiry *</label>
+            <input type="text" id="form-subject" class="form-input" placeholder="e.g. AI / ML Engineering Role &bull; Interview Invitation" required />
+          </div>
+
+          <div class="form-group">
+            <label for="form-message">Detailed Message *</label>
+            <textarea id="form-message" class="form-textarea" placeholder="Briefly describe your team, problem domain, tech stack, or proposal..." required></textarea>
+          </div>
+
+          <div id="form-status" class="form-status"></div>
+
+          <button type="submit" class="btn btn-primary" id="btn-submit-form">
+            <span>Send Secure Inquiry</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       CLI TERMINAL MODAL (Easter Egg for Recruiters & Engineers)
+       ========================================================================== -->
+  <div class="cli-launcher">
+    <button class="cli-toggle-btn" id="cli-toggle-btn" aria-label="Open Interactive CLI Terminal" title="Open Interactive Developer Terminal">
+      <span>&gt;_</span>
+      <span>Terminal</span>
+    </button>
+  </div>
+
+  <div class="cli-modal" id="cli-modal" role="dialog" aria-modal="true" aria-label="Interactive Terminal">
+    <div class="cli-header">
+      <span class="cli-title">mohan@ai-kernel:~ (bash)</span>
+      <button class="cli-close" id="cli-close" aria-label="Close terminal">&times;</button>
+    </div>
+    <div class="cli-body" id="cli-body">
+      <div style="color: var(--accent-emerald);">Mohan AI Environment v2.4.0 (x86_64-pc-linux-gnu)</div>
+      <div style="color: var(--text-muted);">Type <span style="color: #38bdf8;">'help'</span> to see available commands or <span style="color: #38bdf8;">'skills'</span>, <span style="color: #38bdf8;">'projects'</span>, <span style="color: #38bdf8;">'stats'</span>, <span style="color: #38bdf8;">'contact'</span>.</div>
+    </div>
+    <div class="cli-input-line">
+      <span class="cli-prompt">mohan-ai:~$</span>
+      <input type="text" class="cli-input" id="cli-input" autocomplete="off" spellcheck="false" placeholder="type a command..." />
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       PROJECT DETAIL DRAWER / MODAL
+       ========================================================================== -->
+  <div class="modal-backdrop" id="project-modal-backdrop" role="dialog" aria-modal="true">
+    <div class="project-modal">
+      <button class="modal-close-btn" id="modal-close-btn" aria-label="Close dialog">&times;</button>
+      <div id="project-modal-content">
+        <!-- Content injected dynamically by main.js -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       FOOTER
+       ========================================================================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <h4>MOHAN // AI &amp; ML SYSTEMS</h4>
+          <p>B.E./B.Tech Engineering Graduate &bull; Deep Learning &bull; Computer Vision &bull; MLOps</p>
+        </div>
+
+        <div class="footer-links">
+          <a href="#hero">Overview</a>
+          <a href="#lab">Lab</a>
+          <a href="#projects">Systems</a>
+          <a href="#skills">Competencies</a>
+          <a href="#contact">Inquiries</a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          &copy; 2026 Mohan. All rights reserved. Built with precision, semantic HTML5, and vanilla modern CSS.
+        </div>
+        <div class="security-status-indicator">
+          <span class="sec-dot"></span>
+          <span>Zero-Dependency Static Runtime &bull; Strict CSP &bull; Deployable on Vercel/Netlify</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/security.js"></script>
+  <script src="js/particles.js"></script>
+  <script src="js/ai-lab.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
