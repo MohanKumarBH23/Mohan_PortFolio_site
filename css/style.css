@@ -627,7 +627,7 @@ code, pre, .font-mono {
   left: 16px;
   right: 16px;
   padding: 12px 16px;
-  background: rgba(8, 10, 15, 0.85);
+  background: var(--bg-glass);
   border: 1px solid var(--border-strong);
   border-radius: var(--radius-md);
   backdrop-filter: blur(10px);
@@ -639,13 +639,226 @@ code, pre, .font-mono {
 .profile-overlay-info h4 {
   font-size: 0.875rem;
   font-weight: 600;
-  color: #ffffff;
+  color: var(--text-primary);
 }
 
 .profile-overlay-info p {
   font-size: 0.75rem;
   color: var(--text-muted);
   font-family: var(--font-mono);
+}
+
+/* ==========================================================================
+   ABOUT ME SECTION (Musadiq Pasha Inspired Editorial Layout)
+   ========================================================================== */
+
+.about-section {
+  padding: 100px 0;
+  position: relative;
+  background-color: var(--bg-primary);
+  border-top: 1px solid var(--border-subtle);
+  transition: background-color var(--transition-normal);
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 56px;
+  align-items: center;
+}
+
+@media (max-width: 992px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+.about-visual {
+  position: relative;
+  width: 100%;
+}
+
+.about-img-frame {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--border-strong);
+  box-shadow: var(--shadow-lg);
+  background: var(--bg-surface);
+  transition: transform var(--transition-smooth), box-shadow var(--transition-smooth), border-color var(--transition-fast);
+}
+
+.about-img-frame:hover {
+  transform: translateY(-4px);
+  border-color: var(--border-focus);
+  box-shadow: var(--shadow-glow), var(--shadow-lg);
+}
+
+.about-img {
+  width: 100%;
+  height: 100%;
+  max-height: 540px;
+  object-fit: cover;
+  display: block;
+}
+
+.about-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.about-bio {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 12px;
+  margin-bottom: 28px;
+}
+
+.about-bio p {
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+.about-bio p strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+/* Tabs: Education & Certifications */
+.about-tabs-wrapper {
+  margin-top: 8px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.about-tabs {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.about-tab-btn {
+  background: none;
+  border: none;
+  padding: 8px 4px 12px;
+  font-family: var(--font-sans);
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  position: relative;
+  transition: color var(--transition-fast);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.about-tab-btn:hover {
+  color: var(--text-primary);
+}
+
+.about-tab-btn.active {
+  color: var(--text-primary);
+}
+
+.about-tab-btn .tab-indicator {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2.5px;
+  background: var(--accent-sky);
+  border-radius: 2px;
+  transform: scaleX(0);
+  transition: transform var(--transition-normal);
+}
+
+.about-tab-btn.active .tab-indicator {
+  transform: scaleX(1);
+}
+
+/* Tab Panes */
+.about-tab-pane {
+  display: none;
+}
+
+.about-tab-pane.active {
+  display: block;
+  animation: fadeIn 0.25s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.about-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.about-list li {
+  position: relative;
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.about-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 9px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--accent-sky);
+  box-shadow: 0 0 6px var(--accent-sky);
+}
+
+.about-item-header {
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--text-primary);
+}
+
+.about-item-header strong {
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.about-item-header span {
+  color: var(--text-secondary);
+}
+
+.about-item-meta {
+  margin-top: 2px;
+}
+
+.about-badge {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  color: var(--accent-emerald);
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  padding: 2px 10px;
+  border-radius: var(--radius-full);
+}
+
+.about-item-desc {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--text-muted);
 }
 
 /* ==========================================================================

@@ -97,9 +97,10 @@
 
       <ul class="nav-menu" id="nav-menu">
         <li><a href="#hero" class="nav-link active">Overview</a></li>
+        <li><a href="#about" class="nav-link">About</a></li>
         <li><a href="#projects" class="nav-link">Projects</a></li>
         <li><a href="#skills" class="nav-link">Competencies</a></li>
-        <li><a href="#experience" class="nav-link">Experience &amp; Education</a></li>
+        <li><a href="#experience" class="nav-link">Experience</a></li>
         <li><a href="#contact" class="nav-link">Contact</a></li>
       </ul>
 
@@ -198,12 +199,99 @@
       </div>
     </div>
   </header>
-
-
-
+ 
   <!-- ==========================================================================
-       FEATURED PROJECTS (MOHAN'S REAL PORTFOLIO)
+       ABOUT ME SECTION (Musadiq Pasha Layout & Experience Structure)
        ========================================================================== -->
+  <section class="section about-section" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-visual">
+          <div class="about-img-frame">
+            <img src="assets/about-workspace.jpg" alt="Mohan Kumar B.H Engineering Workspace" class="about-img" loading="lazy" />
+          </div>
+        </div>
+        <div class="about-content">
+          <div class="section-tag">Engineering Profile &amp; Mindset</div>
+          <h2 class="section-title">About Me</h2>
+          
+          <div class="about-bio">
+            <p>
+              Hey folks! I'm <strong>Mohan</strong>, a B.Tech graduate in <strong>Artificial Intelligence and Machine Learning (CSE-AIML)</strong> from <strong>Sai Vidya Institute of Technology</strong>, Bangalore (<strong>CGPA: 8.82 / 10.0</strong>), currently working as an <strong>AI Intern at Digitaltransols AI Private Limited</strong>. I'm curious and driven, with interests spanning full-stack AI development, deep learning, multimodal vision, and LLM orchestration.
+            </p>
+            <p>
+              I enjoy diving into new tech, picking up hands-on experience, and learning through real-world applications&mdash;from building production-grade software to researching real-time edge vision with <strong>YOLOv8</strong> and low-latency speech pipelines using <strong>Gemini 2.0 Flash</strong>. Along the way, I love connecting with like-minded engineers and building scalable systems that solve tangible problems.
+            </p>
+            <p>
+              I'm always on the lookout for exciting opportunities to engineer impactful AI systems, optimize neural architectures, and make meaningful engineering contributions.
+            </p>
+          </div>
+
+          <!-- Interactive Tabs: Education & Certifications -->
+          <div class="about-tabs-wrapper">
+            <div class="about-tabs" role="tablist" aria-label="About Me Tabs">
+              <button class="about-tab-btn active" data-tab="education" id="tab-btn-education" role="tab" aria-selected="true" aria-controls="pane-education">
+                <span>Education</span>
+                <div class="tab-indicator"></div>
+              </button>
+              <button class="about-tab-btn" data-tab="certifications" id="tab-btn-certifications" role="tab" aria-selected="false" aria-controls="pane-certifications">
+                <span>Certifications</span>
+                <div class="tab-indicator"></div>
+              </button>
+            </div>
+
+            <!-- Tab Content: Education -->
+            <div class="about-tab-pane active" id="pane-education" role="tabpanel" aria-labelledby="tab-btn-education">
+              <ul class="about-list">
+                <li>
+                  <div class="about-item-header">
+                    <strong>Sai Vidya Institute of Technology, Bangalore</strong> &ndash; <span>B.Tech in Artificial Intelligence &amp; Machine Learning (2022&ndash;2026)</span>
+                  </div>
+                  <div class="about-item-meta">
+                    <span class="about-badge">Grade: <strong>8.82 / 10.0 CGPA</strong> (First Class with Distinction)</span>
+                  </div>
+                  <p class="about-item-desc">
+                    Relevant Coursework: Machine Learning, Deep Learning, Natural Language Processing, Computer Vision, Data Structures &amp; Algorithms, DBMS, Operating Systems, Computer Networks.
+                  </p>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Tab Content: Certifications -->
+            <div class="about-tab-pane" id="pane-certifications" role="tabpanel" aria-labelledby="tab-btn-certifications">
+              <ul class="about-list">
+                <li>
+                  <div class="about-item-header">
+                    <strong>Infosys Springboard</strong> &ndash; <span>AI &amp; Machine Learning Specialization</span>
+                  </div>
+                  <p class="about-item-desc">
+                    Comprehensive training covering Deep Learning Architectures, Scikit-learn, PyTorch modeling pipelines, and exploratory data analysis.
+                  </p>
+                </li>
+                <li>
+                  <div class="about-item-header">
+                    <strong>Digitaltransols AI</strong> &ndash; <span>Multimodal &amp; Edge Vision Engineering</span>
+                  </div>
+                  <p class="about-item-desc">
+                    Production validation for building bilingual audio-driven interview evaluation engines with Gemini 2.0 Flash and YOLOv8 video anomaly detectors.
+                  </p>
+                </li>
+                <li>
+                  <div class="about-item-header">
+                    <strong>Python &amp; High-Performance Microservices</strong> &ndash; <span>Backend Engineering</span>
+                  </div>
+                  <p class="about-item-desc">
+                    Asynchronous RESTful APIs with FastAPI, concurrent async processing, and containerized deployment workflows.
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
   <section class="section" id="projects">
     <div class="container">
       <div class="section-tag">Applied Systems &amp; Deployments</div>
