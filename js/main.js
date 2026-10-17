@@ -88,6 +88,50 @@ document.addEventListener('DOMContentLoaded', () => {
   sections.forEach(sec => navObserver.observe(sec));
 
   /* ==========================================================================
+     2.2 HERO DYNAMIC TYPEWRITER EFFECT (Musadiq Pasha Inspired)
+     ========================================================================== */
+  const typewriterElement = document.getElementById('hero-typewriter');
+  if (typewriterElement) {
+    const typewriterPhrases = [
+      'Mohan',
+      'AI&ML graduate',
+      'Aspirant',
+      'an AI Engineer Aspirant'
+    ];
+    let phraseIdx = 0;
+    let charIdx = 0;
+    let isDeleting = false;
+    let currentSpeed = 100;
+
+    function runTypewriter() {
+      const currentPhrase = typewriterPhrases[phraseIdx];
+
+      if (isDeleting) {
+        charIdx--;
+        typewriterElement.textContent = currentPhrase.substring(0, charIdx);
+        currentSpeed = 50;
+      } else {
+        charIdx++;
+        typewriterElement.textContent = currentPhrase.substring(0, charIdx);
+        currentSpeed = 110;
+      }
+
+      if (!isDeleting && charIdx === currentPhrase.length) {
+        currentSpeed = 1800;
+        isDeleting = true;
+      } else if (isDeleting && charIdx === 0) {
+        isDeleting = false;
+        phraseIdx = (phraseIdx + 1) % typewriterPhrases.length;
+        currentSpeed = 350;
+      }
+
+      setTimeout(runTypewriter, currentSpeed);
+    }
+
+    setTimeout(runTypewriter, 350);
+  }
+
+  /* ==========================================================================
      2.5 ABOUT ME INTERACTIVE TABS (Education & Certifications)
      ========================================================================== */
   const aboutTabBtns = document.querySelectorAll('.about-tab-btn');
