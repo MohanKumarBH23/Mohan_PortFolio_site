@@ -278,46 +278,6 @@ def compute_music_recommendations(user_song_vector, music_db_df, top_k=5):
     return music_db_df.iloc[top_indices][['song_name', 'artist', 'genre']]`,
       githubUrl: 'https://github.com/mohankumarbh',
       demoUrl: 'https://github.com/mohankumarbh'
-    },
-    'bulk-recruitment': {
-      title: 'Bulk-Recruitment Pipeline (Telegram)',
-      badge: 'Automation & Concurrency',
-      category: 'Digitaltransols AI Private Limited',
-      overview: 'High-throughput concurrent automated recruitment system designed to parse bulk CSV applicant records, screen candidate profiles against job eligibility criteria, and orchestrate automated Telegram interview invitations.',
-      architecture: [
-        'Concurrency: Multithreaded Python processing to parse thousands of candidate rows without blocking',
-        'Screening Engine: Automated rule-based candidate filtering against specific job qualifications',
-        'Telegram Bot: Telegram Bot API integration for direct messaging and confirmation logging',
-        'Data Cleaning: Pandas preprocessing, deduplication, and automated candidate status tracking'
-      ],
-      metrics: [
-        { label: 'Execution', value: 'Concurrent Workers' },
-        { label: 'Integration', value: 'Telegram Bot API' },
-        { label: 'Input Format', value: 'Bulk CSV Streams' },
-        { label: 'Efficiency', value: '100% Automated' }
-      ],
-      codeSnippet: `# Concurrent Candidate Processing & Telegram Notification
-import asyncio
-import pandas as pd
-import httpx
-
-async def screen_and_invite_candidate(client, bot_token, candidate, job_criteria):
-    # Rule-based screening
-    if candidate['experience_years'] >= job_criteria['min_exp']:
-        telegram_url = f"https://api.telegram.org/bot{bot_token}/sendMessage"
-        payload = {
-            "chat_id": candidate['telegram_chat_id'],
-            "text": f"Congratulations {candidate['name']}! You have been shortlisted for an interview."
-        }
-        await client.post(telegram_url, json=payload)
-
-async def run_pipeline(csv_file, job_criteria, bot_token):
-    df = pd.read_csv(csv_file)
-    async with httpx.AsyncClient() as client:
-        tasks = [screen_and_invite_candidate(client, bot_token, row, job_criteria) for _, row in df.iterrows()]
-        await asyncio.gather(*tasks)`,
-      githubUrl: 'https://github.com/mohankumarbh',
-      demoUrl: 'https://github.com/mohankumarbh'
     }
   };
 
@@ -441,10 +401,14 @@ async def run_pipeline(csv_file, job_criteria, bot_token):
   if (metricsStrip) countObserver.observe(metricsStrip);
 
   /* ==========================================================================
-     6. SECURE CONTACT FORM HANDLER (MOHAN'S REAL EMAIL)
+     6. SECURE CONTACT FORM HANDLER (GOOGLE SHEETS & EMAIL NOTIFICATIONS)
      ========================================================================== */
+  // Paste your deployed Google Apps Script Web App URL below (see GOOGLE_SHEETS_SETUP.md)
+  const GOOGLE_APPS_SCRIPT_URL = '';
+
   const contactForm = document.getElementById('contact-form');
   const formStatus = document.getElementById('form-status');
+  const submitBtn = document.getElementById('btn-submit-form');
 
   if (contactForm) {
     contactForm.addEventListener('submit', (e) => {
@@ -492,21 +456,81 @@ async def run_pipeline(csv_file, job_criteria, bot_token):
         return;
       }
 
-      // Target Mohan Kumar's exact email address
       const mailtoLink = `mailto:mohankumarbh007@gmail.com?subject=${encodeURIComponent('[Portfolio Inquiry] ' + subject)}&body=${encodeURIComponent('From: ' + name + ' (' + email + ')\n\n' + message)}`;
+      const originalBtnHTML = submitBtn ? submitBtn.innerHTML : '';
 
-      formStatus.className = 'form-status success';
-      formStatus.innerHTML = `
-        <strong>Message prepared securely!</strong><br>
-        Opening your default mail client to reach Mohan Kumar B.H (<a href="${mailtoLink}" style="text-decoration: underline; color: inherit;">click here if not launched</a>).
-      `;
+      // Set button to loading state
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = `
+          <span>Sending Inquiry...</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="animation: spin 1s linear infinite;">
+            <circle cx="12" cy="12" r="10" stroke-opacity="0.25"></circle>
+            <path d="M12 2a10 10 0 0 1 10 10" stroke="currentColor"></path>
+          </svg>
+        `;
+      }
 
-      showToast('Dispatching secure inquiry to Mohan Kumar B.H...');
+      // If Google Apps Script Web App URL is configured, send directly to Google Sheets & Gmail
+      if (GOOGLE_APPS_SCRIPT_URL && GOOGLE_APPS_SCRIPT_URL.startsWith('https://script.google.com')) {
+        formStatus.className = 'form-status';
+        formStatus.style.display = 'block';
+        formStatus.textContent = 'Saving to Google Sheet and notifying Mohan Kumar B.H...';
 
-      setTimeout(() => {
-        window.location.href = mailtoLink;
-        contactForm.reset();
-      }, 1000);
+        const formData = new FormData();
+        formData.append('name', name);
+        formData.append('email', email);
+        formData.append('subject', subject);
+        formData.append('message', message);
+        formData.append('timestamp', new Date().toISOString());
+
+        fetch(GOOGLE_APPS_SCRIPT_URL, {
+          method: 'POST',
+          body: formData,
+          mode: 'no-cors' // Google Apps Script handles 302 redirects seamlessly
+        })
+        .then(() => {
+          formStatus.className = 'form-status success';
+          formStatus.innerHTML = `
+            <strong>Thank you, ${name}!</strong><br>
+            Your inquiry has been successfully saved to Google Sheets and an alert was sent to <strong>mohankumarbh007@gmail.com</strong>.
+          `;
+          showToast('Inquiry delivered & stored in Google Sheet!');
+          contactForm.reset();
+        })
+        .catch((err) => {
+          console.error('Submission error:', err);
+          formStatus.className = 'form-status error';
+          formStatus.innerHTML = `Could not reach Google Apps Script. Opening default mail client as fallback...`;
+          setTimeout(() => {
+            window.location.href = mailtoLink;
+          }, 800);
+        })
+        .finally(() => {
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalBtnHTML;
+          }
+        });
+
+      } else {
+        // Fallback when Web App URL is not yet pasted in main.js
+        formStatus.className = 'form-status success';
+        formStatus.innerHTML = `
+          <strong>Message ready!</strong><br>
+          Opening default mail client to reach Mohan Kumar B.H (<a href="${mailtoLink}" style="text-decoration: underline; color: inherit;">click here if not launched</a>).<br>
+          <span style="font-size: 0.75rem; color: var(--text-muted);">Tip: To store messages directly in Google Sheets, follow <code>GOOGLE_SHEETS_SETUP.md</code>.</span>
+        `;
+        showToast('Dispatching inquiry to Mohan Kumar B.H...');
+        setTimeout(() => {
+          window.location.href = mailtoLink;
+          contactForm.reset();
+          if (submitBtn) {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalBtnHTML;
+          }
+        }, 1200);
+      }
     });
   }
 
@@ -552,8 +576,7 @@ Cloud/Tools: Git, AWS (Lambda, S3)`,
     projects: `[FEATURED PROJECTS]
 1. Intelli-Eye             : GPU-accelerated YOLOv8 Surveillance + Audio Anomaly Detection (Screams, Glass Breaking)
 2. AI Interview Engine     : Real-time Bilingual (Kannada/English) Gemini 2.0 Flash Multimodal Interview Platform
-3. Music Recommender System: Spotify API Recommender with K-Means, PCA, t-SNE, and Cosine Similarity
-4. Bulk-Recruitment Pipeline: Concurrent Automated CSV Screening & Telegram Orchestration`,
+3. Music Recommender System: Spotify API Recommender with K-Means, PCA, t-SNE, and Cosine Similarity`,
     contact: `[DIRECT CONTACT]
 Name     : Mohan Kumar B.H
 Phone    : +91 9980507072
