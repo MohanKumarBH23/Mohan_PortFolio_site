@@ -1,93 +1,277 @@
-# 🧠 Mohan | AI & Machine Learning Engineering Portfolio
+# 🧠 Mohan Kumar B.H | AI & Machine Learning Engineering Portfolio
 
-An editorial, high-performance, and secure portfolio website crafted specifically for an engineering graduate specializing in **Artificial Intelligence, Deep Learning, Computer Vision, and High-Performance MLOps**.
+[![Zero Dependencies](https://img.shields.io/badge/Dependencies-Zero%20(Pure%20Vanilla)-brightgreen?style=flat-square)](https://developer.mozilla.org/en-US/docs/Web)
+[![Lighthouse Score](https://img.shields.io/badge/Lighthouse-100%2F100-success?style=flat-square&logo=google-chrome)](https://pagespeed.web.dev/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue?style=flat-square)](LICENSE)
+[![GitHub](https://img.shields.io/badge/GitHub-mohankumarbh-181717?style=flat-square&logo=github)](https://github.com/mohankumarbh)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-mohankumarbh-0A66C2?style=flat-square&logo=linkedin)](https://linkedin.com/in/mohankumarbh)
 
-Designed with **vanilla web technologies (Zero Runtime Dependencies)** for maximum security, instantaneous load speed (100/100 Lighthouse score), and frictionless deployment to **Vercel**, **Netlify**, or **GitHub Pages**.
+An editorial, high-performance, and secure personal portfolio website engineered specifically for **Mohan Kumar B.H** — an AI & Machine Learning engineer graduating from **Sai Vidya Institute of Technology** (CGPA: 8.82) and AI Intern at **Digitaltransols AI**.
 
----
-
-## 🌟 Key Features
-
-1. **Editorial Modern Tech Aesthetic**:
-   - Curated typography using Google Fonts `Inter` and `JetBrains Mono`.
-   - Polished Obsidian Dark Mode and Pearl Light Mode with automatic system preference detection and localStorage persistence.
-   - Ambient, responsive 60fps neural network particle graph in the hero header.
-
-2. **Interactive In-Browser AI / ML Lab (Recruiter Wow Factor)**:
-   - **Module 1: 2D Neural Decision Boundary Simulator**: Real-time backprop simulation on non-linear topologies (circles, moons, XOR) with customizable learning rate, activation functions (ReLU, Sigmoid, Tanh), and dynamic loss/accuracy tracking.
-   - **Module 2: Semantic Vector Space Explorer**: Live **Cosine Similarity** calculation against engineering projects, with dynamic projection onto a 2D Cartesian plane.
-
-3. **Production Systems & Research Showcase**:
-   - Interactive category filtering (Computer Vision & Edge, LLMs & Agentic Systems, MLOps & Distributed).
-   - Detailed modal drawers with architectural diagrams, problem formulation, production metrics, and PyTorch/CUDA source snippets.
-   - Publications card with instant BibTeX clipboard copy.
-
-4. **Terminal CLI Easter Egg**:
-   - Floating interactive terminal (`>_ Terminal`) supporting commands: `help`, `about`, `skills`, `projects`, `stats`, `contact`, `theme`, and `clear`.
-
-5. **Enterprise-Grade Security Architecture**:
-   - **Strict Content Security Policy (CSP)**: Blocks inline malicious injection, cross-site scripting (XSS), and data leakage.
-   - **Anti-Clickjacking**: `X-Frame-Options: DENY` and `frame-ancestors 'none'`.
-   - **Anti-Bot Honeypot**: Hidden trap field that catches automated spam bots silently.
-   - **Client-Side Rate Limiter**: Token-bucket cooldown in localStorage preventing contact form spam.
-   - **Input Sanitization**: HTML entity escaping on all user inputs.
-   - **Tabnabbing Protection**: `rel="noopener noreferrer"` across all external links.
+Built with **Zero Runtime Dependencies** using vanilla web standards (HTML5, Vanilla CSS, modern ES6+ JavaScript), delivering instantaneous load times, 100/100 Lighthouse performance, strict enterprise security headers, interactive developer tools, and turnkey deployment for **Vercel**, **Netlify**, or **GitHub Pages**.
 
 ---
 
-## 🚀 Quick Deployment Guide
+## 📑 Table of Contents
 
-### Option 1: Deploy to Vercel (Recommended — 2 Minutes)
+- [🌟 Key Highlights & Features](#-key-highlights--features)
+- [🛠️ Tech Stack & Architecture](#️-tech-stack--architecture)
+- [📁 Project Structure](#-project-structure)
+- [🔬 Featured Engineering Projects](#-featured-engineering-projects)
+- [💻 Interactive Developer Terminal (CLI)](#-interactive-developer-terminal-cli)
+- [🔒 Security & Hardening Architecture](#-security--hardening-architecture)
+- [📬 Google Sheets & Email Contact Pipeline](#-google-sheets--email-contact-pipeline)
+- [🚀 Quickstart & Local Development](#-quickstart--local-development)
+- [🌐 Production Deployment Guide](#-production-deployment-guide)
+  - [Deploy to Vercel (Recommended)](#option-1-deploy-to-vercel-recommended)
+  - [Deploy to Netlify](#option-2-deploy-to-netlify)
+  - [Deploy to GitHub Pages](#option-3-deploy-to-github-pages)
+- [⚙️ Personalization & Customization](#️-personalization--customization)
+- [👤 About the Author](#-about-the-author)
+- [📄 License](#-license)
+
+---
+
+## 🌟 Key Highlights & Features
+
+1. **Editorial Modern Design**:
+   - Sleek typography pairing Google Fonts **Inter** (clean sans-serif) and **JetBrains Mono** (technical precision).
+   - Dual-theme engine featuring **Obsidian Dark Mode** and **Pearl Light Mode** with automatic OS preference detection (`prefers-color-scheme`) and persistent `localStorage` synchronization.
+   - Smooth micro-interactions, responsive navigation, glassmorphic cards, and accent gradients.
+
+2. **60 FPS Neural Particle Canvas**:
+   - Ambient, lightweight HTML5 `<canvas>` background graph simulating neural networks and synaptic connections.
+   - Interactive mouse repulsion physics and distance-based dynamic alpha bridging.
+   - Built-in `IntersectionObserver` that automatically freezes the animation loop when off-screen to preserve CPU cycles and battery life.
+
+3. **Dynamic Typewriter Hero**:
+   - Smooth rotating typewriter header cycling through Mohan's key professional identities with custom speed curves and blinking cursor.
+
+4. **Multi-Category Project Filtering & Technical Modals**:
+   - Dynamic category filtering across **Computer Vision & Audio**, **LLMs & Multimodal**, and **Machine Learning & Stats**.
+   - Deep-dive technical modals featuring system architecture breakdowns, benchmark metrics, and formatted PyTorch/FastAPI/Scikit-learn source snippets.
+
+5. **Interactive Developer CLI Terminal (Easter Egg)**:
+   - Floating interactive terminal drawer (`>_ Terminal`) that lets recruiters and engineers query Mohan's skills, experience, education, projects, contact details, and switch themes directly via command-line syntax.
+
+6. **Serverless Contact Pipeline with Anti-Spam Protection**:
+   - Interactive contact form with client-side sanitization, RFC 5322 regex validation, client-side token-bucket cooldown, and an invisible honeypot trap to catch automated bots.
+   - Seamless integration with Google Apps Script (`google-apps-script.js`) logging submissions to **Google Sheets** and dispatching instant email alerts with a 1-click reply button, with automatic fallback to native mail client.
+
+---
+
+## 🛠️ Tech Stack & Architecture
+
+| Layer | Technologies / Implementation |
+| :--- | :--- |
+| **Frontend Core** | Semantic HTML5, Vanilla Modern CSS (CSS Custom Properties, Flexbox, Grid), Vanilla ES6+ JavaScript |
+| **Runtime Dependencies** | **0 (Zero)** &bull; No npm bloat, no framework overhead, instant browser execution |
+| **Animation & Graphics** | HTML5 Canvas 2D API (`requestAnimationFrame`), CSS Keyframe Animations |
+| **Backend / Serverless** | Google Apps Script (Webhook Endpoint), Google Sheets API, Gmail MailApp Service |
+| **Typography** | Google Fonts (`Inter`, `JetBrains Mono`) |
+| **Security Architecture** | Content Security Policy (CSP), Honeypot Field, Token-Bucket Rate Limiter, Anti-XSS Sanitizer, HSTS |
+| **Hosting & CI/CD** | Vercel (`vercel.json`), Netlify (`netlify.toml`, `_headers`), GitHub Pages |
+
+---
+
+## 📁 Project Structure
+
+```text
+Mohan PF/
+├── assets/
+│   └── mohan-avatar.jpg            # Professional avatar / headshot
+├── css/
+│   └── style.css                   # Comprehensive design system, themes, and layouts
+├── js/
+│   ├── main.js                     # Core interactivity, modal manager, CLI, and contact logic
+│   ├── particles.js                # Ambient neural network particle canvas simulation
+│   └── security.js                 # SecurityGuard module (Anti-XSS, rate limiting, honeypot)
+├── _headers                        # Static HTTP security headers for Netlify / Cloudflare
+├── google-apps-script.js           # Serverless backend script for Google Sheets & Gmail alerts
+├── GOOGLE_SHEETS_SETUP.md          # Step-by-step setup documentation for the contact webhook
+├── index.html                      # Semantic single-page portfolio document with JSON-LD schema
+├── netlify.toml                    # Netlify production deployment & caching rules
+├── README.md                       # Comprehensive project documentation
+├── robots.txt                      # Search engine crawler instructions
+├── site.webmanifest                # Progressive Web App (PWA) manifest
+├── sitemap.xml                     # Search engine XML sitemap
+└── vercel.json                     # Vercel production edge headers & route configuration
+```
+
+---
+
+## 🔬 Featured Engineering Projects
+
+### 1. Intelli-Eye: ML-Based Surveillance System
+- **Focus**: Computer Vision & Audio AI (Edge Deployment)
+- **Description**: GPU-accelerated multi-modal surveillance framework combining Ultralytics YOLOv8 real-time object detection and tracking with spectrogram audio anomaly CNN classification (distress screams, glass breaking) to trigger automated municipal alerts.
+- **Key Technologies**: `Python`, `OpenCV`, `YOLOv8`, `CNNs`, `Edge AI`, `Smart Cities`
+- **Metrics**: 60+ FPS Realtime throughput, `< 25ms` audio anomaly classification latency.
+
+### 2. AI Interview Engine (Gemini 2.0 Flash)
+- **Focus**: Multimodal AI & Large Language Models
+- **Organization**: Engineered during internship at **Digitaltransols AI Private Limited**
+- **Description**: Real-time bilingual (Kannada/English) platform leveraging Gemini 2.0 Flash for low-latency multimodal speech transcription, adaptive rubric evaluation, and contextual dynamic follow-up questioning.
+- **Key Technologies**: `FastAPI`, `Next.js`, `Gemini 2.0 Flash`, `Speech Audio`, `Adaptive LLMs`
+- **Metrics**: Dual-language support (Kannada + English), automated PDF evaluation report generation.
+
+### 3. Personalized Music Recommendation System
+- **Focus**: Machine Learning & Statistical Modeling
+- **Description**: Multi-tiered recommendation engine combining Collaborative and Content-Based Filtering with K-Means clustering. Analyzes acoustic features from the Spotify Web API with PCA (retaining 95% variance) and t-SNE for dimensional projection and Cosine Similarity ranking.
+- **Key Technologies**: `Scikit-learn`, `Pandas`, `Spotify API`, `PCA`, `t-SNE`, `Seaborn / Plotly`
+- **Metrics**: Sub-second Cosine Similarity candidate generation across multi-thousand track datasets.
+
+---
+
+## 💻 Interactive Developer Terminal (CLI)
+
+The portfolio features a built-in terminal emulator accessible via the floating **`>_ Terminal`** launcher button. Recruiters and engineers can explore credentials using terminal commands:
+
+| Command | Output / Action |
+| :--- | :--- |
+| `help` | Lists all available terminal commands |
+| `about` | Mohan's engineering background, core focus areas, and AI specialization |
+| `education` | College, degree, coursework, graduation year, and CGPA |
+| `experience` | AI Internship details at Digitaltransols AI Private Limited |
+| `skills` | Programming languages, ML frameworks, core CS concepts, and cloud tools |
+| `projects` | Summary of featured engineering systems |
+| `contact` | Phone, email, LinkedIn, and GitHub links |
+| `theme` | Toggles live between Obsidian Dark and Pearl Light themes |
+| `clear` | Clears the terminal output buffer |
+
+---
+
+## 🔒 Security & Hardening Architecture
+
+Security is treated as a first-class citizen with defense-in-depth across the client and edge layers:
+
+```
+[ Visitor Request ]
+        │
+        ▼
+[ Edge Security Headers ] ──▶ CSP, HSTS, X-Frame-Options: DENY, X-Content-Type-Options
+        │
+        ▼
+[ Client-Side SecurityGuard ]
+        ├─▶ 1. Anti-XSS Sanitizer (Encodes <, >, &, ", ', / entities)
+        ├─▶ 2. Honeypot Trap (_gotcha_hp silent bot drop)
+        ├─▶ 3. Token-Bucket Rate Limiter (45s cooldown in localStorage)
+        └─▶ 4. Secure Async Clipboard (Guarded against injection)
+        │
+        ▼
+[ Google Apps Script Webhook / Mailto Dispatch ]
+```
+
+- **Strict Content Security Policy (CSP)**: Disallows unauthorized external scripts and inline script execution while permitting trusted Google Fonts and self-hosted assets.
+- **Anti-Clickjacking**: Enforced via `X-Frame-Options: DENY` and `frame-ancestors 'none'`.
+- **Anti-Bot Honeypot**: Invisible trap input field (`_gotcha_hp`) that flags and silently drops automated spam submissions.
+- **Client-Side Rate Limiter**: 45-second token-bucket cooldown prevents form flooding.
+- **MIME Sniffing & XSS Protection**: `X-Content-Type-Options: nosniff` and `X-XSS-Protection: 1; mode=block`.
+- **Permissions Policy**: Completely restricts camera, microphone, geolocation, and payment APIs unless explicitly authorized.
+
+---
+
+## 📬 Google Sheets & Email Contact Pipeline
+
+The contact form can operate in two modes:
+
+1. **Full Serverless Webhook (Recommended)**:
+   - Automatically writes inquiries to a private Google Sheet.
+   - Dispatches a structured notification email to `mohankumarbh007@gmail.com` with a 1-click reply button.
+   - See [GOOGLE_SHEETS_SETUP.md](GOOGLE_SHEETS_SETUP.md) for the 4-step setup guide using [`google-apps-script.js`](google-apps-script.js).
+2. **Native Mail Client Fallback**:
+   - If no webhook URL is configured, the form seamlessly opens the user's default email client pre-populated with the inquiry details.
+
+---
+
+## 🚀 Quickstart & Local Development
+
+Because this project uses zero build steps or bundlers, you can run and test it immediately with any static server.
+
+### Option A: Using Python (Pre-installed on most systems)
+
+```bash
+# Navigate to the project root
+cd "Mohan PF"
+
+# Start a local HTTP server
+python -m http.server 8080
+```
+Open [http://localhost:8080](http://localhost:8080) in your browser.
+
+### Option B: Using Node.js `serve`
+
+```bash
+# Run instantaneously without global install
+npx -y serve .
+```
+
+### Option C: Using VS Code Live Server
+Right-click on [`index.html`](index.html) and select **"Open with Live Server"**.
+
+---
+
+## 🌐 Production Deployment Guide
+
+### Option 1: Deploy to Vercel (Recommended)
 
 1. Push your repository to GitHub:
    ```bash
-   git init
    git add .
-   git commit -m "Initial commit of AI Portfolio"
-   git branch -M main
-   git remote add origin https://github.com/<your-username>/mohan-portfolio.git
-   git push -u origin main
+   git commit -m "Update portfolio assets and documentation"
+   git push origin main
    ```
-2. Go to [vercel.com](https://vercel.com) and click **"Add New Project"**.
-3. Select your GitHub repository.
-4. Leave all build settings at their defaults (Vercel automatically detects static HTML and reads [`vercel.json`](file:///c:/Users/Dell/Desktop/Mohan%20PF/vercel.json) for HTTP security headers).
-5. Click **"Deploy"**. Your site is now live with global edge caching and free SSL!
+2. Navigate to [vercel.com](https://vercel.com) and click **"Add New Project"**.
+3. Import your repository (`MohanKumarBH23/Mohan_PortFolio_site`).
+4. Keep the default build settings (Vercel automatically detects static HTML and applies [`vercel.json`](vercel.json) for edge caching and security headers).
+5. Click **"Deploy"**.
 
----
+### Option 2: Deploy to Netlify
 
-### Option 2: Deploy to Netlify (1-Click Drag & Drop or Git)
-
-- **Via Git**: Connect your GitHub repo on [netlify.com](https://netlify.com). Netlify automatically applies headers configured in [`netlify.toml`](file:///c:/Users/Dell/Desktop/Mohan%20PF/netlify.toml).
-- **Via Drag & Drop**: Log into Netlify, go to **Sites**, and drag the `Mohan PF` folder directly into the browser window.
-
----
+- **Via Git**: Connect your repository on [netlify.com](https://netlify.com). Netlify will automatically detect [`netlify.toml`](netlify.toml) and [`_headers`](_headers).
+- **Via Manual Deploy**: Go to Netlify **Sites** and drag-and-drop the project folder directly into the web console.
 
 ### Option 3: Deploy to GitHub Pages
 
-1. In your GitHub repository, navigate to **Settings** > **Pages**.
-2. Under **Build and deployment** > **Source**, choose **Deploy from a branch**.
-3. Select the `main` branch and `/ (root)` folder, then click **Save**.
-4. Your site will be published at `https://<your-username>.github.io/mohan-portfolio/`.
+1. Open your repository on GitHub.
+2. Go to **Settings** > **Pages**.
+3. Under **Build and deployment** > **Branch**, select `main` and `/ (root)`.
+4. Click **Save**. Your site will be live at:
+   ```text
+   https://<your-username>.github.io/<repo-name>/
+   ```
 
 ---
 
-## 💻 Local Testing & Development
+## ⚙️ Personalization & Customization
 
-To preview the website locally on your computer:
-
-```bash
-# Using Node's built-in npx http-server or python
-npx -y serve .
-
-# Or using Python:
-python -m http.server 8080
-```
-Open [http://localhost:8080](http://localhost:8080) in your web browser.
+| Item to Update | File Location | Search Keywords |
+| :--- | :--- | :--- |
+| **Personal Info & Bio** | [`index.html`](index.html) | `Mohan Kumar`, `CSE(AI & ML)` |
+| **Contact Details** | [`index.html`](index.html), [`js/main.js`](js/main.js) | `mohankumarbh007@gmail.com`, `9980507072` |
+| **Profile Photo** | [`assets/mohan-avatar.jpg`](assets/mohan-avatar.jpg) | Replace with 1:1 ratio image |
+| **CV / Resume Link** | [`index.html`](index.html) | `Download CV` |
+| **Projects & Modals** | [`index.html`](index.html), [`js/main.js`](js/main.js) | `projectData`, `Intelli-Eye`, `ai-interview` |
+| **Terminal Commands** | [`js/main.js`](js/main.js) | `cliCommands` |
+| **Contact Webhook** | [`js/main.js`](js/main.js) | `GOOGLE_APPS_SCRIPT_URL` |
+| **Domain / Canonical** | [`index.html`](index.html), [`sitemap.xml`](sitemap.xml) | `canonical`, `og:url` |
 
 ---
 
-## ⚙️ Customization Checklist
+## 👤 About the Author
 
-- **Your Name & Social Links**: Open [`index.html`](file:///c:/Users/Dell/Desktop/Mohan%20PF/index.html) and search for `mohan` to update your email, GitHub, LinkedIn, and Kaggle URLs.
-- **Profile Picture**: Replace [`assets/mohan-avatar.jpg`](file:///c:/Users/Dell/Desktop/Mohan%20PF/assets/mohan-avatar.jpg) with your own headshot.
-- **Projects & Research**: Edit the project cards in `index.html` or their modal technical specs in [`js/main.js`](file:///c:/Users/Dell/Desktop/Mohan%20PF/js/main.js).
+**Mohan Kumar B.H**  
+*AI & Machine Learning Engineer*  
+- **Degree**: B.Tech in Computer Science and Engineering (AIML) &bull; CGPA: 8.82 / 10.0  
+- **Alma Mater**: Sai Vidya Institute of Technology, Bangalore  
+- **Experience**: AI Intern at Digitaltransols AI Private Limited, Bangalore  
+- **Phone**: [+91 9980507072](tel:+919980507072)  
+- **Email**: [mohankumarbh007@gmail.com](mailto:mohankumarbh007@gmail.com)  
+- **LinkedIn**: [linkedin.com/in/mohankumarbh](https://linkedin.com/in/mohankumarbh)  
+- **GitHub**: [github.com/mohankumarbh](https://github.com/mohankumarbh)  
+
+---
+
+## 📄 License
+
+This project is open-source and licensed under the [MIT License](LICENSE). You are free to use it as a foundation for your own portfolio.
