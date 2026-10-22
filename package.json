@@ -1,0 +1,11 @@
+{
+  "name": "mohan-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Mohan Kumar B.H - AI & Machine Learning Engineering Portfolio",
+  "scripts": {
+    "start": "npx serve . -l 3000",
+    "dev": "npx serve . -l 3000",
+    "serve:py": "python -m http.server 8080"
+  }
+}

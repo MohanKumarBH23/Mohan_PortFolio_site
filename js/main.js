@@ -17,8 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (savedTheme) {
       root.setAttribute('data-theme', savedTheme);
     } else {
-      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      root.setAttribute('data-theme', prefersDark ? 'dark' : 'light');
+      root.setAttribute('data-theme', 'dark');
     }
   }
 
@@ -130,73 +129,65 @@ document.addEventListener('DOMContentLoaded', () => {
     setTimeout(runTypewriter, 350);
   }
 
-  /* ==========================================================================
-     3. PROJECT FILTERING SYSTEM
-     ========================================================================== */
-  const filterBtns = document.querySelectorAll('.filter-btn');
-  const projectCards = document.querySelectorAll('.project-card');
 
-  filterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      filterBtns.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-
-      const filterVal = btn.getAttribute('data-filter');
-
-      projectCards.forEach(card => {
-        if (filterVal === 'all' || card.getAttribute('data-category') === filterVal) {
-          card.style.display = 'flex';
-          card.style.animation = 'slideIn 0.3s ease';
-        } else {
-          card.style.display = 'none';
-        }
-      });
-    });
-  });
 
   /* ==========================================================================
      4. PROJECT DETAIL MODAL SYSTEM (MOHAN'S REAL PROJECTS)
      ========================================================================== */
   const projectData = {
     'intelli-eye': {
-      title: 'Intelli-Eye: ML-Based Surveillance System',
-      badge: 'Computer Vision & Audio AI',
-      category: 'GPU-Accelerated Surveillance & Edge Deployment',
-      overview: 'Engineered a real-time smart surveillance architecture combining YOLOv8 computer vision detection with spectrogram audio anomaly classification to autonomously detect physical threats, glass breakage, and distress screams.',
+      title: 'Intelli-Eye: An Holistic Deep-Learning Architecture for Threat Analysis & Alert Automation',
+      badge: 'IEEE ICNPCV 2026 Conference Publication',
+      category: 'Dept. of CSE (AI&ML), Sai Vidya Institute of Technology • IEEE Bangalore Section',
+      overview: 'Published research presented at IEEE ICNPCV 2026. A modular, high-throughput deep-learning architecture engineered to detect multiple real-time threats simultaneously (weapons, fire, accidents, and shoplifting) by coupling fine-tuned YOLOv8 CNN models with a YOLOv8-Pose skeletal heuristic scoring engine and multi-channel Telegram/SMS dispatch.',
       architecture: [
-        'Vision Backbone: Ultralytics YOLOv8 real-time object detection & tracking pipeline',
-        'Audio Anomaly: CNN spectrogram classifier analyzing microphone streams for scream and glass breaking signatures',
-        'Frame Processing: GPU-accelerated OpenCV frame grabber with circular ring buffer',
-        'Alert Infrastructure: Real-time incident dispatching with automated smart city notification triggers'
+        'Preprocessing: Standardized 640x640 frame resizing, BGR-to-RGB conversion, and float pixel normalization (I_norm = I_orig / 255.0)',
+        'Overt Threat Detectors: Fine-tuned YOLOv8 CNN models for Weapon (firearms, knives), Fire (flames, smoke), and Accidents (vehicle collisions, falls)',
+        'Composite Loss Function: L_total = λ1·L_class + λ2·L_box + λ3·L_dfl (Binary Cross-Entropy, CIoU Loss, Distribution Focal Loss)',
+        'Shoplifting Pose Engine: YOLOv8 persistent tracking + YOLOv8-Pose skeletal coordinate extraction (wrists, elbows, hips)',
+        'Behavioral Heuristics: Evaluates Item Interaction (+10), Item Conception (+30 to personal zone), Rapid Movement (+15), and Loitering (+5)',
+        'Proximity & Dynamics: Euclidean distance d=√((x2-x1)²+(y2-y1)²) and keypoint velocity v=Δd/Δt with exponential score decay over time',
+        'Automated Alerting: Immediate webhook dispatch via Telegram bot API and SMS with post-event forensics logging'
       ],
       metrics: [
-        { label: 'Vision Model', value: 'YOLOv8 Edge' },
-        { label: 'Multimodal', value: 'Vision + Audio' },
-        { label: 'Anomaly Latency', value: '< 25 ms' },
-        { label: 'Pipeline Speed', value: '60+ FPS Realtime' }
+        { label: 'System mAP@0.5', value: '91.3%' },
+        { label: 'Weapon mAP (AUC: 0.984)', value: '96.3%' },
+        { label: 'Fire mAP (AUC: 0.967)', value: '92.7%' },
+        { label: 'Accident mAP (AUC: 0.923)', value: '89.4%' },
+        { label: 'Shoplifting (AUC: 0.891)', value: '86.8%' },
+        { label: 'Overall F1-Score', value: '91.3%' }
       ],
-      codeSnippet: `# Intelli-Eye Multi-Modal Threat Detection Pipeline Excerpt
-import cv2
-from ultralytics import YOLO
+      codeSnippet: `# Intelli-Eye: Pose-Based Shoplifting Risk & Multi-Threat Engine Excerpt
+import math
 import numpy as np
+from ultralytics import YOLO
 
-class IntelliEyePipeline:
-    def __init__(self, yolo_weights="yolov8n.pt", audio_anomaly_model=None):
-        self.vision_model = YOLO(yolo_weights)
-        self.audio_classifier = audio_anomaly_model
+class IntelliEyeThreatCore:
+    def __init__(self):
+        # Suite of specialized fine-tuned YOLOv8 models
+        self.weapon_model = YOLO("models/yolov8_weapons.pt")
+        self.fire_model = YOLO("models/yolov8_fire.pt")
+        self.pose_model = YOLO("models/yolov8n-pose.pt")
+        self.risk_scores = {}  # Persistent per-track decay tracker
 
-    def process_multimodal_frame(self, video_frame, audio_spectrogram):
-        # 1. Vision Detection (YOLOv8)
-        vision_results = self.vision_model(video_frame, stream=True)
-        detected_objects = [box.cls for r in vision_results for box in r.boxes]
+    def compute_keypoint_velocity(self, pt_curr, pt_prev, delta_t):
+        """Eq 4: Velocity = sqrt((xt - xt-1)^2 + (yt - yt-1)^2) / delta_t"""
+        dist = math.sqrt((pt_curr[0] - pt_prev[0])**2 + (pt_curr[1] - pt_prev[1])**2)
+        return dist / max(delta_t, 1e-4)
 
-        # 2. Audio Anomaly Inference
-        audio_score = self.audio_classifier.predict(audio_spectrogram)
-        is_audio_threat = audio_score > 0.85 # screams or glass breaks
+    def evaluate_behavioral_risk(self, track_id, wrist_pt, hip_pocket_pt, velocity):
+        """Eq 3 & 5: Euclidean concealment proximity + weighted risk summation"""
+        conceal_dist = math.sqrt((wrist_pt[0] - hip_pocket_pt[0])**2 + (wrist_pt[1] - hip_pocket_pt[1])**2)
+        score = self.risk_scores.get(track_id, 0.0) * 0.92  # Time-decay attenuation
 
-        if is_audio_threat and len(detected_objects) > 0:
-            self.dispatch_smart_alert("HIGH_PRIORITY_THREAT", detected_objects)
-        return vision_results`,
+        if conceal_dist < 45.0:       # Item Conception to personal zone
+            score += 30.0
+        if velocity > 120.0:          # Rapid concealment movement
+            score += 15.0
+
+        self.risk_scores[track_id] = score
+        return score >= 65.0          # Trigger automated SMS & Telegram alert`,
+      pdfUrl: 'assets/intelli-eye-paper.pdf',
       githubUrl: 'https://github.com/mohankumarbh',
       demoUrl: 'https://github.com/mohankumarbh'
     },
@@ -276,8 +267,55 @@ def compute_music_recommendations(user_song_vector, music_db_df, top_k=5):
     top_indices = np.argsort(sim_scores)[::-1][:top_k]
     
     return music_db_df.iloc[top_indices][['song_name', 'artist', 'genre']]`,
-      githubUrl: 'https://github.com/mohankumarbh',
-      demoUrl: 'https://github.com/mohankumarbh'
+      githubUrl: 'https://github.com/MohanKumarBH23/Music-Recommendation-Agent',
+      demoUrl: 'https://github.com/MohanKumarBH23/Music-Recommendation-Agent'
+    },
+    'maze-runner': {
+      title: 'Maze-Runner-Py: Procedural 2D Maze & Pathfinding Framework',
+      badge: 'Graph Algorithms & 2D Simulation Engine',
+      category: 'Python • Graph Search Algorithms • Procedural Generation • Matplotlib Simulation',
+      overview: 'A modular, high-performance Python framework for procedural 2D maze generation, intelligent pathfinding algorithms, and dynamic Matplotlib visualizations. Implements Depth-First Backtracking and Binary Tree generation alongside optimal Breadth-First (BFS) shortest-path and Bi-Directional graph search solvers with step-by-step animated visual rendering and a full-featured CLI.',
+      architecture: [
+        'Grid & Topology Representation: Dual-layer 2D cellular grid model tracking 4-directional wall connectivity and visitation bitmasks',
+        'Procedural Generation Core: Depth-First Search Backtracker (dfs_backtrack) for organic winding labyrinths and Binary Tree (bin_tree) for fast diagonal-bias layouts',
+        'Optimal Path Solvers: Breadth-First Search (BFS) guaranteeing the shortest path, DFS Backtracker for depth exploration, and simultaneous Bi-Directional frontier search',
+        'Visual Simulation Engine: Frame-by-frame animated rendering of maze generation and path exploration pipelines with Matplotlib & high-res static PNG export',
+        'High-Level API & Orchestration: MazeManager class coordinating concurrent maze generation, solver execution, and benchmark metrics',
+        'CLI Architecture: Configurable CLI tool with custom dimensions, animation delay controls, solver selectors, and automated demo mode'
+      ],
+      metrics: [
+        { label: 'Pathfinding Guarantee', value: 'Optimal (BFS)' },
+        { label: 'Solvers', value: 'BFS, DFS, Bi-Dir' },
+        { label: 'Generation Algos', value: 'DFS & Bin-Tree' },
+        { label: 'Visualization', value: 'Matplotlib 2D' },
+        { label: 'Python Version', value: '>= 3.8' },
+        { label: 'License', value: 'MIT Open Source' }
+      ],
+      image: 'assets/maze_solution.png',
+      codeSnippet: `# Maze-Runner-Py: Procedural Generation & Pathfinding Pipeline
+from src.maze_manager import MazeManager
+from src.maze import Maze
+
+# Initialize high-level Maze Manager orchestrator
+manager = MazeManager()
+
+# Generate procedural maze via Depth-First Search Backtracker (15x15)
+maze = manager.add_maze(15, 15)
+
+# Alternatively generate via Binary Tree algorithm:
+# maze_bintree = Maze(15, 15, algorithm="bin_tree")
+# manager.add_existing_maze(maze_bintree)
+
+# Solve with Breadth-First Search (guarantees shortest path)
+# or BiDirectional search / DepthFirstBacktracker
+manager.solve_maze(maze.id, "BreadthFirst")
+
+# Render step-by-step solver animation and overlay solution path
+manager.set_filename("maze_solution_output")
+manager.show_solution_animation(maze.id)
+manager.show_solution(maze.id)`,
+      githubUrl: 'https://github.com/MohanKumarBH23/Maze-Runner-Py',
+      demoUrl: 'https://github.com/MohanKumarBH23/Maze-Runner-Py'
     }
   };
 
@@ -325,18 +363,46 @@ def compute_music_recommendations(user_song_vector, music_db_df, top_k=5):
         </div>
       </div>
 
+      ${data.image ? `
+      <div style="margin-bottom: 24px;">
+        <h4 style="font-size: 0.9375rem; margin-bottom: 10px;">Visual Traversal &amp; Solution Preview</h4>
+        <div style="background: var(--bg-primary); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 16px; text-align: center;">
+          <img src="${data.image}" alt="${data.title}" style="max-width: 100%; max-height: 260px; border-radius: 6px; box-shadow: 0 4px 12px rgba(0,0,0,0.3); display: inline-block;" />
+          <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 10px; font-family: var(--font-mono);">Shortest Path (BFS) Visualized on 2D Cellular Grid</div>
+        </div>
+      </div>
+      ` : ''}
+
       <div style="margin-bottom: 24px;">
         <h4 style="font-size: 0.9375rem; margin-bottom: 8px;">Source Implementation Excerpt</h4>
-        <pre style="background: var(--bg-primary); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 16px; overflow-x: auto; font-size: 0.75rem; font-family: var(--font-mono); color: #38bdf8;"><code>${data.codeSnippet}</code></pre>
+        <pre style="background: var(--bg-primary); border: 1px solid var(--border-subtle); border-radius: 8px; padding: 16px; overflow-x: auto; font-size: 0.75rem; font-family: var(--font-mono); color: #f43f5e;"><code>${data.codeSnippet}</code></pre>
       </div>
 
-      <div style="display: flex; gap: 12px; margin-top: 28px;">
-        <a href="${data.githubUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">
+      <div style="display: flex; gap: 12px; margin-top: 28px; flex-wrap: wrap;">
+        ${data.pdfUrl ? `
+          <a href="${data.pdfUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm" style="display: inline-flex; align-items: center; gap: 8px;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line></svg>
+            Open Full Research Paper (PDF)
+          </a>
+          <button type="button" class="btn btn-secondary btn-sm" id="modal-preview-pdf-btn" style="display: inline-flex; align-items: center; gap: 8px;">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+            Interactive Paper Preview
+          </button>
+        ` : ''}
+        <a href="${data.githubUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-          Mohan's GitHub Profile
+          ${data.githubUrl.includes('Maze-Runner') ? 'View Maze-Runner-Py on GitHub ↗' : data.githubUrl.includes('Music-Recommendation') ? 'View Music-Recommendation-Agent on GitHub ↗' : "Mohan's GitHub Profile ↗"}
         </a>
       </div>
     `;
+
+    const modalPdfBtn = modalContainer.querySelector('#modal-preview-pdf-btn');
+    if (modalPdfBtn) {
+      modalPdfBtn.addEventListener('click', () => {
+        closeModal();
+        openPdfModal();
+      });
+    }
 
     modalBackdrop.classList.add('open');
     document.body.style.overflow = 'hidden';
@@ -347,6 +413,38 @@ def compute_music_recommendations(user_song_vector, music_db_df, top_k=5):
       modalBackdrop.classList.remove('open');
       document.body.style.overflow = '';
     }
+  }
+
+  /* ==========================================================================
+     4.1 IEEE RESEARCH PAPER PDF PREVIEW MODAL
+     ========================================================================== */
+  const pdfModalBackdrop = document.getElementById('pdf-modal-backdrop');
+  const pdfModalCloseBtn = document.getElementById('pdf-modal-close-btn');
+  const previewPaperBtn = document.getElementById('preview-paper-modal-btn');
+  const pdfIframe = document.getElementById('pdf-iframe');
+
+  function openPdfModal() {
+    if (!pdfModalBackdrop) return;
+    if (pdfIframe && (!pdfIframe.src || pdfIframe.src === '' || pdfIframe.src.endsWith('/'))) {
+      pdfIframe.src = 'assets/intelli-eye-paper.pdf';
+    }
+    pdfModalBackdrop.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closePdfModal() {
+    if (pdfModalBackdrop) {
+      pdfModalBackdrop.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  }
+
+  if (previewPaperBtn) previewPaperBtn.addEventListener('click', openPdfModal);
+  if (pdfModalCloseBtn) pdfModalCloseBtn.addEventListener('click', closePdfModal);
+  if (pdfModalBackdrop) {
+    pdfModalBackdrop.addEventListener('click', (e) => {
+      if (e.target === pdfModalBackdrop) closePdfModal();
+    });
   }
 
   document.querySelectorAll('.view-details-btn').forEach(btn => {
@@ -364,7 +462,10 @@ def compute_music_recommendations(user_song_vector, music_db_df, top_k=5):
   }
 
   window.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeModal();
+    if (e.key === 'Escape') {
+      closeModal();
+      closePdfModal();
+    }
   });
 
   /* ==========================================================================
@@ -545,14 +646,16 @@ def compute_music_recommendations(user_song_vector, music_db_df, top_k=5):
 
   const cliCommands = {
     help: `Available commands:
-  - about       : Engineering background & AI focus
-  - education   : College, degree, coursework, and CGPA
-  - experience  : Digitaltransols AI internship details
-  - skills      : Programming languages, ML libraries & tools
-  - projects    : Engineered systems (Intelli-Eye, Gemini Engine, Music Rec)
-  - contact     : Phone, email, LinkedIn, and GitHub
-  - theme       : Toggle dark/light theme
-  - clear       : Clear terminal screen`,
+  - about        : Engineering background & AI focus
+  - education    : College, degree, coursework, and CGPA
+  - experience   : Digitaltransols AI internship details
+  - skills       : Programming languages, ML libraries & tools
+  - publications : Peer-reviewed conference proceedings (IEEE ICNPCV 2026)
+  - paper / pdf  : Open the IEEE research publication PDF directly
+  - projects     : Engineered systems (Intelli-Eye, Gemini Engine, Music Rec)
+  - contact      : Phone, email, LinkedIn, and GitHub
+  - theme        : Toggle dark/light theme
+  - clear        : Clear terminal screen`,
     about: `Mohan Kumar B.H | AI & Machine Learning Engineer
 Graduate in Computer Science & Engineering (AIML) from Sai Vidya Institute of Technology (CGPA: 8.82).
 Currently AI Intern at Digitaltransols AI Private Limited, Bangalore.
@@ -567,6 +670,23 @@ Role    : AI Intern (Feb 2026 – May 2026)
 Company : DIGITALTRANSOLS AI PRIVATE LIMITED, Bangalore
 - Developed a real-time, bilingual (Kannada/English) AI Interview Engine with FastAPI, Next.js, and Gemini 2.0 Flash.
 - Engineered a concurrent automated bulk-recruitment pipeline using Telegram to parse CSVs and orchestrate interviews.`,
+    publications: `[PUBLICATIONS & RESEARCH PROCEEDINGS]
+Paper Title : Intelli-Eye: An Holistic Deep-Learning Architecture for Predictive Threat Analysis and Intelligent Alert Automation
+Authors     : Jayshri, Dr. Kumaresh Sheelavant, K V Vardhan, Sumantha S, Mohan Kumar B H*, Ramesh Karthikeya Reddy K
+Affiliation : Dept. of CSE (AI&ML), Sai Vidya Institute of Technology, Bengaluru, India
+Conference  : 2026 International Conference on Natural Language Processing and Computer Vision (ICNPCV)
+Sponsor/Org : IEEE Bangalore Section (Bengaluru, India • July 17-18, 2026)
+IEEE Ref    : 979-8-3315-9284-4/26/$31.00 ©2026 IEEE
+Benchmarks  : 91.3% System mAP@0.5 | 96.3% Weapon Detection (0.984 AUC) | 92.7% Fire (0.967 AUC) | 86.8% Shoplifting Engine
+PDF Access  : Type 'paper' or 'pdf' to open the complete IEEE paper directly.`,
+    paper: () => {
+      window.open('assets/intelli-eye-paper.pdf', '_blank');
+      return 'Opening Intelli-Eye IEEE conference publication (PDF) in new tab...';
+    },
+    pdf: () => {
+      window.open('assets/intelli-eye-paper.pdf', '_blank');
+      return 'Opening Intelli-Eye IEEE conference publication (PDF) in new tab...';
+    },
     skills: `[TECHNICAL SKILLS]
 Languages  : Python (Proficient), SQL, C/C++, React
 Core CS    : Data Structures & Algorithms, OOPs, OS, DBMS, Computer Networks
@@ -576,13 +696,14 @@ Cloud/Tools: Git, AWS (Lambda, S3)`,
     projects: `[FEATURED PROJECTS]
 1. Intelli-Eye             : GPU-accelerated YOLOv8 Surveillance + Audio Anomaly Detection (Screams, Glass Breaking)
 2. AI Interview Engine     : Real-time Bilingual (Kannada/English) Gemini 2.0 Flash Multimodal Interview Platform
-3. Music Recommender System: Spotify API Recommender with K-Means, PCA, t-SNE, and Cosine Similarity`,
+3. Music Recommender System: Spotify API Recommender with K-Means, PCA, t-SNE, and Cosine Similarity
+4. Maze-Runner-Py          : Procedural 2D Maze Generator & Intelligent Pathfinding Engine (BFS/DFS/Bi-Dir)`,
     contact: `[DIRECT CONTACT]
 Name     : Mohan Kumar B.H
 Phone    : +91 9980507072
 Email    : mohankumarbh007@gmail.com
-LinkedIn : linkedin.com/in/mohankumarbh
-GitHub   : github.com/mohankumarbh
+LinkedIn : linkedin.com/in/mohan-kumar-bh-mk23
+GitHub   : github.com/MohanKumarBH23
 Location : Bangalore, Karnataka, India`,
     theme: () => {
       const current = root.getAttribute('data-theme') || 'dark';
@@ -619,7 +740,7 @@ Location : Bangalore, Karnataka, India`,
 
           // Add user input line
           const userLine = document.createElement('div');
-          userLine.style.color = '#38bdf8';
+          userLine.style.color = '#f43f5e';
           userLine.textContent = `mohan@portfolio:~$ ${val}`;
           cliBody.appendChild(userLine);
 

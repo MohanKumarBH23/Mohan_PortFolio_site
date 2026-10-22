@@ -1,10 +1,10 @@
-# 🧠 Mohan Kumar B.H | AI & Machine Learning Engineering Portfolio
+# ♞ MOHAN KUMAR | AI & Machine Learning Engineering Portfolio
 
 [![Zero Dependencies](https://img.shields.io/badge/Dependencies-Zero%20(Pure%20Vanilla)-brightgreen?style=flat-square)](https://developer.mozilla.org/en-US/docs/Web)
 [![Lighthouse Score](https://img.shields.io/badge/Lighthouse-100%2F100-success?style=flat-square&logo=google-chrome)](https://pagespeed.web.dev/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue?style=flat-square)](LICENSE)
-[![GitHub](https://img.shields.io/badge/GitHub-mohankumarbh-181717?style=flat-square&logo=github)](https://github.com/mohankumarbh)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-mohankumarbh-0A66C2?style=flat-square&logo=linkedin)](https://linkedin.com/in/mohankumarbh)
+[![GitHub](https://img.shields.io/badge/GitHub-MohanKumarBH23-181717?style=flat-square&logo=github)](https://github.com/MohanKumarBH23)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-mohan--kumar--bh--mk23-0A66C2?style=flat-square&logo=linkedin)](https://www.linkedin.com/in/mohan-kumar-bh-mk23)
 
 An editorial, high-performance, and secure personal portfolio website engineered specifically for **Mohan Kumar B.H** — an AI & Machine Learning engineer graduating from **Sai Vidya Institute of Technology** (CGPA: 8.82) and AI Intern at **Digitaltransols AI**.
 
@@ -15,6 +15,7 @@ Built with **Zero Runtime Dependencies** using vanilla web standards (HTML5, Van
 ## 📑 Table of Contents
 
 - [🌟 Key Highlights & Features](#-key-highlights--features)
+- [📚 Peer-Reviewed Research Publication (IEEE ICNPCV 2026)](#-peer-reviewed-research-publication-ieee-icnpcv-2026)
 - [🛠️ Tech Stack & Architecture](#️-tech-stack--architecture)
 - [📁 Project Structure](#-project-structure)
 - [🔬 Featured Engineering Projects](#-featured-engineering-projects)
@@ -60,6 +61,29 @@ Built with **Zero Runtime Dependencies** using vanilla web standards (HTML5, Van
 
 ---
 
+## 📚 Peer-Reviewed Research Publication (IEEE ICNPCV 2026)
+
+Mohan Kumar B.H co-authored and published peer-reviewed research accepted and presented at the **2026 International Conference on Natural Language Processing and Computer Vision (ICNPCV)** organized by the **IEEE Bangalore Section** in Bengaluru, India.
+
+- **Paper Title**: *Intelli-Eye: An Holistic Deep-Learning Architecture for Predictive Threat Analysis and Intelligent Alert Automation*
+- **Authors**: Jayshri, Dr. Kumaresh Sheelavant, K V Vardhan, Sumantha S, **Mohan Kumar B H**, Ramesh Karthikeya Reddy K
+- **Affiliation**: Department of Computer Science & Engineering (AI & ML), Sai Vidya Institute of Technology, Bengaluru, India
+- **Conference / Venue**: 2026 IEEE ICNPCV, Bangalore, India (July 17–18, 2026)
+- **IEEE Index / Catalog**: `CFP26CV9-ART` &bull; **ISBN**: `979-8-3315-9284-4` &bull; `©2026 IEEE`
+- **Full PDF Document**: Available in [`assets/intelli-eye-paper.pdf`](assets/intelli-eye-paper.pdf)
+
+### 📊 Empirical Performance & Benchmarks (Roboflow & Kaggle Test Sets)
+
+| Detection Module | Target Classes | mAP@0.5 | Precision | Recall | F1-Score | ROC AUC |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **Weapon Detection** | Firearms, Knives | **96.3%** | 95.5% | 96.4% | 95.9% | **0.984** |
+| **Fire Detection** | Active Flames, Smoke | **92.7%** | 92.1% | 93.3% | 92.7% | **0.967** |
+| **Accident Detection** | Vehicle Collisions, Human Falls | **89.4%** | 88.9% | 90.0% | 89.4% | **0.923** |
+| **Shoplifting Detection** | Skeletal Concealment & Loitering | **86.8%** | 87.2% | 86.5% | 86.8% | **0.891** |
+| **Overall System Avg** | **Multi-Threat Unified Core** | **91.3%** | **92.9%** | **89.7%** | **91.3%** | **0.941** |
+
+---
+
 ## 🛠️ Tech Stack & Architecture
 
 | Layer | Technologies / Implementation |
@@ -79,6 +103,8 @@ Built with **Zero Runtime Dependencies** using vanilla web standards (HTML5, Van
 ```text
 Mohan PF/
 ├── assets/
+│   ├── intelli-eye-paper.pdf       # Full IEEE ICNPCV 2026 conference research paper (PDF)
+│   ├── ICNPCV2026_Paper1172.pdf    # Direct IEEE camera-ready submission copy
 │   └── mohan-avatar.jpg            # Professional avatar / headshot
 ├── css/
 │   └── style.css                   # Comprehensive design system, themes, and layouts
@@ -117,9 +143,17 @@ Mohan PF/
 
 ### 3. Personalized Music Recommendation System
 - **Focus**: Machine Learning & Statistical Modeling
+- **Repository**: [github.com/MohanKumarBH23/Music-Recommendation-Agent](https://github.com/MohanKumarBH23/Music-Recommendation-Agent)
 - **Description**: Multi-tiered recommendation engine combining Collaborative and Content-Based Filtering with K-Means clustering. Analyzes acoustic features from the Spotify Web API with PCA (retaining 95% variance) and t-SNE for dimensional projection and Cosine Similarity ranking.
 - **Key Technologies**: `Scikit-learn`, `Pandas`, `Spotify API`, `PCA`, `t-SNE`, `Seaborn / Plotly`
 - **Metrics**: Sub-second Cosine Similarity candidate generation across multi-thousand track datasets.
+
+### 4. Maze-Runner-Py: Procedural 2D Maze & Pathfinding Framework
+- **Focus**: Graph Search Algorithms, Procedural Generation & Simulation
+- **Repository**: [github.com/MohanKumarBH23/Maze-Runner-Py](https://github.com/MohanKumarBH23/Maze-Runner-Py)
+- **Description**: Modular Python framework for procedural 2D maze generation (Depth-First Search Backtracking, Binary Tree) and intelligent graph search pathfinding (guaranteed shortest-path BFS, DFS, and simultaneous Bi-Directional search) with dynamic frame-by-frame Matplotlib animated visualizations.
+- **Key Technologies**: `Python 3.8+`, `Graph Algorithms`, `Breadth-First Search (BFS)`, `Depth-First Search (DFS)`, `Bi-Directional Search`, `Matplotlib`, `CLI Engine`
+- **Metrics**: BFS guaranteed shortest-path optimality, multi-algorithm procedural labyrinth generation, high-res static PNG and animation export.
 
 ---
 
@@ -134,6 +168,8 @@ The portfolio features a built-in terminal emulator accessible via the floating 
 | `education` | College, degree, coursework, graduation year, and CGPA |
 | `experience` | AI Internship details at Digitaltransols AI Private Limited |
 | `skills` | Programming languages, ML frameworks, core CS concepts, and cloud tools |
+| `publications` | Peer-reviewed research papers (IEEE ICNPCV 2026) |
+| `paper` / `pdf` | Opens the full IEEE research publication PDF directly |
 | `projects` | Summary of featured engineering systems |
 | `contact` | Phone, email, LinkedIn, and GitHub links |
 | `theme` | Toggles live between Obsidian Dark and Pearl Light themes |
@@ -267,8 +303,8 @@ Right-click on [`index.html`](index.html) and select **"Open with Live Server"**
 - **Experience**: AI Intern at Digitaltransols AI Private Limited, Bangalore  
 - **Phone**: [+91 9980507072](tel:+919980507072)  
 - **Email**: [mohankumarbh007@gmail.com](mailto:mohankumarbh007@gmail.com)  
-- **LinkedIn**: [linkedin.com/in/mohankumarbh](https://linkedin.com/in/mohankumarbh)  
-- **GitHub**: [github.com/mohankumarbh](https://github.com/mohankumarbh)  
+- **LinkedIn**: [linkedin.com/in/mohan-kumar-bh-mk23](https://www.linkedin.com/in/mohan-kumar-bh-mk23)  
+- **GitHub**: [github.com/MohanKumarBH23](https://github.com/MohanKumarBH23)  
 
 ---
 
