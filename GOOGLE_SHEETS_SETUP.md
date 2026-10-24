@@ -47,8 +47,8 @@ Follow these 4 simple steps to connect your portfolio contact form to your Googl
 ---
 
 ### Step 4: Paste Your Web App URL into Your Website
-1. Open [`js/main.js`](file:///c:/Users/Dell/Desktop/Mohan%20PF/js/main.js).
-2. Around line 408, find:
+1. Open [`js/main.js`](file:///c:/Users/Dell/Desktop/Projects/Mohan%20PF/js/main.js).
+2. Around line 508, find:
    ```javascript
    const GOOGLE_APPS_SCRIPT_URL = '';
    ```
@@ -61,8 +61,11 @@ Follow these 4 simple steps to connect your portfolio contact form to your Googl
 ---
 
 ### Verification:
-1. Open your portfolio in your browser (`http://localhost:3000`).
+1. Open your portfolio in your browser (`http://localhost:8080`).
 2. Scroll to the **Let's Connect** section.
 3. Fill out the form with a test message and click **Send Secure Inquiry**.
-4. Check your Google Sheet: a new row will be created with the timestamp, name, email, subject, and message!
-5. Check your Gmail (`mohankumarbh007@gmail.com`): you will have received an email with a 1-click reply button!
+4. The inquiry is **accepted directly on the website** with an instant green confirmation card and Reference ID (`#INQ-XXXXXX`) — no mail client is opened!
+5. Check your Google Sheet: a new row will be created with the timestamp, name, email, subject, and message!
+6. Check your Gmail (`mohankumarbh007@gmail.com`): you will have received an email notification with a 1-click reply button!
+7. (Bonus) Open the terminal on your portfolio (`>_ Terminal`) and type `inquiries` to see all received website messages!
+

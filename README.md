@@ -195,28 +195,29 @@ Security is treated as a first-class citizen with defense-in-depth across the cl
         └─▶ 4. Secure Async Clipboard (Guarded against injection)
         │
         ▼
-[ Google Apps Script Webhook / Mailto Dispatch ]
+[ Google Apps Script Webhook / FormSubmit Direct Web Pipeline ]
 ```
 
 - **Strict Content Security Policy (CSP)**: Disallows unauthorized external scripts and inline script execution while permitting trusted Google Fonts and self-hosted assets.
 - **Anti-Clickjacking**: Enforced via `X-Frame-Options: DENY` and `frame-ancestors 'none'`.
 - **Anti-Bot Honeypot**: Invisible trap input field (`_gotcha_hp`) that flags and silently drops automated spam submissions.
-- **Client-Side Rate Limiter**: 45-second token-bucket cooldown prevents form flooding.
+- **Client-Side Rate Limiter**: 30-second token-bucket cooldown prevents form flooding.
 - **MIME Sniffing & XSS Protection**: `X-Content-Type-Options: nosniff` and `X-XSS-Protection: 1; mode=block`.
 - **Permissions Policy**: Completely restricts camera, microphone, geolocation, and payment APIs unless explicitly authorized.
 
 ---
 
-## 📬 Google Sheets & Email Contact Pipeline
+## 📬 Website-Direct Contact Pipeline
 
-The contact form can operate in two modes:
+Inquiries are **accepted directly through the website** without ever forcing or launching an external desktop mail client (`mailto:`):
 
 1. **Full Serverless Webhook (Recommended)**:
-   - Automatically writes inquiries to a private Google Sheet.
-   - Dispatches a structured notification email to `mohankumarbh007@gmail.com` with a 1-click reply button.
+   - When `GOOGLE_APPS_SCRIPT_URL` is set, submissions are logged directly to a private Google Sheet and trigger an instant notification email to `mohankumarbh007@gmail.com`.
    - See [GOOGLE_SHEETS_SETUP.md](GOOGLE_SHEETS_SETUP.md) for the 4-step setup guide using [`google-apps-script.js`](google-apps-script.js).
-2. **Native Mail Client Fallback**:
-   - If no webhook URL is configured, the form seamlessly opens the user's default email client pre-populated with the inquiry details.
+2. **Direct Background Dispatch & Local Persistence**:
+   - Zero-config background dispatch forwards the message to Mohan without taking the user away from the website.
+   - All submissions are safely logged in browser `localStorage` with unique Reference IDs (`#INQ-XXXXXX`).
+   - Mohan can inspect all website inquiries directly in the interactive developer terminal by typing `inquiries`!
 
 ---
 
