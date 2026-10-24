@@ -652,6 +652,7 @@ manager.show_solution(maze.id)`,
   - skills       : Programming languages, ML libraries & tools
   - publications : Peer-reviewed conference proceedings (IEEE ICNPCV 2026)
   - paper / pdf  : Open the IEEE research publication PDF directly
+  - resume / cv  : Open / download Mohan's Resume (PDF)
   - projects     : Engineered systems (Intelli-Eye, Gemini Engine, Music Rec)
   - contact      : Phone, email, LinkedIn, and GitHub
   - theme        : Toggle dark/light theme
@@ -686,6 +687,14 @@ PDF Access  : Type 'paper' or 'pdf' to open the complete IEEE paper directly.`,
     pdf: () => {
       window.open('assets/intelli-eye-paper.pdf', '_blank');
       return 'Opening Intelli-Eye IEEE conference publication (PDF) in new tab...';
+    },
+    resume: () => {
+      window.open('assets/Mohan_Resume.pdf', '_blank');
+      return 'Opening Mohan Kumar B.H Resume (PDF) in new tab...';
+    },
+    cv: () => {
+      window.open('assets/Mohan_Resume.pdf', '_blank');
+      return 'Opening Mohan Kumar B.H Resume (PDF) in new tab...';
     },
     skills: `[TECHNICAL SKILLS]
 Languages  : Python (Proficient), SQL, C/C++, React
