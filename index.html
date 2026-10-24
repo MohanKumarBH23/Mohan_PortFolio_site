@@ -762,7 +762,7 @@
         </div>
 
         <!-- Secure Contact Form -->
-        <form class="contact-form" id="contact-form" novalidate>
+        <form class="contact-form" id="contact-form" novalidate onsubmit="return false;" action="javascript:void(0);">
           <!-- Honeypot anti-spam bot trap (hidden) -->
           <input type="text" name="_gotcha_hp" class="hp-field" tabindex="-1" autocomplete="off" />
 
@@ -793,8 +793,8 @@
 
           <div id="form-status" class="form-status"></div>
 
-          <button type="submit" class="btn btn-primary" id="btn-submit-form">
-            <span>Send Secure Inquiry</span>
+          <button type="button" class="btn btn-primary" id="btn-submit-form">
+            <span>Send Message</span>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
             </svg>
@@ -917,7 +917,7 @@
   <!-- Scripts -->
   <script src="js/security.js"></script>
   <script src="js/particles.js?v=2.2"></script>
-  <script src="js/main.js?v=1.1"></script>
+  <script src="js/main.js?v=3.5"></script>
 </body>
 
 </html>

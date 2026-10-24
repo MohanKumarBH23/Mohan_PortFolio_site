@@ -1871,23 +1871,27 @@ code, pre, .font-mono {
 }
 
 .form-status {
-  padding: 12px;
+  padding: 14px 16px;
   border-radius: var(--radius-md);
-  font-size: 0.8125rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
   display: none;
+  margin-top: 6px;
+  margin-bottom: 6px;
+  transition: all 0.3s ease;
 }
 
 .form-status.success {
   display: block;
-  background: rgba(16, 185, 129, 0.1);
-  border: 1px solid rgba(16, 185, 129, 0.3);
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.4);
   color: var(--accent-emerald);
 }
 
 .form-status.error {
   display: block;
-  background: rgba(239, 68, 68, 0.1);
-  border: 1px solid rgba(239, 68, 68, 0.3);
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.4);
   color: #ef4444;
 }
 

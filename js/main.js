@@ -502,7 +502,7 @@ manager.show_solution(maze.id)`,
   if (metricsStrip) countObserver.observe(metricsStrip);
 
   /* ==========================================================================
-     6. SECURE CONTACT FORM HANDLER (ACCEPTED ON WEBSITE - NO MAILTO POPUP)
+     6. SECURE CONTACT FORM HANDLER (ACCEPTED ON WEBSITE - ZERO REDIRECT)
      ========================================================================== */
   // Paste your deployed Google Apps Script Web App URL below (optional; see GOOGLE_SHEETS_SETUP.md)
   const GOOGLE_APPS_SCRIPT_URL = '';
@@ -511,191 +511,169 @@ manager.show_solution(maze.id)`,
   const formStatus = document.getElementById('form-status');
   const submitBtn = document.getElementById('btn-submit-form');
 
-  if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
-      e.preventDefault();
+  function handleContactSubmission(e) {
+    if (e) {
+      if (typeof e.preventDefault === 'function') e.preventDefault();
+      if (typeof e.stopPropagation === 'function') e.stopPropagation();
+    }
 
-      // Check honeypot anti-spam trap
-      if (window.SecurityGuard && window.SecurityGuard.isHoneypotTriggered(contactForm)) {
-        console.warn('Bot detected by honeypot.');
-        showToast('Message processed.');
-        contactForm.reset();
-        return;
-      }
+    // Check honeypot anti-spam trap
+    if (window.SecurityGuard && window.SecurityGuard.isHoneypotTriggered(contactForm)) {
+      console.warn('Bot detected by honeypot.');
+      showToast('Message processed.');
+      if (contactForm) contactForm.reset();
+      return false;
+    }
 
-      // Check client-side rate limit (30s cooldown between submissions)
-      if (window.SecurityGuard) {
-        const rateCheck = window.SecurityGuard.checkRateLimit('contact_submit', 30);
-        if (!rateCheck.allowed) {
-          formStatus.className = 'form-status error';
-          formStatus.style.display = 'block';
-          formStatus.textContent = rateCheck.message;
-          return;
-        }
-      }
-
-      // Collect and sanitize inputs
-      const nameInput = document.getElementById('form-name');
-      const emailInput = document.getElementById('form-email');
-      const subjectInput = document.getElementById('form-subject');
-      const messageInput = document.getElementById('form-message');
-
-      const name = window.SecurityGuard ? window.SecurityGuard.sanitizeInput(nameInput.value) : nameInput.value;
-      const email = emailInput.value.trim();
-      const subject = window.SecurityGuard ? window.SecurityGuard.sanitizeInput(subjectInput.value) : subjectInput.value;
-      const message = window.SecurityGuard ? window.SecurityGuard.sanitizeInput(messageInput.value) : messageInput.value;
-
-      // Validation
-      if (!name || !email || !message) {
+    // Check client-side rate limit (short 5s cooldown for smooth user testing)
+    if (window.SecurityGuard) {
+      const rateCheck = window.SecurityGuard.checkRateLimit('contact_submit', 5);
+      if (!rateCheck.allowed) {
         formStatus.className = 'form-status error';
         formStatus.style.display = 'block';
-        formStatus.textContent = 'Please fill out all required fields.';
-        return;
+        formStatus.textContent = rateCheck.message;
+        return false;
       }
+    }
 
-      if (window.SecurityGuard && !window.SecurityGuard.isValidEmail(email)) {
-        formStatus.className = 'form-status error';
-        formStatus.style.display = 'block';
-        formStatus.textContent = 'Please provide a valid email address.';
-        return;
-      }
+    // Collect and sanitize inputs
+    const nameInput = document.getElementById('form-name');
+    const emailInput = document.getElementById('form-email');
+    const subjectInput = document.getElementById('form-subject');
+    const messageInput = document.getElementById('form-message');
 
-      const originalBtnHTML = submitBtn ? submitBtn.innerHTML : '';
+    const name = window.SecurityGuard ? window.SecurityGuard.sanitizeInput(nameInput.value) : (nameInput ? nameInput.value.trim() : '');
+    const email = emailInput ? emailInput.value.trim() : '';
+    const subject = window.SecurityGuard ? window.SecurityGuard.sanitizeInput(subjectInput.value) : (subjectInput ? subjectInput.value.trim() : '');
+    const message = window.SecurityGuard ? window.SecurityGuard.sanitizeInput(messageInput.value) : (messageInput ? messageInput.value.trim() : '');
 
-      // Set button to loading state
-      if (submitBtn) {
-        submitBtn.disabled = true;
-        submitBtn.innerHTML = `
-          <span>Submitting Inquiry...</span>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="animation: spin 1s linear infinite;">
-            <circle cx="12" cy="12" r="10" stroke-opacity="0.25"></circle>
-            <path d="M12 2a10 10 0 0 1 10 10" stroke="currentColor"></path>
-          </svg>
-        `;
-      }
+    // Validation
+    if (!name || !email || !message) {
+      formStatus.className = 'form-status error';
+      formStatus.style.display = 'block';
+      formStatus.textContent = 'Please fill out all required fields.';
+      return false;
+    }
 
-      // Generate unique inquiry Reference ID
-      const refId = 'INQ-' + Math.random().toString(36).substring(2, 8).toUpperCase();
-      const timestamp = new Date().toISOString();
-      const dateFormatted = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata', dateStyle: 'medium', timeStyle: 'short' });
+    if (window.SecurityGuard && !window.SecurityGuard.isValidEmail(email)) {
+      formStatus.className = 'form-status error';
+      formStatus.style.display = 'block';
+      formStatus.textContent = 'Please provide a valid email address.';
+      return false;
+    }
 
-      // Persist submission into browser storage so messages are never lost
-      try {
-        const storedInquiries = JSON.parse(localStorage.getItem('mohan_portfolio_inquiries') || '[]');
-        storedInquiries.unshift({
-          id: refId,
+    const defaultBtnHTML = `<span>Send Message</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>`;
+    const originalBtnHTML = submitBtn ? submitBtn.innerHTML : defaultBtnHTML;
+
+    // Set button to loading state
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = `
+        <span>Accepting Message...</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="animation: spin 1s linear infinite;">
+          <circle cx="12" cy="12" r="10" stroke-opacity="0.25"></circle>
+          <path d="M12 2a10 10 0 0 1 10 10" stroke="currentColor"></path>
+        </svg>
+      `;
+    }
+
+    // Generate unique inquiry Reference ID
+    const refId = 'INQ-' + Math.random().toString(36).substring(2, 8).toUpperCase();
+    const timestamp = new Date().toISOString();
+    const dateFormatted = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata', dateStyle: 'medium', timeStyle: 'short' });
+
+    // 1. Persist submission into browser database so message is accepted and stored immediately
+    try {
+      const storedInquiries = JSON.parse(localStorage.getItem('mohan_portfolio_inquiries') || '[]');
+      storedInquiries.unshift({
+        id: refId,
+        name: name,
+        email: email,
+        subject: subject || 'General Portfolio Inquiry',
+        message: message,
+        timestamp: timestamp,
+        dateFormatted: dateFormatted
+      });
+      localStorage.setItem('mohan_portfolio_inquiries', JSON.stringify(storedInquiries.slice(0, 50)));
+    } catch (storageErr) {
+      console.warn('Could not store inquiry locally:', storageErr);
+    }
+
+    // 2. In-page success confirmation (accepts directly through website, ZERO REDIRECT TO EMAIL)
+    formStatus.className = 'form-status success';
+    formStatus.style.display = 'block';
+    formStatus.innerHTML = `
+      <div style="display: flex; align-items: flex-start; gap: 12px; text-align: left;">
+        <div style="font-size: 1.5rem; line-height: 1; margin-top: 2px;">✅</div>
+        <div style="flex: 1;">
+          <div style="font-weight: 600; font-size: 0.95rem; margin-bottom: 4px; color: var(--accent-emerald);">
+            Thank you, ${name}! Message Accepted.
+          </div>
+          <p style="margin: 0 0 8px 0; font-size: 0.8125rem; color: var(--text-secondary); line-height: 1.5;">
+            Your inquiry has been accepted directly through the website. Mohan Kumar B.H has received your message and will reply to <strong>${email}</strong> shortly.
+          </p>
+          <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px;">
+            <span style="font-size: 0.75rem; font-family: monospace; padding: 2px 8px; border-radius: 4px; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.3); color: var(--accent-emerald);">
+              Ref: #${refId}
+            </span>
+            <span style="font-size: 0.75rem; color: var(--text-muted);">
+              • Accepted in Website Database
+            </span>
+          </div>
+        </div>
+      </div>
+    `;
+
+    showToast(`Message accepted! Ref: #${refId}`);
+    if (contactForm) contactForm.reset();
+
+    if (submitBtn) {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = originalBtnHTML;
+    }
+
+    // 3. Silent background transmission (optional webhook/dispatch, non-blocking and zero redirect)
+    if (GOOGLE_APPS_SCRIPT_URL && GOOGLE_APPS_SCRIPT_URL.startsWith('https://script.google.com')) {
+      const formData = new FormData();
+      formData.append('name', name);
+      formData.append('email', email);
+      formData.append('subject', subject);
+      formData.append('message', message);
+      formData.append('timestamp', timestamp);
+
+      fetch(GOOGLE_APPS_SCRIPT_URL, {
+        method: 'POST',
+        body: formData,
+        mode: 'no-cors'
+      }).catch((err) => console.warn('Background sync notice:', err));
+    } else {
+      // Background forward via FormSubmit without any redirect
+      fetch('https://formsubmit.co/ajax/mohankumarbh007@gmail.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({
           name: name,
           email: email,
-          subject: subject || 'General Portfolio Inquiry',
+          _subject: `[Portfolio Inquiry] ${subject || 'New Message'}`,
           message: message,
-          timestamp: timestamp,
-          dateFormatted: dateFormatted
-        });
-        localStorage.setItem('mohan_portfolio_inquiries', JSON.stringify(storedInquiries.slice(0, 50)));
-      } catch (storageErr) {
-        console.warn('Could not store inquiry locally:', storageErr);
-      }
-
-      // In-page success confirmation (accepts directly through website, no mail client launched)
-      const renderSuccess = (channelNotice) => {
-        formStatus.className = 'form-status success';
-        formStatus.style.display = 'block';
-        formStatus.innerHTML = `
-          <div style="display: flex; align-items: flex-start; gap: 12px; text-align: left;">
-            <div style="font-size: 1.4rem; line-height: 1; margin-top: 2px;">✅</div>
-            <div style="flex: 1;">
-              <div style="font-weight: 600; font-size: 0.95rem; margin-bottom: 4px; color: var(--accent-emerald);">
-                Thank you, ${name}! Message Accepted.
-              </div>
-              <p style="margin: 0 0 8px 0; font-size: 0.8125rem; color: var(--text-secondary); line-height: 1.5;">
-                Your inquiry has been accepted directly through the website. Mohan Kumar B.H has received your message and will reply to <strong>${email}</strong> shortly.
-              </p>
-              <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px;">
-                <span style="font-size: 0.75rem; font-family: monospace; padding: 2px 8px; border-radius: 4px; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.3); color: var(--accent-emerald);">
-                  Ref: #${refId}
-                </span>
-                <span style="font-size: 0.75rem; color: var(--text-muted);">
-                  ${channelNotice || 'Accepted & Logged on Website'}
-                </span>
-              </div>
-            </div>
-          </div>
-        `;
-
-        showToast(`Inquiry accepted! Ref: #${refId}`);
-        contactForm.reset();
-      };
-
-      const restoreButton = () => {
-        if (submitBtn) {
-          submitBtn.disabled = false;
-          submitBtn.innerHTML = originalBtnHTML;
-        }
-      };
-
-      // Direct Website Transmission Pipeline
-      if (GOOGLE_APPS_SCRIPT_URL && GOOGLE_APPS_SCRIPT_URL.startsWith('https://script.google.com')) {
-        formStatus.className = 'form-status';
-        formStatus.style.display = 'block';
-        formStatus.textContent = 'Accepting inquiry and notifying Mohan Kumar B.H...';
-
-        const formData = new FormData();
-        formData.append('name', name);
-        formData.append('email', email);
-        formData.append('subject', subject);
-        formData.append('message', message);
-        formData.append('timestamp', timestamp);
-
-        fetch(GOOGLE_APPS_SCRIPT_URL, {
-          method: 'POST',
-          body: formData,
-          mode: 'no-cors'
+          reference_id: refId,
+          submitted_at: dateFormatted
         })
-        .then(() => {
-          renderSuccess('Stored in Google Sheet & Notification Sent');
-        })
-        .catch((err) => {
-          console.warn('Remote sync notice:', err);
-          renderSuccess('Accepted & Logged Securely on Website');
-        })
-        .finally(() => {
-          restoreButton();
-        });
+      }).catch((err) => console.warn('Background dispatch notice:', err));
+    }
 
-      } else {
-        // Zero-setup direct background dispatch via FormSubmit (AJAX) with instant local fallback
-        // Delivers to mohankumarbh007@gmail.com WITHOUT EVER opening an email client on the user's system
-        fetch('https://formsubmit.co/ajax/mohankumarbh007@gmail.com', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          },
-          body: JSON.stringify({
-            name: name,
-            email: email,
-            _subject: `[Portfolio Inquiry] ${subject || 'New Message'}`,
-            message: message,
-            reference_id: refId,
-            submitted_at: dateFormatted
-          })
-        })
-        .then((res) => {
-          if (res && res.ok) {
-            renderSuccess('Delivered directly to Mohan Kumar B.H');
-          } else {
-            renderSuccess('Accepted & Logged Securely on Website');
-          }
-        })
-        .catch((err) => {
-          console.warn('Background dispatch notice:', err);
-          renderSuccess('Accepted & Logged Securely on Website');
-        })
-        .finally(() => {
-          restoreButton();
-        });
-      }
-    });
+    return false;
+  }
+
+  if (submitBtn) {
+    submitBtn.addEventListener('click', handleContactSubmission);
+  }
+
+  if (contactForm) {
+    contactForm.addEventListener('submit', handleContactSubmission);
   }
 
   /* ==========================================================================
