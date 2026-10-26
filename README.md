@@ -19,7 +19,6 @@ Built with **Zero Runtime Dependencies** using vanilla web standards (HTML5, Van
 - [🛠️ Tech Stack & Architecture](#️-tech-stack--architecture)
 - [📁 Project Structure](#-project-structure)
 - [🔬 Featured Engineering Projects](#-featured-engineering-projects)
-- [💻 Interactive Developer Terminal (CLI)](#-interactive-developer-terminal-cli)
 - [🔒 Security & Hardening Architecture](#-security--hardening-architecture)
 - [📬 Google Sheets & Email Contact Pipeline](#-google-sheets--email-contact-pipeline)
 - [🚀 Quickstart & Local Development](#-quickstart--local-development)
@@ -52,10 +51,7 @@ Built with **Zero Runtime Dependencies** using vanilla web standards (HTML5, Van
    - Dynamic category filtering across **Computer Vision & Audio**, **LLMs & Multimodal**, and **Machine Learning & Stats**.
    - Deep-dive technical modals featuring system architecture breakdowns, benchmark metrics, and formatted PyTorch/FastAPI/Scikit-learn source snippets.
 
-5. **Interactive Developer CLI Terminal (Easter Egg)**:
-   - Floating interactive terminal drawer (`>_ Terminal`) that lets recruiters and engineers query Mohan's skills, experience, education, projects, contact details, and switch themes directly via command-line syntax.
-
-6. **Serverless Contact Pipeline with Anti-Spam Protection**:
+5. **Serverless Contact Pipeline with Anti-Spam Protection**:
    - Interactive contact form with client-side sanitization, RFC 5322 regex validation, client-side token-bucket cooldown, and an invisible honeypot trap to catch automated bots.
    - Seamless integration with Google Apps Script (`google-apps-script.js`) logging submissions to **Google Sheets** and dispatching instant email alerts with a 1-click reply button, with automatic fallback to native mail client.
 
@@ -109,7 +105,7 @@ Mohan PF/
 ├── css/
 │   └── style.css                   # Comprehensive design system, themes, and layouts
 ├── js/
-│   ├── main.js                     # Core interactivity, modal manager, CLI, and contact logic
+│   ├── main.js                     # Core interactivity, modal manager, and contact logic
 │   ├── particles.js                # Ambient neural network particle canvas simulation
 │   └── security.js                 # SecurityGuard module (Anti-XSS, rate limiting, honeypot)
 ├── _headers                        # Static HTTP security headers for Netlify / Cloudflare
@@ -155,25 +151,6 @@ Mohan PF/
 - **Key Technologies**: `Python 3.8+`, `Graph Algorithms`, `Breadth-First Search (BFS)`, `Depth-First Search (DFS)`, `Bi-Directional Search`, `Matplotlib`, `CLI Engine`
 - **Metrics**: BFS guaranteed shortest-path optimality, multi-algorithm procedural labyrinth generation, high-res static PNG and animation export.
 
----
-
-## 💻 Interactive Developer Terminal (CLI)
-
-The portfolio features a built-in terminal emulator accessible via the floating **`>_ Terminal`** launcher button. Recruiters and engineers can explore credentials using terminal commands:
-
-| Command | Output / Action |
-| :--- | :--- |
-| `help` | Lists all available terminal commands |
-| `about` | Mohan's engineering background, core focus areas, and AI specialization |
-| `education` | College, degree, coursework, graduation year, and CGPA |
-| `experience` | AI Internship details at Digitaltransols AI Private Limited |
-| `skills` | Programming languages, ML frameworks, core CS concepts, and cloud tools |
-| `publications` | Peer-reviewed research papers (IEEE ICNPCV 2026) |
-| `paper` / `pdf` | Opens the full IEEE research publication PDF directly |
-| `projects` | Summary of featured engineering systems |
-| `contact` | Phone, email, LinkedIn, and GitHub links |
-| `theme` | Toggles live between Obsidian Dark and Pearl Light themes |
-| `clear` | Clears the terminal output buffer |
 
 ---
 
@@ -217,7 +194,6 @@ Inquiries are **accepted directly through the website** without ever forcing or 
 2. **Direct Background Dispatch & Local Persistence**:
    - Zero-config background dispatch forwards the message to Mohan without taking the user away from the website.
    - All submissions are safely logged in browser `localStorage` with unique Reference IDs (`#INQ-XXXXXX`).
-   - Mohan can inspect all website inquiries directly in the interactive developer terminal by typing `inquiries`!
 
 ---
 
@@ -289,7 +265,6 @@ Right-click on [`index.html`](index.html) and select **"Open with Live Server"**
 | **Profile Photo** | [`assets/mohan-avatar.jpg`](assets/mohan-avatar.jpg) | Replace with 1:1 ratio image |
 | **CV / Resume Link** | [`index.html`](index.html) | `Download CV` |
 | **Projects & Modals** | [`index.html`](index.html), [`js/main.js`](js/main.js) | `projectData`, `Intelli-Eye`, `ai-interview` |
-| **Terminal Commands** | [`js/main.js`](js/main.js) | `cliCommands` |
 | **Contact Webhook** | [`js/main.js`](js/main.js) | `GOOGLE_APPS_SCRIPT_URL` |
 | **Domain / Canonical** | [`index.html`](index.html), [`sitemap.xml`](sitemap.xml) | `canonical`, `og:url` |
 

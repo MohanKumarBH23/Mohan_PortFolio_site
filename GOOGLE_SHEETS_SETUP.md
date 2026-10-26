@@ -67,5 +67,4 @@ Follow these 4 simple steps to connect your portfolio contact form to your Googl
 4. The inquiry is **accepted directly on the website** with an instant green confirmation card and Reference ID (`#INQ-XXXXXX`) — no mail client is opened!
 5. Check your Google Sheet: a new row will be created with the timestamp, name, email, subject, and message!
 6. Check your Gmail (`mohankumarbh007@gmail.com`): you will have received an email notification with a 1-click reply button!
-7. (Bonus) Open the terminal on your portfolio (`>_ Terminal`) and type `inquiries` to see all received website messages!
 
