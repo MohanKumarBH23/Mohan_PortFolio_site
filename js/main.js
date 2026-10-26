@@ -47,7 +47,18 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       navbar.classList.remove('scrolled');
     }
-  });
+
+    // (Issue 13 Resolution): When at the top of the page, explicitly activate Home and deactivate others
+    if (window.scrollY < 120) {
+      navLinks.forEach(link => {
+        if (link.getAttribute('href') === '#home') {
+          link.classList.add('active');
+        } else {
+          link.classList.remove('active');
+        }
+      });
+    }
+  }, { passive: true });
 
   if (mobileToggle && navMenu) {
     mobileToggle.addEventListener('click', () => {
@@ -61,8 +72,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Active section scroll spy
-  const sections = document.querySelectorAll('section[id]');
+  // Active section scroll spy (Issue 13 Resolution: Include header[id] so #home is tracked)
+  const sections = document.querySelectorAll('section[id], header[id]');
   const observerOptions = {
     root: null,
     rootMargin: '-20% 0px -70% 0px',
@@ -70,6 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   const navObserver = new IntersectionObserver((entries) => {
+    if (window.scrollY < 120) return; // Prioritize top-of-page scroll check
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         const id = entry.target.getAttribute('id');
@@ -92,9 +104,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const typewriterElement = document.getElementById('hero-typewriter');
   if (typewriterElement) {
     const typewriterPhrases = [
-      'Mohan',
-      'AI&ML Graduate',
-      'Aspirant',
+      'B.Tech CSE (AI & ML) Graduate @ SVIT',
+      'Aspirant of AI & ML',
+      'Student'
     ];
     let phraseIdx = 0;
     let charIdx = 0;
@@ -539,13 +551,12 @@ manager.show_solution(maze.id)`,
     // Collect and sanitize inputs
     const nameInput = document.getElementById('form-name');
     const emailInput = document.getElementById('form-email');
-    const subjectInput = document.getElementById('form-subject');
     const messageInput = document.getElementById('form-message');
 
-    const name = window.SecurityGuard ? window.SecurityGuard.sanitizeInput(nameInput.value) : (nameInput ? nameInput.value.trim() : '');
+    const name = window.SecurityGuard ? window.SecurityGuard.sanitizeInput(nameInput ? nameInput.value : '') : (nameInput ? nameInput.value.trim() : '');
     const email = emailInput ? emailInput.value.trim() : '';
-    const subject = window.SecurityGuard ? window.SecurityGuard.sanitizeInput(subjectInput.value) : (subjectInput ? subjectInput.value.trim() : '');
-    const message = window.SecurityGuard ? window.SecurityGuard.sanitizeInput(messageInput.value) : (messageInput ? messageInput.value.trim() : '');
+    const subject = 'Direct Message from Website';
+    const message = window.SecurityGuard ? window.SecurityGuard.sanitizeInput(messageInput ? messageInput.value : '') : (messageInput ? messageInput.value.trim() : '');
 
     // Validation
     if (!name || !email || !message) {

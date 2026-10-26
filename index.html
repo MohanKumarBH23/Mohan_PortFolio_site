@@ -144,22 +144,25 @@
           <h1 class="hero-intro-title">
             <span class="hero-gradient-text">Hello, I'm</span>
             <br />
+            <span class="hero-name">Mohan Kumar B.H</span>
+          </h1>
+          <p class="hero-intro-subtitle">
             <span class="hero-typewriter-container">
               <span id="hero-typewriter" class="hero-typewriter-text"></span><span class="typewriter-cursor"
                 aria-hidden="true">|</span>
             </span>
-          </h1>
-          <p class="hero-intro-subtitle">
-            CSE(AI & ML) graduate @ SVIT<br />
           </p>
           <div class="hero-intro-actions">
-            <a href="#contact" class="hero-gradient-btn">
-              <span class="hero-gradient-btn-inner">Contact Me</span>
-            </a>
+            <a href="#contact" class="btn btn-primary">Contact Me</a>
             <a href="assets/Mohan_Resume.pdf" download="Mohan_Kumar_BH_Resume.pdf" target="_blank"
-              rel="noopener noreferrer" class="hero-gradient-btn" title="Download Mohan Kumar B.H Resume (PDF)">
-              <span class="hero-gradient-btn-inner">Download CV</span>
+              rel="noopener noreferrer" class="btn btn-secondary" title="Download Mohan Kumar B.H Resume (PDF)">
+              Download CV
             </a>
+            <button class="btn btn-secondary cli-toggle-btn" id="cli-toggle-btn" aria-label="Open Interactive CLI Terminal"
+              title="Open Interactive Developer Terminal" aria-haspopup="dialog" aria-controls="cli-modal">
+              <span aria-hidden="true" style="font-family: var(--font-mono); color: var(--accent-cyan); font-weight: 700;">&gt;_</span>
+              <span>Terminal</span>
+            </button>
           </div>
         </div>
 
@@ -231,10 +234,9 @@
             <h3 class="skills-card-title">Programming Languages</h3>
           </div>
           <div class="skills-pills">
-            <span class="skill-pill">Python <small class="skill-pill-tag">Proficient</small></span>
+            <span class="skill-pill">Python</span>
             <span class="skill-pill">SQL</span>
             <span class="skill-pill">C / C++</span>
-            <span class="skill-pill">React</span>
             <span class="skill-pill">JavaScript</span>
           </div>
         </div>
@@ -275,12 +277,13 @@
             <h3 class="skills-card-title">Frameworks &amp; APIs</h3>
           </div>
           <div class="skills-pills">
+            <span class="skill-pill">React</span>
+            <span class="skill-pill">Next.js</span>
+            <span class="skill-pill">FastAPI</span>
             <span class="skill-pill">Django</span>
             <span class="skill-pill">Flask</span>
-            <span class="skill-pill">FastAPI</span>
             <span class="skill-pill">REST APIs</span>
             <span class="skill-pill">OpenCV</span>
-            <span class="skill-pill">Next.js</span>
           </div>
         </div>
 
@@ -448,7 +451,7 @@
                 <span class="tag">YOLOv8-Pose Estimation</span>
                 <span class="tag">Shoplifting Heuristics</span>
                 <span class="tag">Telegram &amp; SMS Dispatch</span>
-                <span class="tag">IEEE ICNPCV 2026</span>
+                <span class="tag"><abbr title="International Conference on Natural Language Processing and Computer Vision">IEEE ICNPCV</abbr> &rsquo;26</span>
               </div>
             </div>
 
@@ -524,8 +527,7 @@
             <button class="view-details-btn" data-project="intelli-eye">
               Architecture &amp; Details <span>&rarr;</span>
             </button>
-            <span style="font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-mono);">Aug &ndash; Dec
-              2025</span>
+            <span style="font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-mono);">2025 &bull; Research &amp; AI</span>
           </div>
         </article>
 
@@ -571,8 +573,7 @@
             <button class="view-details-btn" data-project="ai-interview">
               Architecture &amp; Details <span>&rarr;</span>
             </button>
-            <span style="font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-mono);">Digitaltransols
-              AI</span>
+            <span style="font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-mono);">2026 &bull; Digitaltransols AI</span>
           </div>
         </article>
 
@@ -619,13 +620,12 @@
             <button class="view-details-btn" data-project="music-recommender">
               Architecture &amp; Details <span>&rarr;</span>
             </button>
-            <span style="font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-mono);">Dec 2024 &ndash;
-              Feb 2025</span>
+            <span style="font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-mono);">2025 &bull; Open Source</span>
           </div>
         </article>
 
         <!-- Project 4: Maze-Runner-Py -->
-        <article class="project-card project-card-center" data-category="algo">
+        <article class="project-card" data-category="algo">
           <div class="project-card-header">
             <span class="project-badge">Graph Algorithms &amp; Simulation</span>
             <div class="project-links">
@@ -650,7 +650,7 @@
                 <span class="proj-metric-name">Graph Solvers</span>
               </div>
               <div class="proj-metric-item">
-                <span class="proj-metric-val">DFS &amp; BinTree</span>
+                <span class="proj-metric-val">DFS &amp; Tree</span>
                 <span class="proj-metric-name">Procedural Gen</span>
               </div>
             </div>
@@ -667,8 +667,7 @@
             <button class="view-details-btn" data-project="maze-runner">
               Architecture &amp; Details <span>&rarr;</span>
             </button>
-            <span style="font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-mono);">Open
-              Source</span>
+            <span style="font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-mono);">2024 &bull; Open Source</span>
           </div>
         </article>
       </div>
@@ -769,19 +768,21 @@
           <div class="form-row">
             <div class="form-group">
               <label for="form-name">Your Name</label>
-              <input type="text" id="form-name" name="name" class="form-input" <div class="form-group">
-              <label for="form-email">Contact Email</label>
-              <input type="email" id="form-email" name="email" class="form-input" </div>
+              <input type="text" id="form-name" name="name" class="form-input" required />
             </div>
 
             <div class="form-group">
-              <label for="form-subject">Purpose of Inquiry</label>
-              <input type="text" id="form-subject" name="subject" class="form-input" </div>
+              <label for="form-email">Contact Email</label>
+              <input type="email" id="form-email" name="email" class="form-input" required />
+            </div>
+          </div>
 
-              <div class="form-group">
-                <label for="form-message">Message</label>
-                <textarea id="form-message" name="message" class="form-textarea" <div id="form-status"
-                  class="form-status"></div>
+          <div class="form-group">
+            <label for="form-message">Message</label>
+            <textarea id="form-message" name="message" class="form-textarea" required></textarea>
+          </div>
+
+          <div id="form-status" class="form-status"></div>
 
           <button type="button" class="btn btn-primary" id="btn-submit-form">
             <span>Send Message</span>
@@ -797,14 +798,6 @@
   <!-- ==========================================================================
        CLI TERMINAL MODAL (Easter Egg for Recruiters & Engineers)
        ========================================================================== -->
-  <div class="cli-launcher">
-    <button class="cli-toggle-btn" id="cli-toggle-btn" aria-label="Open Interactive CLI Terminal"
-      title="Open Interactive Developer Terminal">
-      <span>&gt;_</span>
-      <span>Terminal</span>
-    </button>
-  </div>
-
   <div class="cli-modal" id="cli-modal" role="dialog" aria-modal="true" aria-label="Interactive Terminal">
     <div class="cli-header">
       <span class="cli-title">mohankumar@ai-core:~ (bash)</span>
@@ -845,7 +838,7 @@
     <div class="project-modal pdf-modal-container">
       <div class="pdf-modal-header">
         <div class="pdf-modal-title-group">
-          <span class="pub-badge pub-badge-ieee">IEEE ICNPCV 2026</span>
+          <span class="pub-badge pub-badge-ieee"><abbr title="International Conference on Natural Language Processing and Computer Vision">IEEE ICNPCV</abbr> &rsquo;26</span>
           <h3 class="pdf-modal-title">Intelli-Eye: Research Paper (PDF)</h3>
         </div>
         <div class="pdf-modal-actions">
@@ -885,11 +878,11 @@
     <div class="container">
       <div class="footer-content">
         <div class="footer-brand">
-          <h4>MOHAN KUMAR B.H </h4>
-          <p>B.Tech CSE (AIML) &bull; Sai Vidya Institute of Technology</p>
+          <h4>MOHAN KUMAR B.H</h4>
+          <p>&copy; 2026 Mohan Kumar B.H &bull; AI &amp; Machine Learning Engineer &bull; SVIT</p>
         </div>
 
-        <div class="footer-links">
+        <div class="footer-links" aria-label="Footer Navigation">
           <a href="#home">Home</a>
           <a href="#about">About</a>
           <a href="#skills">Skills</a>
@@ -907,7 +900,7 @@
   <!-- Scripts -->
   <script src="js/security.js"></script>
   <script src="js/particles.js?v=2.2"></script>
-  <script src="js/main.js?v=3.5"></script>
+  <script src="js/main.js?v=3.7"></script>
 </body>
 
 </html>
