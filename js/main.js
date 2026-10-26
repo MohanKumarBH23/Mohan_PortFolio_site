@@ -105,8 +105,9 @@ document.addEventListener('DOMContentLoaded', () => {
   if (typewriterElement) {
     const typewriterPhrases = [
       'B.Tech CSE (AI & ML) Graduate @ SVIT',
+      'Bengaluru'
       'Aspirant of AI & ML',
-      'Student'
+
     ];
     let phraseIdx = 0;
     let charIdx = 0;
