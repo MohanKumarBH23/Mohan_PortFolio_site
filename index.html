@@ -22,6 +22,22 @@
   <link rel="canonical" href="https://mohankumarbh.dev/" />
   <meta name="theme-color" content="#000000" />
 
+  <!-- Instant Theme Initializer (Eliminates FOUC & Restores Saved Mode) -->
+  <script>
+    (function () {
+      try {
+        var savedTheme = localStorage.getItem('mohan_theme');
+        if (savedTheme === 'light' || savedTheme === 'dark') {
+          document.documentElement.setAttribute('data-theme', savedTheme);
+        } else {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        }
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'dark');
+      }
+    })();
+  </script>
+
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://mohankumarbh.dev/" />
@@ -60,7 +76,7 @@
     },
     "worksFor": {
       "@type": "Organization",
-      "name": "Digitaltransols AI Private Limited, Bangalore"
+      "name": "Digitransols AI Private Limited, Bangalore"
     },
     "description": "B.Tech in Computer Science and Engineering (AIML) graduate with 8.82 CGPA. Experienced AI Intern specializing in LLMs, RAG, Multimodal Gemini 2.0 Flash, YOLOv8 computer vision, and high-performance ML pipelines.",
     "url": "https://mohankumarbh.dev",
@@ -111,7 +127,8 @@
 
       <div class="nav-actions">
         <!-- Dark / Light Theme Toggle -->
-        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle visual theme" title="Toggle Dark/Light Mode">
+        <button class="theme-toggle" id="theme-toggle" type="button" onclick="toggleTheme()"
+          aria-label="Toggle visual theme" title="Toggle Dark/Light Mode">
           <svg class="icon-sun" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
               d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
@@ -880,7 +897,7 @@
   <!-- Scripts -->
   <script src="js/security.js"></script>
   <script src="js/particles.js?v=2.2"></script>
-  <script src="js/main.js?v=3.7"></script>
+  <script src="js/main.js?v=4.0"></script>
 </body>
 
 </html>

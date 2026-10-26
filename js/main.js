@@ -3,35 +3,74 @@
  * Mohan Kumar B.H | AI & Machine Learning Engineering Portfolio
  */
 
-document.addEventListener('DOMContentLoaded', () => {
+/* ==========================================================================
+   TOAST NOTIFICATION UTILITY (Global)
+   ========================================================================== */
+function showToast(message) {
+  let container = document.querySelector('.toast-container');
+  if (!container) {
+    container = document.createElement('div');
+    container.className = 'toast-container';
+    document.body.appendChild(container);
+  }
+
+  const toast = document.createElement('div');
+  toast.className = 'toast';
+  toast.innerHTML = `
+    <span style="color: var(--accent-sky);">✦</span>
+    <span>${message}</span>
+  `;
+
+  container.appendChild(toast);
+
+  setTimeout(() => {
+    toast.style.opacity = '0';
+    toast.style.transform = 'translateY(10px)';
+    toast.style.transition = 'all 0.3s ease';
+    setTimeout(() => toast.remove(), 300);
+  }, 3200);
+}
+window.showToast = showToast;
+
+/* ==========================================================================
+   THEME CONTROLLER (Dark / Light with localStorage & Fail-Safe)
+   ========================================================================== */
+function toggleTheme() {
+  const root = document.documentElement;
+  const current = root.getAttribute('data-theme') || 'dark';
+  const nextTheme = current === 'dark' ? 'light' : 'dark';
+  root.setAttribute('data-theme', nextTheme);
+  try {
+    localStorage.setItem('mohan_theme', nextTheme);
+  } catch (err) {
+    console.warn('Storage unavailable:', err);
+  }
+  showToast(`Switched to ${nextTheme} mode`);
+}
+window.toggleTheme = toggleTheme;
+
+function initTheme() {
+  const root = document.documentElement;
+  try {
+    const savedTheme = localStorage.getItem('mohan_theme');
+    if (savedTheme === 'light' || savedTheme === 'dark') {
+      root.setAttribute('data-theme', savedTheme);
+      return;
+    }
+  } catch (err) {}
+  if (!root.getAttribute('data-theme')) {
+    root.setAttribute('data-theme', 'dark');
+  }
+}
+initTheme();
+
+function initApp() {
   'use strict';
 
-  /* ==========================================================================
-     1. THEME SWITCHER (Dark / Light with localStorage)
-     ========================================================================== */
   const themeToggle = document.getElementById('theme-toggle');
-  const root = document.documentElement;
-
-  function initTheme() {
-    const savedTheme = localStorage.getItem('mohan_theme');
-    if (savedTheme) {
-      root.setAttribute('data-theme', savedTheme);
-    } else {
-      root.setAttribute('data-theme', 'dark');
-    }
-  }
-
   if (themeToggle) {
-    themeToggle.addEventListener('click', () => {
-      const current = root.getAttribute('data-theme') || 'dark';
-      const nextTheme = current === 'dark' ? 'light' : 'dark';
-      root.setAttribute('data-theme', nextTheme);
-      localStorage.setItem('mohan_theme', nextTheme);
-      showToast(`Switched to ${nextTheme} mode`);
-    });
+    themeToggle.addEventListener('click', toggleTheme);
   }
-
-  initTheme();
 
   /* ==========================================================================
      2. NAVBAR SCROLL EFFECT & MOBILE NAVIGATION
@@ -687,33 +726,10 @@ manager.show_solution(maze.id)`,
     contactForm.addEventListener('submit', handleContactSubmission);
   }
 
-  /* ==========================================================================
-     7. TOAST NOTIFICATION UTILITY
-     ========================================================================== */
-  function showToast(message) {
-    let container = document.querySelector('.toast-container');
-    if (!container) {
-      container = document.createElement('div');
-      container.className = 'toast-container';
-      document.body.appendChild(container);
-    }
+} // end initApp
 
-    const toast = document.createElement('div');
-    toast.className = 'toast';
-    toast.innerHTML = `
-      <span style="color: var(--accent-sky);">✦</span>
-      <span>${message}</span>
-    `;
-
-    container.appendChild(toast);
-
-    setTimeout(() => {
-      toast.style.opacity = '0';
-      toast.style.transform = 'translateY(10px)';
-      toast.style.transition = 'all 0.3s ease';
-      setTimeout(() => toast.remove(), 300);
-    }, 3200);
-  }
-
-  window.showToast = showToast;
-});
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initApp);
+} else {
+  initApp();
+}
