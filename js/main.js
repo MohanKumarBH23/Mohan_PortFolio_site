@@ -109,128 +109,6 @@ function initApp() {
 
   sections.forEach(sec => navObserver.observe(sec));
 
-  // Telemetry Deck Controller
-  const telemetryChannels = {
-    weapon: {
-      bbox: { x: 90, y: 25, width: 130, height: 95 },
-      label: 'WEAPON: 0.963',
-      meta: 'd=34.2px v=128px/s',
-      color: 'oklch(84% 0.19 80.46)',
-      m1: '96.3% mAP (0.984 AUC)',
-      m2: '14.2 ms / 640x640',
-      m3: 'OVERT THREAT: ALERT',
-      status: 'FPS: 38.4 • Edge Jetson FP16'
-    },
-    fire: {
-      bbox: { x: 75, y: 30, width: 155, height: 90 },
-      label: 'FIRE/SMOKE: 0.927',
-      meta: 'Thermal Area: 1420px²',
-      color: 'oklch(65% 0.18 28)',
-      m1: '92.7% mAP (0.967 AUC)',
-      m2: '13.8 ms / 640x640',
-      m3: 'THERMAL HAZARD: ACTIVE',
-      status: 'FPS: 41.2 • CNN Dual Classification'
-    },
-    pose: {
-      bbox: { x: 105, y: 20, width: 110, height: 105 },
-      label: 'POSE RISK: 86.8%',
-      meta: 'v=Δd/Δt | Score: 78.4',
-      color: 'oklch(70% 0.12 188)',
-      m1: '86.8% mAP (0.891 AUC)',
-      m2: '16.4 ms / YOLO-Pose',
-      m3: 'CONCEAL PROXIMITY: <45px',
-      status: 'FPS: 34.0 • Exponential Score Decay'
-    },
-    gemini: {
-      bbox: { x: 60, y: 35, width: 190, height: 80 },
-      label: 'GEMINI 2.0: BILINGUAL',
-      meta: 'Kannada/Eng Rubric',
-      color: 'oklch(72% 0.14 148)',
-      m1: '94.2% Rubric Scoring',
-      m2: '180 ms Latency',
-      m3: 'SPEECH AUDIO: TRANSCRIBED',
-      status: 'Digitaltransols AI Platform Core'
-    }
-  };
-
-  const channelKeys = ['weapon', 'fire', 'pose', 'gemini'];
-  let currentChannelIdx = 0;
-
-  const deckTabs = document.querySelectorAll('.deck-tab');
-  const bboxRect = document.getElementById('specimen-bbox');
-  const tagBg = document.getElementById('specimen-tag-bg');
-  const labelText = document.getElementById('specimen-label');
-  const metaText = document.getElementById('specimen-meta-text');
-  const centroidCircle = document.getElementById('specimen-centroid');
-  const m1Span = document.getElementById('telemetry-m1');
-  const m2Span = document.getElementById('telemetry-m2');
-  const m3Span = document.getElementById('telemetry-m3');
-  const statusSpan = document.getElementById('telemetry-status-text');
-  const cycleBtn = document.getElementById('btn-cycle-telemetry');
-
-  function applyTelemetryChannel(key) {
-    const data = telemetryChannels[key];
-    if (!data) return;
-
-    deckTabs.forEach(tab => {
-      tab.classList.toggle('active', tab.getAttribute('data-channel') === key);
-    });
-
-    if (bboxRect) {
-      bboxRect.setAttribute('x', data.bbox.x);
-      bboxRect.setAttribute('y', data.bbox.y);
-      bboxRect.setAttribute('width', data.bbox.width);
-      bboxRect.setAttribute('height', data.bbox.height);
-      bboxRect.setAttribute('stroke', data.color);
-      bboxRect.setAttribute('fill', data.color.replace(')', ' / 0.1)'));
-    }
-
-    if (tagBg) {
-      tagBg.setAttribute('x', data.bbox.x);
-      tagBg.setAttribute('y', Math.max(8, data.bbox.y - 17));
-      tagBg.setAttribute('fill', data.color);
-    }
-
-    if (labelText) {
-      labelText.setAttribute('x', data.bbox.x + 5);
-      labelText.setAttribute('y', Math.max(20, data.bbox.y - 5));
-      labelText.textContent = data.label;
-    }
-
-    if (metaText) {
-      metaText.textContent = data.meta;
-      metaText.setAttribute('fill', data.color);
-    }
-
-    if (centroidCircle) {
-      centroidCircle.setAttribute('cx', data.bbox.x + data.bbox.width / 2);
-      centroidCircle.setAttribute('cy', data.bbox.y + data.bbox.height / 2);
-      centroidCircle.setAttribute('fill', data.color);
-    }
-
-    if (m1Span) m1Span.textContent = data.m1;
-    if (m2Span) m2Span.textContent = data.m2;
-    if (m3Span) {
-      m3Span.textContent = data.m3;
-      m3Span.style.color = data.color;
-    }
-    if (statusSpan) statusSpan.textContent = data.status;
-  }
-
-  deckTabs.forEach((tab, idx) => {
-    tab.addEventListener('click', () => {
-      currentChannelIdx = idx;
-      applyTelemetryChannel(tab.getAttribute('data-channel'));
-    });
-  });
-
-  if (cycleBtn) {
-    cycleBtn.addEventListener('click', () => {
-      currentChannelIdx = (currentChannelIdx + 1) % channelKeys.length;
-      applyTelemetryChannel(channelKeys[currentChannelIdx]);
-    });
-  }
-
   // Project Modals
   const projectData = {
     'intelli-eye': {
@@ -496,8 +374,9 @@ manager.show_solution(maze.id)`,
   const pdfIframe = document.getElementById('pdf-iframe');
 
   function openPdfModal() {
-    if (pdfIframe && !pdfIframe.src) {
-      pdfIframe.src = 'assets/intelli-eye-paper.pdf';
+    const pdfPath = 'assets/intelli-eye-paper.pdf';
+    if (pdfIframe && (!pdfIframe.src || !pdfIframe.src.endsWith(pdfPath))) {
+      pdfIframe.src = pdfPath;
     }
     if (pdfModalBackdrop) {
       pdfModalBackdrop.classList.add('active');

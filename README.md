@@ -105,7 +105,7 @@ Mohan PF/
 ├── css/
 │   └── style.css                   # Comprehensive design system, themes, and layouts
 ├── js/
-│   └── main.js                     # Core interactivity, telemetry console, and modals
+│   └── main.js                     # Core interactivity, theme toggle, and modals
 ├── _headers                        # Static HTTP security headers for Netlify / Cloudflare
 ├── google-apps-script.js           # Serverless backend script for Google Sheets & Gmail alerts
 ├── GOOGLE_SHEETS_SETUP.md          # Step-by-step setup documentation for the contact webhook

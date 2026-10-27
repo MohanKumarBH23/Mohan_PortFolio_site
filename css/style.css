@@ -488,7 +488,7 @@ button, input, textarea, select {
 }
 
 /* ==========================================================================
-   HERO SECTION: Architectural Lead & Interactive Telemetry Console
+   HERO SECTION: Architectural Lead
    ========================================================================== */
 .hero-section {
   padding-top: calc(var(--nav-height) + 56px);
@@ -499,7 +499,7 @@ button, input, textarea, select {
 
 .hero-grid {
   display: grid;
-  grid-template-columns: 1.15fr 1fr;
+  grid-template-columns: 1.15fr 0.85fr;
   gap: clamp(32px, 5vw, 64px);
   align-items: center;
 }
@@ -595,201 +595,30 @@ button, input, textarea, select {
   margin-top: 8px;
 }
 
-/* ==========================================================================
-   HERO TELEMETRY DECK: Real-Time Model & Research Specimen Console
-   Replaces the generic 3D Midjourney cartoon avatar with authentic engineering
-   ========================================================================== */
-.telemetry-deck {
-  background: var(--bg-surface);
-  border: 1px solid var(--border-strong);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-lg);
-  overflow: hidden;
+/* Hero Avatar */
+.hero-avatar-panel {
   display: flex;
-  flex-direction: column;
-}
-
-.deck-header {
-  padding: 10px 16px;
-  background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border-subtle);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.deck-dots {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.deck-dot {
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: var(--border-strong);
-}
-.deck-dot.red { background: #ef4444; }
-.deck-dot.yellow { background: #eab308; }
-.deck-dot.green { background: #22c55e; }
-
-.deck-title-group {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  color: var(--text-muted);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.deck-badge-live {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  padding: 2px 7px;
-  border-radius: var(--radius-xs);
-  background: oklch(70% 0.12 188 / 0.12);
-  color: var(--color-patina);
-  font-size: 0.6875rem;
-  font-weight: 600;
-  border: 1px solid oklch(70% 0.12 188 / 0.25);
-}
-
-/* Channel Tabs (Instrument Control Strip) */
-.deck-tabs {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  background: var(--bg-secondary);
-  border-bottom: 1px solid var(--border-subtle);
-}
-
-.deck-tab {
-  padding: 8px 6px;
-  background: transparent;
-  border: none;
-  border-right: 1px solid var(--border-subtle);
-  font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  color: var(--text-muted);
-  cursor: pointer;
-  text-align: center;
-  transition: all var(--transition-fast);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.deck-tab:last-child {
-  border-right: none;
-}
-
-.deck-tab:hover {
-  background: var(--bg-surface);
-  color: var(--text-primary);
-}
-
-.deck-tab.active {
-  background: var(--bg-surface);
-  color: var(--color-kinpaku);
-  font-weight: 600;
-  border-bottom: 2px solid var(--color-kinpaku);
-}
-
-/* Screen Viewport */
-.deck-screen {
-  padding: 16px;
-  position: relative;
-  min-height: 220px;
-  background: var(--bg-well);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.screen-canvas-box {
-  width: 100%;
-  height: 150px;
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-xs);
-  background: oklch(4% 0.003 95);
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
 }
 
-[data-theme="light"] .screen-canvas-box {
-  background: oklch(14% 0.018 95);
+.hero-avatar-frame {
+  position: relative;
+  max-width: 380px;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid var(--border-gold);
+  box-shadow: var(--shadow-lg);
+  background: var(--bg-surface);
 }
 
-/* Simulated Vector Bounding Box Overlay */
-.specimen-svg {
+.hero-avatar-img {
   width: 100%;
   height: 100%;
-}
-
-.deck-readouts {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
-  margin-top: 12px;
-}
-
-.deck-stat-chip {
-  padding: 6px 10px;
-  border-radius: var(--radius-xs);
-  background: var(--bg-surface);
-  border: 1px solid var(--border-subtle);
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.deck-stat-label {
-  font-family: var(--font-mono);
-  font-size: 0.625rem;
-  text-transform: uppercase;
-  color: var(--text-muted);
-  letter-spacing: 0.05em;
-}
-
-.deck-stat-val {
-  font-family: var(--font-mono);
-  font-size: 0.8125rem;
-  font-weight: 600;
-  color: var(--text-primary);
-}
-
-.deck-footer {
-  padding: 10px 16px;
-  background: var(--bg-secondary);
-  border-top: 1px solid var(--border-subtle);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  color: var(--text-muted);
-}
-
-.deck-interactive-btn {
-  background: var(--bg-surface);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-xs);
-  color: var(--text-secondary);
-  padding: 4px 10px;
-  cursor: pointer;
-  font-family: var(--font-mono);
-  font-size: 0.6875rem;
-  transition: all var(--transition-fast);
-}
-
-.deck-interactive-btn:hover {
-  background: var(--bg-surface-elevated);
-  color: var(--color-kinpaku);
-  border-color: var(--border-gold);
+  object-fit: cover;
+  display: block;
 }
 
 /* ==========================================================================
@@ -808,6 +637,8 @@ button, input, textarea, select {
   font-size: var(--text-base);
   color: var(--text-secondary);
   line-height: 1.72;
+  text-align: justify;
+  text-justify: inter-word;
 }
 
 .about-thesis strong {
@@ -1602,8 +1433,9 @@ button, input, textarea, select {
 
 /* PDF Modal Container */
 .pdf-modal-container {
-  max-width: 1080px;
-  height: 88vh;
+  max-width: 1120px;
+  width: 95vw;
+  height: 90vh;
   display: flex;
   flex-direction: column;
   padding: 0;
@@ -1611,18 +1443,21 @@ button, input, textarea, select {
 }
 
 .pdf-modal-header {
-  padding: 14px 20px;
+  padding: 12px 20px;
   background: var(--bg-secondary);
   border-bottom: 1px solid var(--border-subtle);
   display: flex;
   align-items: center;
   justify-content: space-between;
+  flex-shrink: 0;
+  gap: 12px;
 }
 
 .pdf-modal-title-group {
   display: flex;
   align-items: center;
   gap: 12px;
+  min-width: 0;
 }
 
 .pdf-modal-title {
@@ -1630,18 +1465,54 @@ button, input, textarea, select {
   font-size: 1.25rem;
   font-weight: 400;
   color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .pdf-modal-actions {
   display: flex;
   align-items: center;
   gap: 10px;
+  flex-shrink: 0;
+}
+
+.pdf-modal-header .modal-close-btn {
+  position: static;
+  margin-left: 2px;
+  flex-shrink: 0;
 }
 
 .pdf-frame-wrapper {
   flex: 1;
   width: 100%;
+  height: 100%;
+  position: relative;
   background: #1e1e1e;
+  display: flex;
+  flex-direction: column;
+}
+
+.pdf-frame-wrapper iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+  flex: 1;
+}
+
+.pdf-fallback-banner {
+  padding: 10px 16px;
+  background: var(--bg-surface);
+  border-top: 1px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-size: var(--text-xs);
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
 }
 
 /* ==========================================================================
@@ -1734,6 +1605,9 @@ button, input, textarea, select {
   .hero-grid {
     grid-template-columns: 1fr;
     gap: 40px;
+  }
+  .hero-avatar-frame {
+    max-width: 320px;
   }
   .featured-project-card {
     grid-template-columns: 1fr;
