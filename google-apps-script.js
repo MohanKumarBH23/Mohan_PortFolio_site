@@ -1,31 +1,51 @@
 /**
  * ==============================================================================
  * Google Apps Script for Mohan Kumar B.H Portfolio Contact Form
- * Destination: Saves submissions to Google Sheets & sends email notifications
+ * Destination Sheet: https://docs.google.com/spreadsheets/d/1WrptqgCnLYrPDP3fhgjWs-Je9qzoWT9QesasZB1m6jY/edit
  * Target Notification: mohankumarbh007@gmail.com
  * ==============================================================================
  */
+
+// Mohan's designated Google Sheet ID
+var SPREADSHEET_ID = "1WrptqgCnLYrPDP3fhgjWs-Je9qzoWT9QesasZB1m6jY";
+
+function doGet(e) {
+  return ContentService
+    .createTextOutput(JSON.stringify({ 
+      "status": "online", 
+      "sheetId": SPREADSHEET_ID,
+      "message": "Mohan's Portfolio Webhook is ready to accept inquiries." 
+    }))
+    .setMimeType(ContentService.MimeType.JSON);
+}
 
 function doPost(e) {
   var lock = LockService.getScriptLock();
   lock.tryLock(10000); // Prevent concurrent write race conditions
 
   try {
-    var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+    var spreadsheet;
+    try {
+      spreadsheet = SpreadsheetApp.getActiveSpreadsheet() || SpreadsheetApp.openById(SPREADSHEET_ID);
+    } catch (sheetErr) {
+      spreadsheet = SpreadsheetApp.openById(SPREADSHEET_ID);
+    }
+    var sheet = spreadsheet.getActiveSheet();
 
     // If the sheet is brand new/empty, automatically configure the header row
     if (sheet.getLastRow() === 0) {
       sheet.appendRow([
-        "Timestamp",
+        "Timestamp (IST)",
         "Sender Name",
         "Sender Email",
         "Purpose of Inquiry",
         "Message",
-        "Client Submitted Time"
+        "Reference ID",
+        "Client Submission Time"
       ]);
 
       // Style header row
-      var headerRange = sheet.getRange(1, 1, 1, 6);
+      var headerRange = sheet.getRange(1, 1, 1, 7);
       headerRange.setFontWeight("bold");
       headerRange.setBackground("#0f172a");
       headerRange.setFontColor("#f8fafc");
@@ -50,6 +70,7 @@ function doPost(e) {
     var email = (data.email || "No Email Provided").toString().trim();
     var subject = (data.subject || "General Portfolio Inquiry").toString().trim();
     var message = (data.message || "No message body provided.").toString().trim();
+    var refId = (data.reference_id || data.refId || "INQ-WEB").toString().trim();
     var clientTime = data.timestamp ? data.timestamp.toString() : now.toISOString();
 
     // Format IST Timestamp for Indian Standard Time
@@ -62,6 +83,7 @@ function doPost(e) {
       email,
       subject,
       message,
+      refId,
       clientTime
     ]);
 

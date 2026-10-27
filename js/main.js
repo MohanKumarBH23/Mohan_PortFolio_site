@@ -545,6 +545,29 @@ class AI:
       submitBtn.innerHTML = originalBtnHTML;
     }
 
+    // Google Apps Script Web App Endpoint for Sheet: https://docs.google.com/spreadsheets/d/1WrptqgCnLYrPDP3fhgjWs-Je9qzoWT9QesasZB1m6jY
+    const GOOGLE_APPS_SCRIPT_URL = '';
+
+    const payload = {
+      name,
+      email,
+      subject: subject || 'General Portfolio Inquiry',
+      message,
+      reference_id: refId,
+      timestamp: dateFormatted
+    };
+
+    // 1. Dispatch directly to Google Sheet via Google Apps Script Webhook
+    if (GOOGLE_APPS_SCRIPT_URL && GOOGLE_APPS_SCRIPT_URL.startsWith('https://script.google.com')) {
+      fetch(GOOGLE_APPS_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      }).catch(err => console.warn('Google Sheets webhook notice:', err));
+    }
+
+    // 2. Email Notification Pipeline
     fetch('https://formsubmit.co/ajax/mohankumarbh007@gmail.com', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
