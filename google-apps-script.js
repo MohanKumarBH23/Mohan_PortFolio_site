@@ -91,13 +91,13 @@ function doPost(e) {
           '</tr>' +
         '</table>' +
         
-        '<div style="background-color: #f8fafc; border-left: 4px solid #f43f5e; padding: 16px 20px; border-radius: 6px; margin-bottom: 24px;">' +
+        '<div style="background-color: #f8fafc; border: 1px solid #e2e8f0; padding: 18px 20px; border-radius: 6px; margin-bottom: 24px;">' +
           '<h4 style="margin: 0 0 10px; color: #475569; font-size: 12px; text-transform: uppercase; letter-spacing: 0.8px;">Message Content:</h4>' +
           '<p style="margin: 0; color: #1e293b; font-size: 15px; line-height: 1.6; white-space: pre-wrap;">' + message + '</p>' +
         '</div>' +
         
         '<div style="text-align: center; padding-top: 16px; border-top: 1px solid #e2e8f0;">' +
-          '<a href="mailto:' + email + '?subject=' + encodeURIComponent('Re: ' + subject) + '" style="display: inline-block; background-color: #f43f5e; color: #ffffff; text-decoration: none; padding: 12px 28px; border-radius: 8px; font-weight: 600; font-size: 14px;">Reply Directly to ' + name + '</a>' +
+          '<a href="mailto:' + email + '?subject=' + encodeURIComponent('Re: ' + subject) + '" style="display: inline-block; background-color: #141312; color: #f0b938; text-decoration: none; padding: 12px 28px; border-radius: 4px; font-weight: 600; font-size: 14px; border: 1px solid #d9a028;">Reply Directly to ' + name + '</a>' +
         '</div>' +
       '</div>';
 

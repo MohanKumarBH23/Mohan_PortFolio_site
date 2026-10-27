@@ -105,9 +105,7 @@ Mohan PF/
 ├── css/
 │   └── style.css                   # Comprehensive design system, themes, and layouts
 ├── js/
-│   ├── main.js                     # Core interactivity, modal manager, and contact logic
-│   ├── particles.js                # Ambient neural network particle canvas simulation
-│   └── security.js                 # SecurityGuard module (Anti-XSS, rate limiting, honeypot)
+│   └── main.js                     # Core interactivity, telemetry console, and modals
 ├── _headers                        # Static HTTP security headers for Netlify / Cloudflare
 ├── google-apps-script.js           # Serverless backend script for Google Sheets & Gmail alerts
 ├── GOOGLE_SHEETS_SETUP.md          # Step-by-step setup documentation for the contact webhook
