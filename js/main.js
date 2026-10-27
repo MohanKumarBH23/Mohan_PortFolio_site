@@ -257,6 +257,8 @@ def compute_music_recommendations(user_song_vector, music_db_df, top_k=5):
         { label: 'License', value: 'MIT Open Source' }
       ],
       image: 'assets/maze_solution.png',
+      imageTitle: 'Visual Traversal Preview',
+      imageCaption: 'Shortest Path (BFS) Visualized on 2D Cellular Grid',
       codeSnippet: `# Maze-Runner-Py: Procedural Generation & Pathfinding Pipeline Excerpt
 from src.maze_manager import MazeManager
 from src.maze import Maze
@@ -268,6 +270,68 @@ manager.set_filename("maze_solution_output")
 manager.show_solution_animation(maze.id)
 manager.show_solution(maze.id)`,
       githubUrl: 'https://github.com/MohanKumarBH23/Maze-Runner-Py'
+    },
+    'pychess': {
+      title: 'PyChess: Minimax Autonomous AI & Neo Kinpaku Engine',
+      badge: 'Autonomous AI & Game Theory Search',
+      category: 'Python 3.10+ • Minimax with Alpha-Beta Pruning • FIDE Rules • Pygame GUI',
+      overview: 'A high-performance desktop chess application engineered with strict separation between board state representation, FIDE-standard move validation, autonomous heuristic search, and an artisanal visual interface. Features recursive Minimax adversarial search up to depth 3 with alpha-beta branch pruning, evaluating material balances, piece mobility rays, and king safety.',
+      architecture: [
+        'Adversarial Search Core: Recursive Minimax algorithm exploring move permutations up to depth 3 with Alpha-Beta pruning (alpha >= beta) for exponential branch reduction and sub-second decision making',
+        'Heuristic Evaluation Matrix: Composite board scoring combining Shannon piece weights (P:100, N:320, B:330, R:500, Q:900, K:20000), square-table center bias, and piece mobility counts',
+        'FIDE Move Validation State Machine: Strict rule enforcement for legal moves, pinned pieces (pinnedw, pinnedb), castling (kingside/queenside), pawn promotion, en passant, check, and checkmate/stalemate detection',
+        'Dual Game Modes: Adversarial Human vs Autonomous Minimax AI and over-the-board local Pass & Play (2 Player)',
+        'Impeccable Neo Kinpaku Interface: Bespoke Pygame GUI with warm obsidian lacquer (#101113), champagne gold leaf anchors (#D4AF37), bilinear anti-aliased sprites, move indicator rings, and in-place promotion modals'
+      ],
+      metrics: [
+        { label: 'Search Lookahead', value: 'Depth 3' },
+        { label: 'Pruning Algorithm', value: 'Alpha-Beta' },
+        { label: 'Rules Compliance', value: 'FIDE Standard' },
+        { label: 'Engine', value: 'Pure Python' },
+        { label: 'UI Engine', value: 'Pygame >= 2.6' },
+        { label: 'Game Modes', value: 'PvAI & PvP' }
+      ],
+      image: 'assets/ai_chess_board.png',
+      imageTitle: 'Pygame Chess Engine & Board Interface',
+      imageCaption: 'Real-Time Match Interface with Move Selection & Legal Path Highlighting',
+      codeSnippet: `# PyChess: Minimax Search with Alpha-Beta Pruning (player/AI.py Excerpt)
+class AI:
+    def minimax(self, gametiles, depth, alpha, beta, player):
+        if depth == 0 or self.checkmate(gametiles) or self.stalemate(gametiles, player):
+            return self.calculateb(gametiles)
+
+        if not player:  # Minimizing AI (Black)
+            minEval = 100000000
+            kp, ks = self.eva(gametiles, player)
+            for lk in kp:
+                for move in lk:
+                    mts = gametiles[move[2]][move[3]].pieceonTile
+                    gametiles = self.move(gametiles, move[0], move[1], move[2], move[3])
+                    evalk = self.minimax(gametiles, depth - 1, alpha, beta, True)
+                    if evalk < minEval and depth == 3:
+                        self.tp.clear()
+                        self.tp.append(move)
+                    minEval = min(minEval, evalk)
+                    beta = min(beta, evalk)
+                    gametiles = self.revmove(gametiles, move[2], move[3], move[0], move[1], mts)
+                    if beta <= alpha:  # Alpha-beta branch cut-off
+                        break
+            return minEval
+        else:  # Maximizing Human (White)
+            maxEval = -100000000
+            kp, ks = self.eva(gametiles, player)
+            for lk in ks:
+                for move in lk:
+                    mts = gametiles[move[2]][move[3]].pieceonTile
+                    gametiles = self.movew(gametiles, move[0], move[1], move[2], move[3])
+                    evalk = self.minimax(gametiles, depth - 1, alpha, beta, False)
+                    maxEval = max(maxEval, evalk)
+                    alpha = max(alpha, evalk)
+                    gametiles = self.revmove(gametiles, move[2], move[3], move[0], move[1], mts)
+                    if beta <= alpha:
+                        break
+            return maxEval`,
+      githubUrl: 'https://github.com/MohanKumarBH23/AI-Chess-Bot'
     }
   };
 
@@ -317,10 +381,10 @@ manager.show_solution(maze.id)`,
 
       ${data.image ? `
       <div style="margin-bottom: 24px;">
-        <h4 style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); margin-bottom: 10px;">Visual Traversal Preview</h4>
+        <h4 style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); margin-bottom: 10px;">${data.imageTitle || 'Visual Interface & Runtime Preview'}</h4>
         <div style="background: var(--bg-well); border: 1px solid var(--border-subtle); border-radius: var(--radius-xs); padding: 16px; text-align: center;">
-          <img src="${data.image}" alt="${data.title}" style="max-width: 100%; max-height: 260px; border-radius: 4px; display: inline-block;" />
-          <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 10px; font-family: var(--font-mono);">Shortest Path (BFS) Visualized on 2D Cellular Grid</div>
+          <img src="${data.image}" alt="${data.title}" style="max-width: 100%; max-height: 300px; border-radius: 4px; display: inline-block; box-shadow: var(--shadow-sm);" />
+          <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 10px; font-family: var(--font-mono);">${data.imageCaption || 'Execution Preview'}</div>
         </div>
       </div>
       ` : ''}

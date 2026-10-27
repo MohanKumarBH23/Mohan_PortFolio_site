@@ -135,14 +135,21 @@ Mohan PF/
 - **Key Technologies**: `FastAPI`, `Next.js`, `Gemini 2.0 Flash`, `Speech Audio`, `Adaptive LLMs`
 - **Metrics**: Dual-language support (Kannada + English), automated PDF evaluation report generation.
 
-### 3. Personalized Music Recommendation System
+### 3. PyChess: Minimax Autonomous AI & Neo Kinpaku Engine
+- **Focus**: Autonomous AI, Heuristic Adversarial Search & Game Theory
+- **Repository**: [github.com/MohanKumarBH23/AI-Chess-Bot](https://github.com/MohanKumarBH23/AI-Chess-Bot)
+- **Description**: High-performance desktop chess application engineered with strict separation between board state representation, FIDE-standard move validation, autonomous heuristic search, and an artisanal visual interface. Features recursive Minimax adversarial search up to depth 3 with alpha-beta branch pruning, evaluating material balances, piece mobility rays, and king safety.
+- **Key Technologies**: `Python 3.10+`, `Pygame >= 2.6`, `Minimax Algorithm`, `Alpha-Beta Pruning`, `FIDE Move State Machine`, `Impeccable Neo Kinpaku`
+- **Metrics**: Depth-3 recursive lookahead, ~80% branch reduction via alpha-beta cut-offs, 60 FPS Pygame GUI, dual game modes (Player vs Autonomous AI & Pass-and-Play).
+
+### 4. Personalized Music Recommendation System
 - **Focus**: Machine Learning & Statistical Modeling
 - **Repository**: [github.com/MohanKumarBH23/Music-Recommendation-Agent](https://github.com/MohanKumarBH23/Music-Recommendation-Agent)
 - **Description**: Multi-tiered recommendation engine combining Collaborative and Content-Based Filtering with K-Means clustering. Analyzes acoustic features from the Spotify Web API with PCA (retaining 95% variance) and t-SNE for dimensional projection and Cosine Similarity ranking.
 - **Key Technologies**: `Scikit-learn`, `Pandas`, `Spotify API`, `PCA`, `t-SNE`, `Seaborn / Plotly`
 - **Metrics**: Sub-second Cosine Similarity candidate generation across multi-thousand track datasets.
 
-### 4. Maze-Runner-Py: Procedural 2D Maze & Pathfinding Framework
+### 5. Maze-Runner-Py: Procedural 2D Maze & Pathfinding Framework
 - **Focus**: Graph Search Algorithms, Procedural Generation & Simulation
 - **Repository**: [github.com/MohanKumarBH23/Maze-Runner-Py](https://github.com/MohanKumarBH23/Maze-Runner-Py)
 - **Description**: Modular Python framework for procedural 2D maze generation (Depth-First Search Backtracking, Binary Tree) and intelligent graph search pathfinding (guaranteed shortest-path BFS, DFS, and simultaneous Bi-Directional search) with dynamic frame-by-frame Matplotlib animated visualizations.
