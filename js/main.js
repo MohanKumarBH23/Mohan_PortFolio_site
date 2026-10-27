@@ -56,7 +56,7 @@ function toggleTheme() {
   root.setAttribute('data-theme', nextTheme);
   try {
     localStorage.setItem('mohan_theme', nextTheme);
-  } catch (err) {}
+  } catch (err) { }
   showToast(`Switched to ${nextTheme === 'light' ? 'Washi Paper & Sumi Ink' : 'Dark Mineral Lacquer'}`);
 }
 
@@ -522,7 +522,7 @@ class AI:
       const stored = JSON.parse(localStorage.getItem('mohan_portfolio_inquiries') || '[]');
       stored.unshift({ id: refId, name, email, subject: subject || 'General Portfolio Inquiry', message, timestamp, dateFormatted });
       localStorage.setItem('mohan_portfolio_inquiries', JSON.stringify(stored.slice(0, 50)));
-    } catch (storageErr) {}
+    } catch (storageErr) { }
 
     formStatus.className = 'form-status success';
     formStatus.style.display = 'block';
@@ -546,7 +546,7 @@ class AI:
     }
 
     // Google Apps Script Web App Endpoint for Sheet: https://docs.google.com/spreadsheets/d/1WrptqgCnLYrPDP3fhgjWs-Je9qzoWT9QesasZB1m6jY
-    const GOOGLE_APPS_SCRIPT_URL = '';
+    const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxfedfx6d6SaB4y00f68BEISftfM4x4siy4FOSXBqbKUfnmzImQgTAW_qWYfUxtdd--/exec';
 
     const payload = {
       name,
