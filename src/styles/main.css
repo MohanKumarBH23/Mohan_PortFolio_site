@@ -1,0 +1,95 @@
+/* ==========================================================================
+   MAIN STYLESHEET ENTRYPOINT
+   Mohan Kumar B.H | Machine Learning & Edge AI Engineering Portfolio
+   ========================================================================== */
+@import url('./tokens.css');
+@import url('./base.css');
+@import url('./components.css');
+@import url('./layout.css');
+@import url('./sections.css');
+
+/* ==========================================================================
+   RESPONSIVE DESIGN & REDUCED MOTION
+   ========================================================================== */
+@media (max-width: 1024px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .hero-avatar-frame {
+    max-width: 320px;
+  }
+
+  .featured-project-card {
+    grid-template-columns: 1fr;
+  }
+
+  .sub-projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .skills-taxonomy-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .theme-toggle,
+  .mobile-nav-toggle,
+  .modal-close-btn,
+  .copy-btn {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .nav-menu {
+    position: fixed;
+    top: var(--nav-height);
+    left: 0;
+    width: 100%;
+    background: var(--bg-surface);
+    border-bottom: 1px solid var(--border-subtle);
+    flex-direction: column;
+    padding: 24px;
+    gap: 18px;
+    display: none;
+  }
+
+  .nav-menu.open {
+    display: flex;
+  }
+
+  [data-theme="light"] .nav-menu {
+    background: #0A192F;
+    border-bottom: 1px solid rgba(240, 90, 72, 0.25);
+  }
+
+  .mobile-nav-toggle {
+    display: block;
+  }
+
+  .about-grid,
+  .timeline-dual-grid,
+  .contact-layout-grid,
+  .form-row,
+  .sub-projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pub-metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+

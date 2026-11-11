@@ -1,14 +1,14 @@
 {
-  "name": "♞ MOHAN KUMAR",
-  "short_name": "♞ MOHAN KUMAR",
+  "name": "MOHAN KUMAR B.H",
+  "short_name": "MOHAN KUMAR",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#000000",
-  "theme_color": "#000000",
+  "background_color": "#121110",
+  "theme_color": "#121110",
   "description": "Portfolio of Mohan Kumar B.H, B.Tech CSE (AIML) graduate from Sai Vidya Institute of Technology.",
   "icons": [
     {
-      "src": "assets/mohan-avatar.jpg",
+      "src": "assets/images/mohan-avatar.jpg",
       "sizes": "512x512",
       "type": "image/jpeg"
     }
