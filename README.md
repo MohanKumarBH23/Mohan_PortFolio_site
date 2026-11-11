@@ -88,6 +88,7 @@ Mohan PF/
 │   └── design-system/MASTER.md       # Extended design reference
 │
 ├── scripts/
+│   ├── build-dist.mjs                # Stages deployable static files into dist/
 │   └── generate-env.mjs              # Zero-dependency .env -> runtimeEnv.js generator
 │
 ├── src/
@@ -149,7 +150,8 @@ npm run serve:py
 ### Build Runtime Config & Run Test Suite
 
 ```bash
-# Regenerate runtime environment config from .env / defaults
+# Regenerate runtime environment config & build static dist/
+npm run env:build
 npm run build
 
 # Run automated unit & integration tests (Node.js native test runner)
@@ -160,7 +162,7 @@ npm test
 
 ## Production Deployment
 
-- **Vercel**: Import repository directly; [`vercel.json`](vercel.json) configures strict CSP, HSTS, and long-lived asset caching. Optionally set build command to `npm run build` and output directory to `.`.
+- **Vercel**: Import repository directly; [`vercel.json`](vercel.json) sets `framework: null`, skips unnecessary `npm install` (`installCommand: ""`), builds the clean static output via `node scripts/build-dist.mjs`, sets `outputDirectory` to `dist`, and enforces strict CSP, HSTS, and long-lived asset caching.
 - **Netlify**: [`netlify.toml`](netlify.toml) automatically runs `npm run env:build`, publishes `.`, and enforces edge security headers.
 - **GitHub Pages**: Serve directly from `main` `/ (root)` after committing generated `src/config/runtimeEnv.js` (keeping secrets out of git).
 

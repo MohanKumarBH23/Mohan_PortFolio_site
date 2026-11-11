@@ -108,7 +108,12 @@ export function buildRuntimePayload(defaults, env) {
   };
 }
 
-function main() {
+/**
+ * Generates `src/config/runtimeEnv.js` by merging defaults, `.env`, and `process.env`.
+ *
+ * @returns {string} Path to the generated `runtimeEnv.js` file.
+ */
+export function generateRuntimeEnv() {
   if (!fs.existsSync(DEFAULTS_PATH)) {
     throw new Error(`Missing defaults file at ${DEFAULTS_PATH}`);
   }
@@ -139,9 +144,10 @@ function main() {
   fs.mkdirSync(path.dirname(OUTPUT_PATH), { recursive: true });
   fs.writeFileSync(OUTPUT_PATH, fileHeader, 'utf8');
   console.log(`Generated ${path.relative(ROOT_DIR, OUTPUT_PATH)} successfully.`);
+  return OUTPUT_PATH;
 }
 
 if (process.argv[1] && path.resolve(process.argv[1]) === __filename) {
-  main();
+  generateRuntimeEnv();
 }
 

@@ -1,9 +1,11 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import { buildDist } from '../scripts/build-dist.mjs';
 import { PROFILE } from '../src/data/profile.js';
 import { PUBLICATIONS } from '../src/data/publications.js';
 import { PROJECTS } from '../src/data/projects.js';
@@ -96,8 +98,28 @@ describe('Static Assets, Module Graph & CSP Smoke Verification', () => {
 
   it('verifies deployment configs are valid and reference current folders', () => {
     const vercel = JSON.parse(fs.readFileSync(path.join(ROOT_DIR, 'vercel.json'), 'utf8'));
+    assert.equal(vercel.framework, null);
+    assert.equal(vercel.installCommand, '');
+    assert.equal(vercel.buildCommand, 'node scripts/build-dist.mjs');
+    assert.equal(vercel.outputDirectory, 'dist');
     const sources = (vercel.headers || []).map((h) => h.source);
     assert.ok(sources.includes('/assets/(.*)'));
     assert.ok(sources.includes('/src/(.*)'));
+  });
+
+  it('builds a clean static distribution excluding repo internals', () => {
+    const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'mohan-pf-dist-'));
+    try {
+      const outDir = path.join(tmpDir, 'dist');
+      buildDist({ outDir });
+      assert.equal(fs.existsSync(path.join(outDir, 'index.html')), true);
+      assert.equal(fs.existsSync(path.join(outDir, 'src/config/runtimeEnv.js')), true);
+      assert.equal(fs.existsSync(path.join(outDir, 'assets/documents/Mohan_Resume.pdf')), true);
+      assert.equal(fs.existsSync(path.join(outDir, 'package.json')), false);
+      assert.equal(fs.existsSync(path.join(outDir, 'tests')), false);
+      assert.equal(fs.existsSync(path.join(outDir, 'scripts')), false);
+    } finally {
+      fs.rmSync(tmpDir, { recursive: true, force: true });
+    }
   });
 });
