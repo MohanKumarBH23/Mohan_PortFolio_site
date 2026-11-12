@@ -143,6 +143,77 @@ async def evaluate_candidate(audio: UploadFile, language: str = "kannada", rubri
     }
   },
   {
+    id: 'deltacheck',
+    featured: false,
+    categoryKey: 'llm',
+    domainTag: 'AI Agents • Temporal RAG & Search',
+    cardTitle: 'DeltaCheck: Temporal Web Search & Memory Agent',
+    cardSummary:
+      'TypeScript web search and episodic memory chat agent with a custom web console and CLI REPL. Deterministically resolves relative dates against the system clock, recalls user-isolated conversation baselines, runs parallel web searches (Tavily/Brave), and streams source-cited differential answers over SSE.',
+    cardTags: [
+      'TypeScript',
+      'Node.js',
+      'OpenAI GPT-4o',
+      'Tavily & Brave API',
+      'SSE Streaming',
+      'AES-256-GCM'
+    ],
+    cardMeta: '2026 • Open Source',
+    ctaLabel: 'Case Study',
+    githubUrl: 'https://github.com/MohanKumarBH23/Chat-Boot',
+    modal: {
+      title: 'DeltaCheck: Temporal Web Search & Episodic Memory Chat Agent',
+      badge: 'AI Agents & Secure Full-Stack Architecture',
+      category: 'TypeScript • Node.js 20+ • OpenAI GPT-4o • Tavily/Brave Search • SSE',
+      overview:
+        'A TypeScript web search and episodic memory chat agent featuring a modular web interface and CLI REPL. Resolves explicit and relative dates deterministically against the system clock, recalls matching prior turns from user-scoped JSON storage, fans out parallel web queries, and synthesizes cited answers comparing past baselines against current results.',
+      architecture: [
+        'Stage 1 — Temporal Grounding & Routing: resolveTemporalAnchor deterministically parses explicit dates, offsets ("N days ago", "yesterday"), and weekdays, then recalls tenant-isolated turns from MemoryStore',
+        'Stage 2 — Parallel Search & Deduplication: Dispatches 1–3 planned queries concurrently via Promise.all across ISearchClient (TavilySearchClient, BraveSearchClient, or offline MockSearchClient) with abort timeouts and canonical URL deduplication',
+        'Stage 3 — Differential Synthesis & Streaming: Contrasts prior conversation baselines against retrieved snippets via GPT-4o (or deterministic fallback) with markdown citations streamed over SSE',
+        'Security & Auth Layer: Dual-mounted /api/v1/* router with salted scrypt password hashing, HTTP-only SameSite-Strict HMAC sessions, CSRF tokens, RBAC admin diagnostics, and optional AES-256-GCM storage encryption',
+        'Dual Runtime Interfaces: Modular web console (ESM store + inspector modals) paired with a CLI REPL and --eval dry-run harness'
+      ],
+      metrics: [
+        { label: 'Agent Pipeline', value: '3-Stage SSE' },
+        { label: 'Search Fan-Out', value: 'Tavily / Brave' },
+        { label: 'LLM Synthesizer', value: 'OpenAI GPT-4o' },
+        { label: 'At-Rest Security', value: 'AES-256-GCM' },
+        { label: 'Auth Layer', value: 'scrypt + HMAC' },
+        { label: 'License', value: 'MIT Open Source' }
+      ],
+      codeSnippet: `// DeltaCheck: Three-Stage Agent Pipeline (src/services/agent/searchAgent.ts)
+async processWithEvents(
+  userMessage: string,
+  conversationId = 'default-cli-session',
+  onEvent?: (event: StreamEvent) => void,
+  ownerId?: string
+): Promise<AgentResponse> {
+  const cleanUserMessage = sanitizeText(userMessage, 4000, true);
+  if (!cleanUserMessage) {
+    throw new ValidationError('Message content is required');
+  }
+
+  const startTime = Date.now();
+  const decision = await this.stage1Route(cleanUserMessage, conversationId, ownerId);
+  onEvent?.({ type: 'stage', stage: 'route', decision });
+
+  let sources: SearchResult[] = [];
+  if (decision.requiresSearch && decision.searchQueries.length > 0) {
+    sources = await this.stage2Search(decision.searchQueries);
+  }
+  onEvent?.({ type: 'stage', stage: 'search', queries: decision.searchQueries, sources });
+
+  const content = await this.stage3Synthesize(cleanUserMessage, decision, sources);
+  const latencyMs = Date.now() - startTime;
+  this.recordTurn(conversationId, cleanUserMessage, content, decision, sources, latencyMs, ownerId);
+
+  return { content, sources, queries: decision.searchQueries, latencyMs, routerDecision: decision };
+}`,
+      githubUrl: 'https://github.com/MohanKumarBH23/Chat-Boot'
+    }
+  },
+  {
     id: 'pychess',
     featured: false,
     categoryKey: 'ai',

@@ -115,7 +115,11 @@ describe('Core Utilities & Business Services', () => {
 
     const projectService = createProjectService(PROJECTS);
     assert.equal(projectService.getFeaturedProject().id, 'intelli-eye');
-    assert.equal(projectService.getSecondaryProjects().length, 4);
+    assert.equal(projectService.getSecondaryProjects().length, 5);
+    assert.equal(
+      projectService.getProjectById('deltacheck').githubUrl,
+      'https://github.com/MohanKumarBH23/Chat-Boot'
+    );
     assert.throws(() => projectService.getProjectById('nonexistent'), NotFoundError);
 
     assert.equal(isNavbarScrolled(25), true);

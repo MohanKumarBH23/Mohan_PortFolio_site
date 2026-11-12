@@ -403,6 +403,10 @@
   gap: 24px;
 }
 
+.sub-projects-grid > .project-case-card:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+}
+
 .project-case-card {
   background: var(--bg-surface);
   border: 1px solid var(--border-subtle);
