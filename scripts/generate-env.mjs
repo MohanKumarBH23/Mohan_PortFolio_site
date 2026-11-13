@@ -96,11 +96,9 @@ export function buildRuntimePayload(defaults, env) {
       timeZone: defaults.contact.timeZone
     },
     storage: {
-      themeKey: env.THEME_STORAGE_KEY || defaults.storage.themeKey,
       inquiriesKey: env.INQUIRY_STORAGE_KEY || defaults.storage.inquiriesKey,
       cooldownKey: env.COOLDOWN_STORAGE_KEY || defaults.storage.cooldownKey
     },
-    theme: defaults.theme,
     environments: defaults.environments,
     overrides: {
       logLevel: env.LOG_LEVEL || null

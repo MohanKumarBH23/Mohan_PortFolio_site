@@ -8,7 +8,7 @@ export const PROJECTS = Object.freeze([
     id: 'intelli-eye',
     featured: true,
     categoryKey: 'vision',
-    domainTag: 'Featured IEEE Publication • Computer Vision & Edge AI',
+    domainTag: 'Featured IEEE Publication • Research Project',
     cardTitle: 'Intelli-Eye: Multi-Modal Threat Detection Pipeline',
     cardSummary:
       'A GPU-accelerated multi-modal surveillance architecture that executes concurrent threat classification. Combines fine-tuned YOLOv8 bounding-box detection for weapons, fire, and vehicle collisions with a YOLOv8-Pose skeletal tracking engine that calculates Euclidean keypoint velocity for shoplifting heuristics.',
@@ -232,7 +232,7 @@ async processWithEvents(
     ctaLabel: 'Case Study',
     githubUrl: 'https://github.com/MohanKumarBH23/AI-Chess-Bot',
     modal: {
-      title: 'PyChess: Minimax Autonomous AI & Neo Kinpaku Engine',
+      title: 'PyChess: Minimax Autonomous Chess Engine',
       badge: 'Autonomous AI & Game Theory Search',
       category: 'Python 3.10+ • Minimax with Alpha-Beta Pruning • FIDE Rules • Pygame GUI',
       overview:

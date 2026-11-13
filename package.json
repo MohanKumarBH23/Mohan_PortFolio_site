@@ -5,11 +5,33 @@
   "type": "module",
   "description": "Modular AI & ML Engineering Portfolio of Mohan Kumar B.H",
   "scripts": {
-    "start": "npx serve . -l 3000",
-    "dev": "npx serve . -l 3000",
-    "serve:py": "python -m http.server 8080",
+    "dev": "vite",
     "env:build": "node scripts/generate-env.mjs",
-    "build": "node scripts/build-dist.mjs",
-    "test": "node --test tests/*.test.mjs"
+    "build": "node scripts/generate-env.mjs && vite build && node scripts/copy-static.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.5",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.3.0",
+    "playwright": "^1.65.0",
+    "tailwindcss": "^4.3.5",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.8"
+  },
+  "dependencies": {
+    "@fontsource-variable/petrona": "^5.3.0",
+    "@fontsource/ibm-plex-mono": "^5.3.0",
+    "@fontsource/ibm-plex-sans": "^5.3.0",
+    "@fontsource/newsreader": "^5.3.0",
+    "clsx": "^2.1.1",
+    "lucide-react": "^1.72.0",
+    "motion": "^14.12.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "react-use-measure": "^2.1.7",
+    "tailwind-merge": "^3.7.0"
   }
 }

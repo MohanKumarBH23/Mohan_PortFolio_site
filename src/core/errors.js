@@ -1,7 +1,7 @@
 /**
- * @fileoverview Typed Error Hierarchy, Error Normalization & Global Error Boundary.
+ * @fileoverview Typed Error Hierarchy & Error Normalization Helpers.
  * Provides structured operational errors across configuration, validation,
- * network transport, storage, and UI rendering layers.
+ * network transport, and API layers.
  */
 
 /**
@@ -145,17 +145,6 @@ export class ApiError extends AppError {
   }
 }
 
-/** Raised when reading or writing browser storage fails. */
-export class StorageError extends AppError {
-  constructor(message, options = {}) {
-    super(message, {
-      code: 'STORAGE_ERROR',
-      statusCode: 500,
-      ...options
-    });
-  }
-}
-
 /** Raised when a requested entity (e.g. project ID) does not exist. */
 export class NotFoundError extends AppError {
   constructor(resourceName, id, options = {}) {
@@ -201,48 +190,5 @@ export function normalizeError(err, fallbackMessage = 'An unexpected error occur
     details: { raw: err },
     isOperational: false
   });
-}
-
-/**
- * Registers global window error and unhandled promise rejection boundaries.
- * Returns a teardown callback for clean lifecycle management.
- *
- * @param {object} options
- * @param {{ error: Function }} options.logger
- * @param {(err: AppError) => void} [options.onError]
- * @returns {() => void} Teardown function removing listeners.
- */
-export function installGlobalErrorHandlers({ logger, onError }) {
-  if (typeof globalThis.addEventListener !== 'function') {
-    return () => {};
-  }
-
-  const handleWindowError = (event) => {
-    const normalized = normalizeError(
-      event.error || event.message || 'Unhandled script error'
-    );
-    logger.error('Uncaught runtime error', normalized.toJSON());
-    if (typeof onError === 'function') {
-      onError(normalized);
-    }
-  };
-
-  const handleUnhandledRejection = (event) => {
-    const normalized = normalizeError(
-      event.reason || 'Unhandled promise rejection'
-    );
-    logger.error('Unhandled promise rejection', normalized.toJSON());
-    if (typeof onError === 'function') {
-      onError(normalized);
-    }
-  };
-
-  globalThis.addEventListener('error', handleWindowError);
-  globalThis.addEventListener('unhandledrejection', handleUnhandledRejection);
-
-  return () => {
-    globalThis.removeEventListener('error', handleWindowError);
-    globalThis.removeEventListener('unhandledrejection', handleUnhandledRejection);
-  };
 }
 

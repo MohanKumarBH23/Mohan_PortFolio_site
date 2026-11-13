@@ -138,7 +138,7 @@ export function createAppConfig(rawConfig, context = {}) {
     throw new ConfigError(`Invalid logLevel "${logLevel}".`);
   }
 
-  if (!source.storage?.themeKey || !source.storage?.inquiriesKey || !source.storage?.cooldownKey) {
+  if (!source.storage?.inquiriesKey || !source.storage?.cooldownKey) {
     throw new ConfigError('Missing required storage key definitions in environment config.');
   }
 
@@ -167,20 +167,11 @@ export function createAppConfig(rawConfig, context = {}) {
       timeZone: source.contact?.timeZone || 'Asia/Kolkata'
     },
     storage: {
-      themeKey: source.storage.themeKey,
       inquiriesKey: source.storage.inquiriesKey,
       cooldownKey: source.storage.cooldownKey
     },
-    theme: {
-      defaultTheme: source.theme?.defaultTheme || 'dark',
-      themes: source.theme?.themes || {
-        dark: { label: 'Dark Mineral Lacquer', themeColor: '#121110' },
-        light: { label: 'Navy & Cream (Coral)', themeColor: '#FAF7F2' }
-      }
-    },
     observability: {
-      logLevel,
-      enableStoreLogger: Boolean(envProfile.enableStoreLogger)
+      logLevel
     }
   };
 

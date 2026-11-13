@@ -6,8 +6,8 @@ export const PUBLICATIONS = Object.freeze([
   {
     id: 'icnpcv-2026-intelli-eye',
     badges: [
-      { label: 'IEEE Bangalore Section', variant: 'ieee', icon: 'layers' },
-      { label: 'ICNPCV 2026 Proceedings', variant: 'conf' }
+      { label: 'IEEE Paper', variant: 'ieee', icon: 'layers' },
+      { label: 'ICNPCV 2026 • Bangalore ', variant: 'conf' }
     ],
     presentationDate: 'Presentation Date: July 17–18, 2026',
     title:

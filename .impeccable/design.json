@@ -1,0 +1,165 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-12T15:27:00+05:30",
+  "title": "Design System: Mohan Kumar B.H Portfolio",
+  "extensions": {
+    "colorMeta": {
+      "primary": {
+        "role": "primary",
+        "displayName": "Rubric Vermilion",
+        "canonical": "#B3371E",
+        "tonalRamp": ["#2D0D07", "#53170C", "#7D2412", "#962C17", "#B3371E", "#CA5E46", "#DE9584", "#F4DCD6"]
+      },
+      "primary-hover": {
+        "role": "primary",
+        "displayName": "Pressed Vermilion",
+        "canonical": "#962C17",
+        "tonalRamp": ["#250A05", "#47140A", "#6D2010", "#962C17", "#B3371E", "#C8614B", "#DD9686", "#F3DDD8"]
+      },
+      "primary-edge": {
+        "role": "primary",
+        "displayName": "Deep Rubric Edge",
+        "canonical": "#7D2412",
+        "tonalRamp": ["#1F0804", "#3E1108", "#5E1B0D", "#7D2412", "#9A3420", "#B9614F", "#D59588", "#F0DBD6"]
+      },
+      "neutral-ground": {
+        "role": "neutral",
+        "displayName": "Editorial Bone",
+        "canonical": "#F8F5E8",
+        "tonalRamp": ["#27251F", "#47443B", "#6B675A", "#8F8A7B", "#B5B0A0", "#D5D1C3", "#EAE6D8", "#F8F5E8"]
+      },
+      "neutral-fold": {
+        "role": "neutral",
+        "displayName": "Recessed Vellum Fold",
+        "canonical": "#F3EEE3",
+        "tonalRamp": ["#26241E", "#464238", "#696456", "#8C8677", "#B0AA9B", "#D1CBC0", "#E6E1D5", "#F3EEE3"]
+      },
+      "ink-primary": {
+        "role": "neutral",
+        "displayName": "Graphite Carbon Ink",
+        "canonical": "#0F100F",
+        "tonalRamp": ["#0F100F", "#242524", "#3B3C3A", "#565754", "#757673", "#9A9B98", "#C4C5C2", "#EAEBE8"]
+      },
+      "ink-secondary": {
+        "role": "neutral",
+        "displayName": "Soot Charcoal",
+        "canonical": "#434440",
+        "tonalRamp": ["#141513", "#2A2B28", "#434440", "#5F605B", "#7E7F79", "#A2A39D", "#C8C9C4", "#EAEBE7"]
+      },
+      "ink-muted": {
+        "role": "neutral",
+        "displayName": "Archival Slate Olive",
+        "canonical": "#5C5B4F",
+        "tonalRamp": ["#1A1916", "#31302A", "#46453C", "#5C5B4F", "#7A796B", "#9D9C8F", "#C2C1B6", "#E7E6DF"]
+      },
+      "rule-ash": {
+        "role": "neutral",
+        "displayName": "Fine Ash Rule",
+        "canonical": "#C5C2B9",
+        "tonalRamp": ["#22211F", "#3D3C38", "#5B5954", "#7C7A73", "#A09D95", "#C5C2B9", "#DFDCD5", "#F2F0EB"]
+      }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display Serif", "purpose": "Hero name plate and opening folio headline." },
+      "headline": { "displayName": "Section Headline", "purpose": "Chapter titles (02–07) inline with vermilion index numbers." },
+      "title": { "displayName": "Editorial Lead", "purpose": "Light serif thesis copy introducing hero and section headers." },
+      "body": { "displayName": "Technical Prose", "purpose": "Long-form engineering abstracts, specs, and project descriptions." },
+      "label": { "displayName": "Monospace Index", "purpose": "Tabular metrics, section numerals, plate tags, and form labels." }
+    },
+    "shadows": [],
+    "motion": [
+      { "name": "morph-spring", "value": "cubic-bezier(0.22, 1, 0.36, 1)", "purpose": "Restrained spring for AnimatedBackground tab indicator and modal enter/exit." },
+      { "name": "toast-slide", "value": "180ms ease-out", "purpose": "Anchored bottom-right archival confirmation slip transition." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Rubric Vermilion rectangular action plate with fine inner bone hairline framing.",
+      "html": "<a href=\"#projects\" class=\"ds-btn-primary\"><span>Inspect Systems</span><span aria-hidden=\"true\">&#8594;</span></a>",
+      "css": ".ds-btn-primary { display: inline-flex; height: 42px; align-items: center; justify-content: center; gap: 10px; border: 1px solid var(--primary-edge, #7D2412); background: var(--rubric-accent, #B3371E); color: var(--paper-ground, #F8F5E8); padding: 0 20px; font-family: var(--font-sans, 'IBM Plex Sans', sans-serif); font-size: 13.5px; font-weight: 400; letter-spacing: 0.02em; text-decoration: none; border-radius: 0px; outline: 1px solid rgba(248, 245, 232, 0.45); outline-offset: -3px; transition: background-color 150ms ease; } .ds-btn-primary:hover { background: var(--rubric-hover, #962C17); } .ds-btn-primary:focus-visible { outline: 2px solid var(--rubric-accent, #B3371E); outline-offset: 2px; }"
+    },
+    {
+      "name": "Masthead Action Button",
+      "kind": "button",
+      "refersTo": "button-masthead",
+      "description": "Sharp unbleached paper button with carbon ink hairline border that inverts solidly on hover.",
+      "html": "<button type=\"button\" class=\"ds-btn-masthead\"><span>RESUME PDF</span><span aria-hidden=\"true\">+</span></button>",
+      "css": ".ds-btn-masthead { cursor: pointer; display: inline-flex; height: 36px; align-items: center; justify-content: center; gap: 8px; border: 1px solid var(--ink-primary, #0F100F); background: var(--paper-ground, #F8F5E8); color: var(--ink-primary, #0F100F); padding: 0 16px; font-family: var(--font-sans, 'IBM Plex Sans', sans-serif); font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; border-radius: 0px; transition: background-color 150ms ease, color 150ms ease; } .ds-btn-masthead:hover { background: var(--ink-primary, #0F100F); color: var(--paper-ground, #F8F5E8); } .ds-btn-masthead:focus-visible { outline: 2px solid var(--rubric-accent, #B3371E); outline-offset: 2px; }"
+    },
+    {
+      "name": "Form Input Field",
+      "kind": "input",
+      "refersTo": "input-field",
+      "description": "Single-rule Soot Charcoal dispatch input with archival olive placeholder and vermilion caret.",
+      "html": "<input type=\"email\" class=\"ds-input\" placeholder=\"name@company.com\" />",
+      "css": ".ds-input { width: 100%; height: 42px; border: 1px solid var(--ink-secondary, #434440); background: var(--paper-ground, #F8F5E8); color: var(--ink-primary, #0F100F); caret-color: var(--rubric-accent, #B3371E); padding: 0 14px; font-family: var(--font-sans, 'IBM Plex Sans', sans-serif); font-size: 14px; border-radius: 0px; transition: border-color 150ms ease; } .ds-input::placeholder { color: var(--ink-muted, #5C5B4F); } .ds-input:focus { border-color: var(--rubric-accent, #B3371E); outline: 2px solid var(--rubric-accent, #B3371E); outline-offset: 2px; }"
+    },
+    {
+      "name": "Masthead Navigation",
+      "kind": "nav",
+      "description": "Full-bleed horizontal reference bar with inline numbered chapter links.",
+      "html": "<nav class=\"ds-nav\"><a href=\"#home\" class=\"ds-nav-link ds-nav-active\"><span>01</span><span>Home</span></a><a href=\"#projects\" class=\"ds-nav-link\"><span>05</span><span>Projects</span></a></nav>",
+      "css": ".ds-nav { display: flex; align-items: center; gap: 16px; border-bottom: 1px solid var(--ink-primary, #0F100F); background: var(--paper-ground, #F8F5E8); padding: 14px 20px; } .ds-nav-link { display: inline-flex; align-items: baseline; gap: 4px; font-family: var(--font-sans, 'IBM Plex Sans', sans-serif); font-size: 12px; color: var(--ink-primary, #0F100F); text-decoration: none; } .ds-nav-link span:first-child { font-family: var(--font-mono, 'IBM Plex Mono', monospace); font-size: 10.5px; color: var(--ink-muted, #5C5B4F); } .ds-nav-link:hover, .ds-nav-active { color: var(--rubric-accent, #B3371E); font-weight: 500; } .ds-nav-link:focus-visible { outline: 2px solid var(--rubric-accent, #B3371E); outline-offset: 2px; }"
+    },
+    {
+      "name": "Filter Tab & Tag Chip",
+      "kind": "chip",
+      "description": "Sharp ink-bordered category filter tab and compact specification tag.",
+      "html": "<div class=\"ds-chip-row\"><button type=\"button\" class=\"ds-tab ds-tab-active\">ALL SYSTEMS</button><span class=\"ds-tag\">YOLOv8-Pose</span></div>",
+      "css": ".ds-chip-row { display: inline-flex; align-items: center; gap: 8px; } .ds-tab { cursor: pointer; border: 1px solid var(--ink-primary, #0F100F); background: var(--ink-primary, #0F100F); color: var(--paper-ground, #F8F5E8); padding: 6px 12px; font-family: var(--font-mono, 'IBM Plex Mono', monospace); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; border-radius: 0px; } .ds-tab:focus-visible { outline: 2px solid var(--rubric-accent, #B3371E); outline-offset: 2px; } .ds-tag { border: 1px solid var(--rule-ash, #C5C2B9); background: var(--paper-ground, #F8F5E8); color: var(--ink-secondary, #434440); padding: 3px 8px; font-family: var(--font-mono, 'IBM Plex Mono', monospace); font-size: 11px; border-radius: 0px; }"
+    },
+    {
+      "name": "Specimen Reference Card",
+      "kind": "card",
+      "refersTo": "specimen-card",
+      "description": "Flat 1px hairline-framed software system folio card with no shadows or corner rounding.",
+      "html": "<article class=\"ds-card\"><div class=\"ds-card-head\"><span>AI AGENTS</span><span>02</span></div><h3 class=\"ds-card-title\">DeltaCheck: Temporal Web Search Agent</h3><p class=\"ds-card-body\">Deterministic date grounding and episodic memory search over SSE.</p></article>",
+      "css": ".ds-card { border: 1px solid var(--ink-primary, #0F100F); background: var(--paper-ground, #F8F5E8); padding: 16px; border-radius: 0px; transition: background-color 150ms ease; } .ds-card:hover { background: var(--paper-fold, #F3EEE3); } .ds-card-head { display: flex; justify-content: space-between; border-bottom: 1px solid var(--rule-ash, #C5C2B9); padding-bottom: 8px; margin-bottom: 12px; font-family: var(--font-mono, 'IBM Plex Mono', monospace); font-size: 10.5px; letter-spacing: 0.08em; color: var(--ink-muted, #5C5B4F); } .ds-card-title { margin: 0 0 6px; font-family: var(--font-serif, 'Newsreader', serif); font-size: 20px; font-weight: 400; color: var(--ink-primary, #0F100F); } .ds-card-body { margin: 0; font-family: var(--font-sans, 'IBM Plex Sans', sans-serif); font-size: 13.5px; line-height: 1.5; color: var(--ink-secondary, #434440); }"
+    },
+    {
+      "name": "Toast Notice Slip",
+      "kind": "custom",
+      "description": "Shadowless archival confirmation banner with vermilion stamp dot.",
+      "html": "<div class=\"ds-toast\" role=\"status\"><span class=\"ds-toast-dot\" aria-hidden=\"true\"></span><span class=\"ds-toast-text\">Email copied to clipboard</span></div>",
+      "css": ".ds-toast { display: inline-flex; align-items: center; gap: 10px; border: 1px solid var(--ink-primary, #0F100F); background: var(--paper-ground, #F8F5E8); padding: 10px 14px; border-radius: 0px; } .ds-toast-dot { width: 8px; height: 8px; background: var(--rubric-accent, #B3371E); } .ds-toast-text { font-family: var(--font-mono, 'IBM Plex Mono', monospace); font-size: 12px; color: var(--ink-primary, #0F100F); }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Centre-Rail Monograph",
+    "overview": "This design system treats an AI and software systems portfolio as a bound technical reference monograph rather than a marketing SaaS template. Pages rest on quiet Editorial Bone paper, bisected on desktop by a vertical centre-rail spine (M O H A N) that anchors credentials, empirical IEEE benchmarks, and live interactive software artifacts side by side. Structural hierarchy comes strictly from typographic scale shifts between literary serif titles and crisp sans/mono metadata, separated by razor-sharp single-pixel rules with zero corner rounding.\n\nEvery interactive surface favors archival restraint: no ambient drop shadows, no gradient fills, and no decorative badge inflation. Rubric Vermilion serves exclusively as the proofreader's ink—marking active navigation states, section indices, focus outlines, text selection highlights, and primary action plates.",
+    "keyCharacteristics": [
+      "Editorial Bone paper ground paired with carbon-ink hairline framing (1px) and zero rounded corners (0px) everywhere",
+      "Three-register typography uniting Newsreader display heads, Petrona Variable lead summaries, IBM Plex Sans interface copy, and IBM Plex Mono tabular indices",
+      "Strictly flat elevation model using warm vellum tonal shifts rather than blurred or hard-offset box shadows",
+      "Self-hosted open-source WOFF2 font families bundled locally for deterministic rendering under strict CSP rules"
+    ],
+    "rules": [
+      { "name": "The Proofreader's Ink Rule", "section": "colors", "body": "Reserve Rubric Vermilion (primary) for directional focus, indices, and primary calls to action so it occupies less than 10% of any viewport and never dilutes into ambient chrome." },
+      { "name": "The Contrast Floor Rule", "section": "colors", "body": "Never lighten secondary metadata ink below Archival Slate Olive (ink-muted) on Recessed Vellum Fold surfaces; every monospace index and placeholder must clear the 4.5:1 AA threshold." },
+      { "name": "The Inline Index Rule", "section": "typography", "body": "Place section numbers (02–07) inline with the h2 display title inside one horizontal baseline; never stack repetitive uppercase eyebrow kickers above section headings." },
+      { "name": "The Tabular Metric Rule", "section": "typography", "body": "Enforce font-variant-numeric: tabular-nums on every benchmark counter, navigation numeral, timestamp, and plate index so animated SlidingNumber transitions never jitter adjacent columns." },
+      { "name": "The Ink-On-Paper Rule", "section": "elevation", "body": "Surfaces stay flat at rest and in motion; state changes shift background ink (neutral-ground to ink-primary or neutral-fold) or border weight within a 1px–2px frame rather than casting shadows." }
+    ],
+    "dos": [
+      "Do enforce 0px corner radius on every container, tag, image mat, scrollbar, and dialog without exception.",
+      "Do validate every text/surface combination—especially small monospace indices over Recessed Vellum Fold (neutral-fold)—to maintain >= 4.5:1 WCAG AA contrast via ink-muted (#5C5B4F) or darker.",
+      "Do restore keyboard focus back to the invoking trigger element whenever ProjectModal or PdfViewerModal closes.",
+      "Do keep portrait plates cleanly anchored (object-contain object-bottom) and architectural board captures uncropped inside fixed specimen containers."
+    ],
+    "donts": [
+      "Don't introduce drop shadows, ambient neon glows, frosted glass blurs, or multi-stop gradients anywhere on cards, toasts, or buttons.",
+      "Don't stack uppercase eyebrow kickers above section h2 headings; integrate chapter indices inline on one baseline.",
+      "Don't use heavy >= 2px colored vertical bars on callout strips; stick to 1px hairline accents matching the grid stroke weight.",
+      "Don't leave unstyled browser defaults on ::selection, caret-color, scrollbars, or focus rings; bind them to Rubric Vermilion and Editorial Bone tokens."
+    ]
+  }
+}
+

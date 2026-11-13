@@ -2,28 +2,32 @@
 
 ## Overview
 
-The Mohan Kumar B.H Portfolio follows a **Zero-Dependency Modular Layered Architecture** built on standard Web Platform ES Modules, CSS Custom Properties, and a strict unidirectional data-flow model.
+The Mohan Kumar B.H Portfolio follows a **Modular Layered React + TypeScript + Vite Architecture** that separates UI presentation, reusable hooks, domain services, API transport, and validated environment configuration.
 
 ```text
 ┌─────────────────────────────────────────────────────────────────────────┐
-│                          UI Components Layer                            │
-│  src/components/ui/*  (Icon, Button, Badge, SectionHeader, Modal, Toast)│
-│  src/components/sections/*  (Navbar, Hero, About, Skills, Projects, ...)│
+│                          UI Presentation Layer                          │
+│  src/components/hero/*      (HeroWorkbench)                             │
+│  src/components/sections/*  (About, Skills, Publications, Projects,     │
+│                              Experience, Contact)                       │
+│  src/components/modals/*    (ProjectModal, PdfViewerModal)              │
+│  src/components/common/*    (SectionHeading, ToastBanner)               │
+│  src/components/motion-primitives/* (TextEffect, TextMorph, Sliding... )│
 └──────────────────────────┬───────────────────────────┬──────────────────┘
-                           │ dispatches actions        │ subscribes slices
+                           │ calls actions             │ reads hook state
                            ▼                           │
 ┌──────────────────────────────────────┐               │
-│     Centralized State Store          │───────────────┘
-│  src/state/{createStore,actions,     │
-│             reducers,selectors,store}│
+│   Application Hooks & State Layer    │───────────────┘
+│  src/hooks/usePortfolioServices.ts   │
+│  src/hooks/useModalLifecycle.ts      │
 └──────────────────────────┬───────────┘
-                           │ invoked by UI / orchestration
+                           │ orchestrates domain services
                            ▼
 ┌──────────────────────────────────────┐
 │      Pure Business Logic Layer       │
-│  src/services/{contact,theme,project,│
+│  src/services/{contact,project,      │
 │                navigation,clipboard} │
-│  (Zero DOM access; fully testable)   │
+│  (Zero DOM access; unit-tested)      │
 └──────────────────────────┬───────────┘
                            │ calls repositories
                            ▼
@@ -37,7 +41,7 @@ The Mohan Kumar B.H Portfolio follows a **Zero-Dependency Modular Layered Archit
 ┌──────────────────────────────────────┐
 │    Core Infrastructure & Config      │
 │  src/core/{errors,logger,storage,    │
-│            sanitize,dom}             │
+│            sanitize}                 │
 │  src/config/{env,runtimeEnv}         │
 └──────────────────────────────────────┘
 ```
@@ -46,47 +50,27 @@ The Mohan Kumar B.H Portfolio follows a **Zero-Dependency Modular Layered Archit
 
 ## Dependency Direction Rules
 
-1. **`src/config` & `src/core`**: Leaf modules with zero dependencies on services, state, API, or UI.
+1. **`src/config` & `src/core`**: Leaf modules with zero dependencies on services, hooks, API, or UI.
 2. **`src/data`**: Pure frozen domain datasets (`profile.js`, `skills.js`, `publications.js`, `projects.js`) serving as the Single Source of Truth.
-3. **`src/api`**: Depends only on `src/core` and `config`. Never reads DOM or store state.
-4. **`src/services`**: Encapsulates all validation, rate-limiting, persistence, and domain rules. Never touches `document`, `window`, or HTML templates.
-5. **`src/state`**: Pure reducers, action creators, selectors, and reactive store (`createStore`).
-6. **`src/components`**: Pure DOM rendering + store subscriptions + user event delegation.
-7. **`src/main.js`**: Composition root wiring all layers together and wrapping every section mount in a `safeRender` error boundary.
+3. **`src/api`**: Depends only on `src/core` and `config`. Never reads DOM or React state.
+4. **`src/services`**: Encapsulates all validation, rate-limiting, project lookup, scroll-spy math, and clipboard rules without touching React or DOM APIs.
+5. **`src/hooks`**: Bridges domain services, browser lifecycle (`useModalLifecycle`, scroll-spy, clipboard), and memoized React state cleanly into `App.tsx`.
+6. **`src/components`**: Pure React + Tailwind + Motion Primitives UI components receiving typed props from `App.tsx`.
+7. **`src/main.tsx`**: Application mount importing self-hosted `@fontsource*` typography and `src/styles/app.css`.
 
 ---
 
-## State Management Model
+## Error Handling & Resilience Strategy
 
-State is organized into five immutable slices inside `src/state/reducers.js`:
-
-| Slice | Shape | Responsibility |
-| :--- | :--- | :--- |
-| `theme` | `{ current: 'dark' \| 'light', source: 'storage' \| 'system' \| 'default' \| 'user' }` | Visual theme & meta theme-color synchronization |
-| `navigation` | `{ activeSection, isScrolled, isMobileMenuOpen }` | Active scroll-spy highlight, navbar elevation, responsive menu |
-| `modal` | `{ active: null \| ProjectModal \| PdfModal, triggerElementId }` | Accessible dialog state & focus restoration |
-| `contact` | `{ status, fieldErrors, errorMessage, lastSubmission, failedRefId, cooldownUntil, history }` | Contact form lifecycle, inline errors & local archive |
-| `toasts` | `{ items: ToastItem[] }` | Auto-dismissing user notifications |
-
-Components subscribe via `store.select(selector, listener)` so each component only updates when its specific slice changes.
-
----
-
-## Error Handling Strategy
-
-- **Typed Operational Errors** (`src/core/errors.js`): `AppError`, `ConfigError`, `ValidationError`, `RateLimitError`, `NetworkError`, `TimeoutError`, `ApiError`, `StorageError`, `NotFoundError`.
-- **Global Error Boundary**: `installGlobalErrorHandlers` captures uncaught `error` and `unhandledrejection` events cleanly.
-- **Section Error Boundaries**: `safeRender` isolates component render failures so a single broken section renders an accessible recovery banner without breaking the rest of the application.
+- **Typed Operational Errors** (`src/core/errors.js`): `AppError`, `ConfigError`, `ValidationError`, `RateLimitError`, `NetworkError`, `TimeoutError`, `ApiError`, and `NotFoundError`.
 - **Resilient Persistence**: `createStorageService` automatically falls back to an in-memory `Map` if `localStorage` is blocked (`SecurityError`) or full (`QuotaExceededError`) and safely recovers from malformed JSON.
-- **XSS & URL Hardening**: UI components render text via `textContent` (`el()`), validate external/asset links via `sanitizeUrl()`, and backend Apps Script escapes HTML before building email templates (`escapeHtml_`).
+- **URL Hardening & XSS Safety**: React JSX escapes rendered text automatically; external/document links pass `sanitizeUrl()` (`https:`, `http:`, `mailto:`, `tel:`, and relative paths), and backend Apps Script escapes HTML (`escapeHtml_`).
 
 ---
 
 ## Environment Configuration
 
-1. Default settings live in `config/env.defaults.json`.
-2. Environment overrides live in `.env` (gitignored; documented in `.env.example`).
-3. `npm run env:build` (`scripts/generate-env.mjs`) compiles `.env` + `process.env` + defaults into `src/config/runtimeEnv.js`.
-4. `src/config/env.js` resolves the active profile (`development`, `staging`, `production`), validates schemas/URLs/timeouts, and recursively freezes the resulting config object.
-5. `src/bootstrap/themeInit.js` reads `runtimeEnv.js` synchronously in `<head>` to eliminate Flash of Unstyled Content (FOUC) without inline `<script>` tags (allowing strict `script-src 'self'` CSP).
-
+1. Default settings live in [`config/env.defaults.json`](../config/env.defaults.json).
+2. Environment overrides live in `.env` (gitignored; documented in [`.env.example`](../.env.example)).
+3. `npm run env:build` ([`scripts/generate-env.mjs`](../scripts/generate-env.mjs)) compiles `.env` + `process.env` + defaults into `src/config/runtimeEnv.js`.
+4. [`src/config/env.js`](../src/config/env.js) resolves the active profile (`development`, `staging`, `production`), validates schemas/URLs/timeouts, and recursively freezes the resulting config object.

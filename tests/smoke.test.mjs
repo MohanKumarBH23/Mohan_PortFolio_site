@@ -1,11 +1,10 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
+import { execSync } from 'node:child_process';
 import fs from 'node:fs';
-import os from 'node:os';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { buildDist } from '../scripts/build-dist.mjs';
 import { PROFILE } from '../src/data/profile.js';
 import { PUBLICATIONS } from '../src/data/publications.js';
 import { PROJECTS } from '../src/data/projects.js';
@@ -26,7 +25,7 @@ function walkFiles(dir) {
   return results;
 }
 
-describe('Static Assets, Module Graph & CSP Smoke Verification', () => {
+describe('Vite Bundle, Static Assets, Module Graph & CSP Smoke Verification', () => {
   it('ensures index.html complies with strict CSP (no inline executable scripts or handlers)', () => {
     const html = fs.readFileSync(path.join(ROOT_DIR, 'index.html'), 'utf8');
     assert.equal(/\son(click|submit|load|error)=/i.test(html), false);
@@ -38,44 +37,37 @@ describe('Static Assets, Module Graph & CSP Smoke Verification', () => {
     const localRefs = [
       ...html.matchAll(/(?:src|href)="(?!https?:|mailto:|tel:|data:|#)([^"]+)"/g)
     ].map((m) => m[1]);
-    assert.ok(localRefs.length >= 4);
+    assert.ok(localRefs.length >= 3);
     for (const ref of localRefs) {
+      const normalized = ref.startsWith('/') ? ref.slice(1) : ref;
       assert.equal(
-        fs.existsSync(path.join(ROOT_DIR, ref)),
+        fs.existsSync(path.join(ROOT_DIR, normalized)),
         true,
         `Missing HTML referenced resource: ${ref}`
       );
     }
   });
 
-  it('verifies all referenced assets, manifest icons, and CSS imports exist on disk', () => {
+  it('verifies all referenced assets, manifest icons, and styles exist on disk', () => {
     const manifest = JSON.parse(fs.readFileSync(path.join(ROOT_DIR, 'site.webmanifest'), 'utf8'));
     const manifestIcons = (manifest.icons || []).map((icon) => icon.src);
 
     const assetPaths = [
       PROFILE.avatar.src,
       PROFILE.resume.url,
+      'assets/plates/portrait-plate.png',
       ...PUBLICATIONS.map((p) => p.pdf.url),
       ...PROJECTS.flatMap((p) => [p.modal?.image, p.modal?.pdfUrl].filter(Boolean)),
       ...manifestIcons,
       'site.webmanifest',
       'robots.txt',
-      'sitemap.xml'
+      'sitemap.xml',
+      'src/styles/app.css'
     ];
 
     for (const relPath of assetPaths) {
       const fullPath = path.join(ROOT_DIR, relPath);
       assert.equal(fs.existsSync(fullPath), true, `Missing referenced asset: ${relPath}`);
-    }
-
-    const mainCss = fs.readFileSync(path.join(ROOT_DIR, 'src/styles/main.css'), 'utf8');
-    const imports = [...mainCss.matchAll(/@import\s+url\(['"]\.\/([^'"]+)['"]\)/g)].map(
-      (m) => m[1]
-    );
-    assert.ok(imports.length >= 5);
-    for (const cssFile of imports) {
-      const fullPath = path.join(ROOT_DIR, 'src/styles', cssFile);
-      assert.equal(fs.existsSync(fullPath), true, `Missing CSS partial: ${cssFile}`);
     }
   });
 
@@ -96,30 +88,24 @@ describe('Static Assets, Module Graph & CSP Smoke Verification', () => {
     }
   });
 
-  it('verifies deployment configs are valid and reference current folders', () => {
+  it('verifies deployment configs are valid and target Vite dist output', () => {
     const vercel = JSON.parse(fs.readFileSync(path.join(ROOT_DIR, 'vercel.json'), 'utf8'));
     assert.equal(vercel.framework, null);
-    assert.equal(vercel.installCommand, '');
-    assert.equal(vercel.buildCommand, 'node scripts/build-dist.mjs');
+    assert.equal(vercel.installCommand, 'npm install');
+    assert.equal(vercel.buildCommand, 'npm run build');
     assert.equal(vercel.outputDirectory, 'dist');
     const sources = (vercel.headers || []).map((h) => h.source);
     assert.ok(sources.includes('/assets/(.*)'));
-    assert.ok(sources.includes('/src/(.*)'));
   });
 
-  it('builds a clean static distribution excluding repo internals', () => {
-    const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'mohan-pf-dist-'));
-    try {
-      const outDir = path.join(tmpDir, 'dist');
-      buildDist({ outDir });
-      assert.equal(fs.existsSync(path.join(outDir, 'index.html')), true);
-      assert.equal(fs.existsSync(path.join(outDir, 'src/config/runtimeEnv.js')), true);
-      assert.equal(fs.existsSync(path.join(outDir, 'assets/documents/Mohan_Resume.pdf')), true);
-      assert.equal(fs.existsSync(path.join(outDir, 'package.json')), false);
-      assert.equal(fs.existsSync(path.join(outDir, 'tests')), false);
-      assert.equal(fs.existsSync(path.join(outDir, 'scripts')), false);
-    } finally {
-      fs.rmSync(tmpDir, { recursive: true, force: true });
-    }
+  it('produces a clean Vite production bundle in dist/ including static assets', () => {
+    execSync('npm run build', { cwd: ROOT_DIR, stdio: 'pipe' });
+    const distDir = path.join(ROOT_DIR, 'dist');
+    assert.equal(fs.existsSync(path.join(distDir, 'index.html')), true);
+    assert.equal(fs.existsSync(path.join(distDir, 'assets/documents/Mohan_Resume.pdf')), true);
+    assert.equal(fs.existsSync(path.join(distDir, 'assets/documents/intelli-eye-paper.pdf')), true);
+    assert.equal(fs.existsSync(path.join(distDir, 'assets/plates/portrait-plate.png')), true);
+    assert.equal(fs.existsSync(path.join(distDir, 'package.json')), false);
+    assert.equal(fs.existsSync(path.join(distDir, 'tests')), false);
   });
 });

@@ -2,30 +2,21 @@ import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 
 import { createStorageService } from '../src/core/storage.js';
-import { escapeHtml, sanitizeUrl } from '../src/core/sanitize.js';
+import { sanitizeUrl } from '../src/core/sanitize.js';
 import { createContactService, validateContactInput } from '../src/services/contactService.js';
-import { createThemeService } from '../src/services/themeService.js';
 import { createProjectService } from '../src/services/projectService.js';
-import { isNavbarScrolled, resolveActiveSection } from '../src/services/navigationService.js';
+import { resolveActiveSection } from '../src/services/navigationService.js';
 import { createClipboardService } from '../src/services/clipboardService.js';
 import { PROJECTS } from '../src/data/projects.js';
 import { NotFoundError, RateLimitError, ValidationError } from '../src/core/errors.js';
 
 const testConfig = {
   contact: { cooldownMs: 30000, maxHistory: 5, locale: 'en-IN', timeZone: 'Asia/Kolkata' },
-  storage: { themeKey: 't_key', inquiriesKey: 'i_key', cooldownKey: 'c_key' },
-  theme: {
-    defaultTheme: 'dark',
-    themes: {
-      dark: { label: 'Dark', themeColor: '#121110' },
-      light: { label: 'Light', themeColor: '#FAF7F2' }
-    }
-  }
+  storage: { inquiriesKey: 'i_key', cooldownKey: 'c_key' }
 };
 
 describe('Core Utilities & Business Services', () => {
-  it('sanitizes HTML and blocks unsafe URL schemes', () => {
-    assert.equal(escapeHtml('<script>"test"</script>'), '&lt;script&gt;&quot;test&quot;&lt;/script&gt;');
+  it('blocks unsafe URL schemes while allowing safe relative and HTTPS links', () => {
     assert.equal(sanitizeUrl('javascript:alert(1)'), '#');
     assert.equal(sanitizeUrl('assets/documents/Mohan_Resume.pdf'), 'assets/documents/Mohan_Resume.pdf');
     assert.equal(sanitizeUrl('https://github.com/MohanKumarBH23'), 'https://github.com/MohanKumarBH23');
@@ -101,18 +92,7 @@ describe('Core Utilities & Business Services', () => {
     );
   });
 
-  it('resolves themes, projects, scroll-spy, and clipboard operations cleanly', async () => {
-    const storage = createStorageService({ backend: null });
-    const themeService = createThemeService({
-      config: testConfig,
-      storage,
-      prefersLightQuery: () => true
-    });
-    assert.deepEqual(themeService.resolveInitialTheme(), { theme: 'light', source: 'system' });
-    themeService.persistTheme('dark');
-    assert.deepEqual(themeService.resolveInitialTheme(), { theme: 'dark', source: 'storage' });
-    assert.equal(themeService.getNextTheme('dark'), 'light');
-
+  it('resolves projects, scroll-spy, and clipboard operations cleanly', async () => {
     const projectService = createProjectService(PROJECTS);
     assert.equal(projectService.getFeaturedProject().id, 'intelli-eye');
     assert.equal(projectService.getSecondaryProjects().length, 5);
@@ -122,7 +102,6 @@ describe('Core Utilities & Business Services', () => {
     );
     assert.throws(() => projectService.getProjectById('nonexistent'), NotFoundError);
 
-    assert.equal(isNavbarScrolled(25), true);
     assert.equal(
       resolveActiveSection({
         scrollY: 600,

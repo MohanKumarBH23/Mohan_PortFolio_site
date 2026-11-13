@@ -28,22 +28,8 @@
     "timeZone": "Asia/Kolkata"
   },
   "storage": {
-    "themeKey": "mohan_theme",
     "inquiriesKey": "mohan_portfolio_inquiries",
     "cooldownKey": "mohan_contact_cooldown_until"
-  },
-  "theme": {
-    "defaultTheme": "dark",
-    "themes": {
-      "dark": {
-        "label": "Dark Mineral Lacquer",
-        "themeColor": "#121110"
-      },
-      "light": {
-        "label": "Navy & Cream (Coral)",
-        "themeColor": "#FAF7F2"
-      }
-    }
   },
   "environments": {
     "development": {
@@ -52,24 +38,21 @@
         "127.0.0.1",
         "0.0.0.0"
       ],
-      "logLevel": "debug",
-      "enableStoreLogger": true
+      "logLevel": "debug"
     },
     "staging": {
       "hostnames": [
         "vercel.app",
         "netlify.app"
       ],
-      "logLevel": "info",
-      "enableStoreLogger": false
+      "logLevel": "info"
     },
     "production": {
       "hostnames": [
         "mohankumarbh.dev",
         "www.mohankumarbh.dev"
       ],
-      "logLevel": "warn",
-      "enableStoreLogger": false
+      "logLevel": "warn"
     }
   },
   "overrides": {

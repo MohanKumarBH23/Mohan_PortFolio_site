@@ -1,23 +1,8 @@
 /**
- * @fileoverview Pure Input Sanitization, HTML Escaping & URL Validation Helpers.
+ * @fileoverview Pure Input Normalization & URL Validation Helpers.
  */
 
 const SAFE_URL_PROTOCOLS = new Set(['https:', 'http:', 'mailto:', 'tel:']);
-
-/**
- * Escapes HTML special characters to neutralize XSS vectors in text interpolation.
- *
- * @param {unknown} value
- * @returns {string}
- */
-export function escapeHtml(value) {
-  return String(value ?? '')
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;');
-}
 
 /**
  * Normalizes plain-text user input by trimming, stripping unsafe ASCII control chars,

@@ -3,13 +3,13 @@
  */
 
 export const NAV_ITEMS = Object.freeze([
-  { id: 'home', label: 'Home', href: '#home' },
-  { id: 'about', label: 'About', href: '#about' },
-  { id: 'skills', label: 'Skills', href: '#skills' },
-  { id: 'publications', label: 'Publications', href: '#publications' },
-  { id: 'projects', label: 'Projects', href: '#projects' },
-  { id: 'experience', label: 'Experience', href: '#experience' },
-  { id: 'contact', label: 'Contact', href: '#contact' }
+  { num: '01', id: 'home', label: 'Home', href: '#home' },
+  { num: '02', id: 'about', label: 'About Me', href: '#about' },
+  { num: '03', id: 'experience', label: 'Experience', href: '#experience' },
+  { num: '04', id: 'skills', label: 'Skills', href: '#skills' },
+  { num: '05', id: 'publications', label: 'Publications', href: '#publications' },
+  { num: '06', id: 'projects', label: 'Projects', href: '#projects' },
+  { num: '07', id: 'contact', label: 'Contact', href: '#contact' }
 ]);
 
 export const PROFILE = Object.freeze({
@@ -92,7 +92,7 @@ export const CONTACT_CHANNELS = Object.freeze([
     id: 'email',
     type: 'copyable',
     icon: 'mail',
-    name: 'Direct Email',
+    name: 'Email',
     displayValue: 'mohankumarbh007@gmail.com',
     href: 'mailto:mohankumarbh007@gmail.com',
     copyValue: 'mohankumarbh007@gmail.com',
@@ -104,7 +104,7 @@ export const CONTACT_CHANNELS = Object.freeze([
     id: 'linkedin',
     type: 'external',
     icon: 'linkedin',
-    name: 'Professional Network',
+    name: 'LinkedIn',
     displayValue: 'linkedin.com/in/mohan-kumar-bh-mk23 ↗',
     href: 'https://www.linkedin.com/in/mohan-kumar-bh-mk23'
   },
@@ -112,7 +112,7 @@ export const CONTACT_CHANNELS = Object.freeze([
     id: 'github',
     type: 'external',
     icon: 'github',
-    name: 'Code Repositories',
+    name: 'GitHub',
     displayValue: 'github.com/MohanKumarBH23 ↗',
     href: 'https://github.com/MohanKumarBH23'
   }
@@ -144,8 +144,6 @@ export const TIMELINE = Object.freeze({
       role: 'B.Tech in Artificial Intelligence & ML',
       organization: 'Sai Vidya Institute of Technology',
       grade: 'CGPA: 8.80 / 10.0',
-      coursework:
-        'Coursework: Machine Learning, Deep Learning, Natural Language Processing, Computer Vision, DSA, DBMS, Operating Systems, Computer Networks.'
     },
     {
       period: '2020 – 2022 • Gauribidanur',

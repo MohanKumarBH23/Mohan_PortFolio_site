@@ -1,111 +1,26 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
   <title>MOHAN KUMAR B.H</title>
   <meta name="description"
-    content="Portfolio of Mohan Kumar B.H, B.Tech in CSE (AIML) from Sai Vidya Institute of Technology (CGPA 8.80). AI Intern at Digitaltransols AI, specializing in YOLOv8, Gemini 2.0 Flash, RAG, and Multimodal Edge Systems." />
-  <meta name="keywords"
-    content="Mohan Kumar B.H, Mohan Kumar, AI Engineer, Machine Learning, B.Tech AIML, Sai Vidya Institute of Technology, Digitaltransols AI, YOLOv8, Gemini 2.0 Flash, FastAPI, PyTorch, Bangalore" />
-  <meta name="author" content="Mohan Kumar B.H" />
-  <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://mohankumarbh.dev/" />
-  <meta name="theme-color" content="#121110" />
-
-  <!-- Runtime Config & Pre-Paint Theme Bootstrap (zero inline script) -->
-  <script src="src/config/runtimeEnv.js"></script>
-  <script src="src/bootstrap/themeInit.js"></script>
-
-  <!-- Open Graph / Social -->
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://mohankumarbh.dev/" />
+    content="Mohan Kumar B.H — CSE (AI & ML) Engineer, IEEE ICNPCV 2026 accepted author, and AI Intern at Digitaltransols AI Pvt. Ltd. Systems built on empirical benchmarks and verifiable code." />
+  <meta name="theme-color" content="#F8F5E8" />
   <meta property="og:title" content="MOHAN KUMAR B.H" />
-  <meta property="og:description" content="B.Tech CSE (AIML) • Bengaluru" />
-
-  <!-- Favicon / Web App Manifest -->
-  <link rel="icon" type="image/svg+xml"
-    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='16' fill='%23121110'/><text y='.72em' x='50%' text-anchor='middle' font-family='monospace' font-size='54' font-weight='bold' fill='%23e6b744'>MK</text></svg>" />
+  <meta property="og:description"
+    content="Applied AI & ML Engineer. Accepted IEEE ICNPCV 2026 author, Gemini 2.0 multimodal engineer, and open-source AI systems builder." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://mohankumarbh.vercel.app/" />
+  <link rel="canonical" href="https://mohankumarbh.vercel.app/" />
+  <link rel="icon" type="image/jpeg" href="assets/images/mohan-avatar.jpg" />
   <link rel="manifest" href="site.webmanifest" />
-
-  <!-- Typography & Modular Stylesheet -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Albert+Sans:ital,wght@0,300..700;1,300..700&family=Alumni+Sans:ital,wght@0,100..700;1,100..700&family=JetBrains+Mono:wght@400;500;600&display=swap"
-    rel="stylesheet" />
-  <link rel="stylesheet" href="src/styles/main.css" />
-
-  <!-- JSON-LD Structured Data (Person Schema) -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Mohan Kumar B.H",
-    "jobTitle": "AI & ML Engineer",
-    "telephone": "+919980507072",
-    "email": "mohankumarbh007@gmail.com",
-    "alumniOf": {
-      "@type": "EducationalOrganization",
-      "name": "Sai Vidya Institute of Technology, Bangalore"
-    },
-    "worksFor": {
-      "@type": "Organization",
-      "name": "Digitaltransols AI Private Limited, Bangalore"
-    },
-    "description": "B.Tech in Computer Science and Engineering (AIML) graduate with 8.80 CGPA. Experienced AI Intern specializing in LLMs, RAG, Multimodal Gemini 2.0 Flash, YOLOv8 computer vision, and high-performance ML pipelines.",
-    "url": "https://mohankumarbh.dev",
-    "sameAs": [
-      "https://github.com/MohanKumarBH23",
-      "https://www.linkedin.com/in/mohan-kumar-bh-mk23"
-    ]
-  }
-  </script>
 </head>
 
 <body>
-  <a href="#main" class="skip-link">Skip to main content</a>
-
-  <noscript>
-    <div class="noscript-banner" role="alert">
-      JavaScript is disabled in your browser. Please enable JavaScript to view the interactive portfolio of Mohan Kumar B.H, or contact <a href="mailto:mohankumarbh007@gmail.com">mohankumarbh007@gmail.com</a>.
-    </div>
-  </noscript>
-
-  <!-- Navigation -->
-  <nav class="navbar" id="navbar" aria-label="Main Navigation"></nav>
-
-  <!-- Main Content Landmarks -->
-  <main id="main">
-    <header class="section hero-section" id="home"></header>
-    <section class="section" id="about"></section>
-    <section class="section" id="skills"></section>
-    <section class="section" id="publications"></section>
-    <section class="section" id="projects"></section>
-    <section class="section" id="experience"></section>
-    <section class="section" id="contact"></section>
-  </main>
-
-  <!-- Dialogs & Notifications -->
-  <div class="modal-backdrop" id="project-modal-backdrop" role="dialog" aria-modal="true"
-    aria-labelledby="project-modal-title" aria-hidden="true">
-    <div class="project-modal">
-      <button type="button" class="modal-close-btn" id="modal-close-btn" aria-label="Close dialog">&times;</button>
-      <div id="project-modal-content"></div>
-    </div>
-  </div>
-
-  <div class="modal-backdrop" id="pdf-modal-backdrop" role="dialog" aria-modal="true"
-    aria-label="IEEE Research Paper Viewer" aria-hidden="true"></div>
-
-  <div id="toast-root"></div>
-
-  <!-- Footer -->
-  <footer class="footer" id="footer"></footer>
-
-  <script type="module" src="src/main.js"></script>
+  <div id="root"></div>
+  <script type="module" src="/src/main.tsx"></script>
 </body>
 
 </html>

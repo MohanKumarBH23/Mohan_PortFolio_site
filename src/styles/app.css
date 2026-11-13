@@ -1,0 +1,239 @@
+@import "tailwindcss";
+
+:root {
+  --paper-ground: #F8F5E8;
+  --paper-fold: #F3EEE3;
+  --ink-primary: #0F100F;
+  --ink-secondary: #434440;
+  --ink-muted: #5C5B4F;
+  --ink-ash: #C5C2B9;
+  --border-line: #0F100F;
+  --border-card: #434440;
+  --rubric-accent: #B3371E;
+  --rubric-hover: #962C17;
+  --rubric-edge: #7D2412;
+  --accent-contrast: #F8F5E8;
+
+  --font-serif: 'Newsreader', 'Petrona Variable', 'Petrona', Georgia, serif;
+  --font-lead: 'Petrona Variable', 'Petrona', Georgia, serif;
+  --font-sans: 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, monospace;
+}
+
+html.dark {
+  /* Midnight black ground */
+  --paper-ground: #08090C;
+  --paper-fold: #111318;
+  /* Crisp white on top */
+  --ink-primary: #FFFFFF;
+  --ink-secondary: #D4D4D8;
+  --ink-muted: #94A3B8;
+  --ink-ash: #262933;
+  --border-line: #2C303B;
+  --border-card: #333845;
+  /* Electric lime accent */
+  --rubric-accent: #A3E635;
+  --rubric-hover: #BEF264;
+  --rubric-edge: #84CC16;
+  --accent-contrast: #08090C;
+}
+
+@layer base {
+  html {
+    background-color: var(--paper-ground);
+    color: var(--ink-primary);
+    font-family: var(--font-sans);
+    scroll-behavior: smooth;
+    scrollbar-color: var(--ink-muted) var(--paper-fold);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transition: background-color 0.18s ease, color 0.18s ease;
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--paper-ground);
+    color: var(--ink-primary);
+    caret-color: var(--rubric-accent);
+    overflow-x: clip;
+    transition: background-color 0.18s ease, color 0.18s ease;
+  }
+
+  *, *::before, *::after {
+    box-sizing: border-box;
+    border-radius: 0px;
+  }
+
+  ::selection {
+    background-color: var(--rubric-accent);
+    color: var(--accent-contrast);
+  }
+
+  a {
+    text-underline-offset: 3px;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--rubric-accent);
+    outline-offset: 2px;
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--paper-fold);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--ink-muted);
+    border: 2px solid var(--paper-fold);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--ink-primary);
+  }
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ==========================================================================
+   Dark Mode Overrides: Midnight Black + Crisp White + Electric Lime Accent
+   ========================================================================== */
+html.dark .bg-\[\#F8F5E8\],
+html.dark [class*="bg-[#F8F5E8]"] {
+  background-color: var(--paper-ground) !important;
+}
+
+html.dark .bg-\[\#F3EEE3\],
+html.dark [class*="bg-[#F3EEE3]"] {
+  background-color: var(--paper-fold) !important;
+}
+
+/* Remove grey wash / gradient blocks in dark mode (seamless midnight black) */
+html.dark [data-region="calibration-matrix"],
+html.dark #publications .bg-\[\#F3EEE3\]\/45 {
+  background-color: transparent !important;
+}
+
+html.dark .text-\[\#0F100F\] {
+  color: var(--ink-primary) !important;
+}
+
+html.dark .text-\[\#434440\] {
+  color: var(--ink-secondary) !important;
+}
+
+html.dark .text-\[\#5C5B4F\] {
+  color: var(--ink-muted) !important;
+}
+
+html.dark .text-\[\#B3371E\] {
+  color: var(--rubric-accent) !important;
+}
+
+html.dark .border-\[\#0F100F\] {
+  border-color: var(--border-line) !important;
+}
+
+html.dark .border-\[\#434440\] {
+  border-color: var(--border-card) !important;
+}
+
+html.dark .border-\[\#C5C2B9\] {
+  border-color: var(--ink-ash) !important;
+}
+
+html.dark .border-\[\#5C5B4F\] {
+  border-color: var(--border-line) !important;
+}
+
+html.dark .border-\[\#B3371E\] {
+  border-color: var(--rubric-accent) !important;
+}
+
+html.dark .border-\[\#7D2412\] {
+  border-color: var(--rubric-edge) !important;
+}
+
+/* Primary Action Buttons (Electric Lime Fill in Dark Mode with Midnight Black Text) */
+html.dark .bg-\[\#B3371E\] {
+  background-color: var(--rubric-accent) !important;
+  color: var(--accent-contrast) !important;
+  outline-color: rgba(8, 9, 12, 0.3) !important;
+}
+
+html.dark .bg-\[\#B3371E\] * {
+  color: var(--accent-contrast) !important;
+}
+
+html.dark .hover\:bg-\[\#962C17\]:hover {
+  background-color: var(--rubric-hover) !important;
+}
+
+html.dark .hover\:border-\[\#B3371E\]:hover {
+  border-color: var(--rubric-accent) !important;
+}
+
+html.dark .hover\:text-\[\#B3371E\]:hover {
+  color: var(--rubric-accent) !important;
+}
+
+html.dark .focus\:border-\[\#B3371E\]:focus {
+  border-color: var(--rubric-accent) !important;
+}
+
+/* Inverted Surface Buttons & Masthead Actions */
+html.dark .hover\:bg-\[\#0F100F\]:hover {
+  background-color: var(--ink-primary) !important;
+  color: var(--paper-ground) !important;
+}
+
+html.dark .hover\:text-\[\#F8F5E8\]:hover {
+  color: var(--paper-ground) !important;
+}
+
+/* Interactive Tabs & Badges */
+html.dark .bg-\[\#0F100F\] {
+  background-color: var(--rubric-accent) !important;
+  color: var(--accent-contrast) !important;
+}
+
+html.dark .data-\[checked\=true\]\:text-\[\#F8F5E8\][data-checked="true"] {
+  color: var(--accent-contrast) !important;
+}
+
+html.dark .data-\[checked\=true\]\:border-\[\#0F100F\][data-checked="true"] {
+  border-color: var(--rubric-accent) !important;
+}
+
+/* Modal Backdrops */
+html.dark .bg-\[\#0F100F\]\/70,
+html.dark .bg-\[\#0F100F\]\/75 {
+  background-color: rgba(0, 0, 0, 0.88) !important;
+}
+
+/* Form Inputs in Dark Mode */
+html.dark input,
+html.dark textarea {
+  background-color: var(--paper-ground) !important;
+  color: var(--ink-primary) !important;
+  border-color: var(--border-line) !important;
+  caret-color: var(--rubric-accent) !important;
+}
+
+html.dark input::placeholder,
+html.dark textarea::placeholder {
+  color: var(--ink-muted) !important;
+}
+
+html.dark input:focus,
+html.dark textarea:focus {
+  border-color: var(--rubric-accent) !important;
+  outline-color: var(--rubric-accent) !important;
+}
+

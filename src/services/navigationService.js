@@ -3,17 +3,6 @@
  */
 
 /**
- * Determines whether the navbar has crossed the scrolled elevation threshold.
- *
- * @param {number} scrollY
- * @param {number} [threshold=20]
- * @returns {boolean}
- */
-export function isNavbarScrolled(scrollY, threshold = 20) {
-  return Number(scrollY) > threshold;
-}
-
-/**
  * Resolves the active navigation section given current scroll offset and section positions.
  * Pure deterministic function suitable for unit testing without browser APIs.
  *
